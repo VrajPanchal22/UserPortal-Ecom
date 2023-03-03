@@ -7,11 +7,11 @@
     --light: #f8f9fa;
     --font-family-menu: Arial,sans-serif;
   }
-.sign-up-container {
+.main-container {
     min-height: 100vh;
     background: radial-gradient(rgb(177, 176, 176),var(--nav-color));
 }
-.sign-up__form-container{
+.user-form{
     flex-direction: column;
     border: 1px solid var(--button-color);
     border-radius: 10px;
@@ -21,43 +21,42 @@
     z-index: 10;
     min-height: 786px;
 }
-.sign-up__form-width {
+.form-width {
     width: 66%;
 }
 .font-family{
     font-family: var(--font-family-menu)
 }
-.sign-up__sign-up-header {
+.signup-logo {
     margin-bottom: 15px;
     font-size: 2rem;
 }
-.sign-up__better-buy-logo{
+.website-logo{
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
     background: var(--nav-color);
 }
-.sign-up__better-buy-logo > img{
+.website-logo > img{
     width: 4rem !important;
 }
-.sign-up__form-elem-fs{
+.form-fontsize{
     font-size: 1rem;
 }
-.sign-up__placeholder-icon{
+.form-field{
     position: relative;
-    box-shadow: 4px 4px 6px 5px var(--background-color);
 }
-.sign-up__form-elem-p {
+.form-para {
     padding-left: 1.5rem;
 }
-.sign-up__form-elem-br{
+.form-br{
     border-color:var(--br-color-grey);
 }
 .sign-up__badge-bg{
     background-color: var(--hightlight-color);
     margin-top: 1.5rem;
 }
-.sign-up__bottom-icons > img{
+.social-icons > img{
     width: 25px;
     height: 25px;
 }
@@ -65,18 +64,12 @@
     flex: 1;
 }
 
-.sign-up__btn--btn-clr{
-    color: var(--light)!important;
-    background: var(--button-color);
-    border: 1px solid var(--button-color);
-    margin-top: 2rem;
-    outline: var(--button-color);
+.signup-btn{
+   margin-top: 1rem;
+   background-color: var(--button-color) !important;
+   color:var(--light) !important;
 }
-.sign-up__btn--btn-hover:hover{
-    background: var(--nav-color)!important;
-    outline: var(--nav-color);
-}
-.sign-up__fa-icon {
+.form-icon {
     position: absolute;
     margin-top: 8px;
     margin-left: 5px;
