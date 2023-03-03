@@ -21,7 +21,8 @@ function Signup() {
     return (
         <div className="main-container d-flex">
             <div className="flex-1 d-flex">
-                <ImgTag className="w-100" src='../../../public/assets/images/bac_removed_3.png' alt='backgroud img' />
+                <ImgTag className="w-100" imgUrl="/assets/images/bac_removed_3.png" altText='backgroud img' />
+                <img src="" alt="" />
             </div>
             <div className="d-flex flex-1 align-items-center">
                 <div className="user-form d-flex align-items-center justify-content-center">
@@ -31,7 +32,7 @@ function Signup() {
                             <div className=" d-flex justify-content-between align-items-center">
                                 <div className="signup-logo">Login</div>
                                 <div className="website-logo d-flex justify-content-center align-items-center">
-                                    <ImgTag className="w-100" src='../../../public/assets/images/logo1.png' alt='backgroud img' />
+                                    <ImgTag className="w-100" imgUrl='/assets/images/logo1.png' altText='backgroud img' />
                                 </div>
                             </div>
                             <FormInput outerDivClass='form-fontsize mt-2' htmlFor='email' label='Email ' fieldClass='form-field' iconClass='fa-solid fa-envelope form-icon' type='email' inputClass='form-control form-para form-br' id='email' name='email' placeholder="   Enter email" />
@@ -45,6 +46,9 @@ function Signup() {
                         </Form>
                     </Formik>
                 </div>
+            </div>
+            <div>
+                {/* <img src="/assets/images/bac_removed_3.png" alt="" /> */}
             </div>
         </div>
     )

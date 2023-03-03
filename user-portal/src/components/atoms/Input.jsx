@@ -6,7 +6,7 @@ function Input(props) {
     const  {type, className, id, name, placeholder} = props;
     return (
             <Field type={type} className={className}
-                id={id} name={name} placeholder={placeholder} />
+                id={id} name={name} placeholder={placeholder}/>
     )
 }
 

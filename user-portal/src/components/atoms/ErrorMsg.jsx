@@ -9,7 +9,7 @@ console.log(className , name)
     <ErrorMessage name={name}>
         {
             (errorMsg)=>{
-                return (<div className={className?className:'text-danger mt-1'}>{errorMsg}</div>)
+                return (<div className={className?className:'text-danger mt-1'}>{name} {errorMsg}</div>)
             }
         }
     </ErrorMessage>
