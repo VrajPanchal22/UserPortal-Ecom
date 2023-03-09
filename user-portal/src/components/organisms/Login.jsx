@@ -17,7 +17,29 @@ const validationSchema = yup.object({
     password: yup.string().required('required !')
     })
 
-function Signup() {
+function Login() {
+
+    function handlesubmit(values) {
+        let data = values
+        console.log(data)
+        fetch("http://localhost:3200/api/user", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then((result) => {
+                if (result.message) {
+                    console.log(result.message)
+                }
+            }).catch((error) => {
+                console.log("errorincatch:::::", error)
+            })
+    }
+
+
     return (
         <div className="main-container d-flex">
             <div className="flex-1 d-flex">
@@ -27,7 +49,7 @@ function Signup() {
             <div className="d-flex flex-1 align-items-center">
                 <div className="user-form d-flex align-items-center justify-content-center">
                     <Formik
-                        initialValues={initialValues} validationSchema={validationSchema}>
+                        initialValues={initialValues} validationSchema={validationSchema} onSubmit={handlesubmit}>
                         <Form className="form-width">
                             <div className=" d-flex justify-content-between align-items-center">
                                 <div className="signup-logo">Login</div>
@@ -48,10 +70,9 @@ function Signup() {
                 </div>
             </div>
             <div>
-                {/* <img src="/assets/images/bac_removed_3.png" alt="" /> */}
             </div>
         </div>
     )
 }
 
-export default Signup
+export default Login

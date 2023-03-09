@@ -1,4 +1,4 @@
-import Input from '../atoms/Input'
+import InputField from '../atoms/InputField'
 import Label from '../atoms/Label'
 import React from 'react'
 import ErrorMsg from '../atoms/ErrorMsg';
@@ -10,7 +10,7 @@ function FormInput(props) {
       <Label htmlFor={htmlFor}  label={label}/>
       <div className={fieldClass}>
       <i className={iconClass}></i>
-      <Input type={type} className={inputClass}
+      <InputField type={type} className={inputClass}
                 id={id} name={name} placeholder={placeholder}/>
                 </div>
                 <ErrorMsg name={name} className={errorClass} />

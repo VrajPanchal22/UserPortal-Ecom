@@ -9,67 +9,66 @@ import { Link } from 'react-router-dom'
 import * as yup from 'yup';
 import SocialIcon from '../molecules/SocialIcon'
 
+const initialValues = {
+    firstName: '',
+    lastName: '',
+    emailId: '',
+    password: '',
+    ReEnterPassword: '',
+    contactNumber: ''
+}
+
+const validationSchema = yup.object({
+    firstName: yup.string('first-name must be string').required('is required !'),
+    lastName: yup.string('last-name must be string').required('is equired !'),
+    emailId: yup.string().email('enter valid email').required('is required !'),
+    password: yup.string().required('required !'),
+    ReEnterPassword: yup.string().required('required !').oneOf([yup.ref('password'), null], 'Passwords must match')
+})
 
 function Signup() {
 
-    const initialValues = {
-        firstName: '',
-        lastName: '',
-        emailId: '',
-        password: '',
-        ReEnterPassword: '',
-        contactNumber: ''
-    }
-    
-    const validationSchema = yup.object({
-        firstName: yup.string('first-name must be string').required('is required !'),
-        lastName: yup.string('last-name must be string').required('is equired !'),
-        emailId:yup.string().email('enter valid email').required('is required !'),
-        password: yup.string().required('required !'),
-        ReEnterPassword : yup.string().required('required !').oneOf([yup.ref('password'), null], 'Passwords must match')
+    const [msg, setMsg] = useState("");
+    function handlesubmit(values) {
+        let data = values
+        console.log(data)
+        fetch("http://localhost:3200/api/user", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
         })
-    
-        const [msg, setMsg] = useState("");
-    let Msg;
-        function handlesubmit(values){
-            let data = values
-            console.log(data)
-            fetch("http://localhost:3200/api/user",{
-                method:"POST",
-                headers:{
-                    'Content-Type':'application/json'
-                },
-                body:JSON.stringify(data)
-            })
             .then(res => res.json())
-            .then((result)=>{
-                Msg = result.message
-               if(result.message){
-                console.log("there is a msg for you")
-                setMsg(result.message)
-               }
-            }).catch((error)=>{
-                console.log("errorincatch:::::",error)
+            .then((result) => {
+                if (result.message) {
+                    console.log("there is a msg for you")
+                    setMsg(result.message)
+                    console.log(msg)
+                }
+            }).catch((error) => {
+                console.log("errorincatch:::::", error)
             })
-        }
-    
+    }
+
 
     return (
-        
+
         <div className="main-container d-flex">
-            <div className="msg position-absolute w-100">
+            <div className="Msg position-absolute w-100">
                 {
-                   msg && msg==="user created successfully!"?
-                   <Alert variant="success" onClose={() => setMsg(false)} dismissible>
-                   <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-                 </Alert>
-                 ?
-                 msg 
-                 :
-                 <Alert variant="danger" onClose={() => setMsg(true)} dismissible>
-                 <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-               </Alert>
-                 : null
+                    msg && msg === "user created successfully!"
+                        ?
+                        <Alert variant="success" onClose={() => setMsg()} dismissible>
+                            <Alert.Heading>Successful signup !!!</Alert.Heading>
+                        </Alert>
+                            :
+                            msg
+                            ?
+                            <Alert variant="danger" onClose={() => setMsg()} dismissible>
+                                <Alert.Heading>Please check your details !!!</Alert.Heading>
+                            </Alert>
+                        : null
                 }
             </div>
             <div className="flex-1 d-flex">
@@ -98,7 +97,7 @@ function Signup() {
                             <div className="sign-up__badge text-center">
                                 <span className="badge badge-secondary badge-bg">OR</span>
                             </div>
-                            <SocialIcon divClass='social-icons my-2 text-center' imgClass='w-100' urlArr={['google.png','facebook.png','mail.png']} />
+                            <SocialIcon divClass='social-icons my-2 text-center' imgClass='w-100' urlArr={['google.png', 'facebook.png', 'mail.png']} />
                             <small id="emailHelp" className="form-text text-muted text-center my-2">Already a user? <Link to='/'>login</Link></small>
                         </Form>
                     </Formik>
