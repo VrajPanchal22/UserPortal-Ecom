@@ -4,7 +4,6 @@ import React from 'react'
 
 function ErrorMsg(props) {
 const {className , name} = props;
-console.log(className , name)
   return (
     <ErrorMessage name={name}>
         {

@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios';
 import Alert from 'react-bootstrap/Alert';
 import { useState } from 'react';
 import FormInput from '../molecules/FormInput'
@@ -23,7 +24,8 @@ const validationSchema = yup.object({
     lastName: yup.string('last-name must be string').required('is equired !'),
     emailId: yup.string().email('enter valid email').required('is required !'),
     password: yup.string().required('required !'),
-    ReEnterPassword: yup.string().required('required !').oneOf([yup.ref('password'), null], 'Passwords must match')
+    ReEnterPassword: yup.string().required('required !').oneOf([yup.ref('password'), null], 'Passwords must match'),
+    contactNumber: yup.string().matches(/^[6-9]{1}[0-9]{9}$/, "invalid phone number").required()
 })
 
 function Signup() {
@@ -32,22 +34,18 @@ function Signup() {
     function handlesubmit(values) {
         let data = values
         console.log(data)
-        fetch("http://localhost:3200/api/user", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-            .then(res => res.json())
+        axios.post('http://localhost:3200/api/user', data)
             .then((result) => {
-                if (result.message) {
+                console.log(result)
+                if (result.data.status) {
                     console.log("there is a msg for you")
-                    setMsg(result.message)
-                    console.log(msg)
+                    setMsg(result.data.message)
+                    console.log("msg::::: ",msg)
                 }
             }).catch((error) => {
-                console.log("errorincatch:::::", error)
+                if (error.response) {
+                    setMsg(error.response.data.message)
+                  }
             })
     }
 
