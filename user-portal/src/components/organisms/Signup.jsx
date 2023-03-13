@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios';
-import Alert from 'react-bootstrap/Alert';
 import { useState } from 'react';
 import FormInput from '../molecules/FormInput'
 import Button from '../atoms/Button'
@@ -53,22 +52,7 @@ function Signup() {
     return (
 
         <div className="main-container d-flex">
-            <div className="Msg position-absolute w-100">
-                {
-                    msg && msg === "user created successfully!"
-                        ?
-                        <Alert variant="success" onClose={() => setMsg()} dismissible>
-                            <Alert.Heading>Successful signup !!!</Alert.Heading>
-                        </Alert>
-                            :
-                            msg
-                            ?
-                            <Alert variant="danger" onClose={() => setMsg()} dismissible>
-                                <Alert.Heading>Please check your details !!!</Alert.Heading>
-                            </Alert>
-                        : null
-                }
-            </div>
+            
             <div className="flex-1 d-flex">
                 <ImgTag className="w-100" imgUrl='/assets/images/bac_removed_3.png' altText='backgroud img' />
             </div>
@@ -83,6 +67,15 @@ function Signup() {
                                     <ImgTag className="w-100" imgUrl='/assets/images/logo1.png' altText='backgroud img' />
                                 </div>
                             </div>
+                            <div className="msg position-absolute w-100">
+                                {
+                                    msg && msg !== "user created successfully!"
+                                        ?<p className='text-danger'>{msg}</p>:
+                                            msg ?<p className='text-success'>Signup successfull!</p>
+                                            :null
+                                }
+                            </div>
+                            <br />
                             <div className="d-flex mt-2 w-100 ">
                                 <FormInput outerDivClass='form-fontsize' htmlFor='first-name' label='First name' fieldClass='form-field' iconClass='fa-solid fa-user form-icon' type='text' inputClass='form-control form-para form-br' id='First-name' name='firstName' placeholder="   First Name" />
                                 <FormInput outerDivClass='form-fontsize' htmlFor='last-name' label='last name' fieldClass='form-field' iconClass='fa-solid fa-user form-icon' type='text' inputClass='form-control form-para form-br' id='last-name' name='lastName' placeholder="   Last Name" />
