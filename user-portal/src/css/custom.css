@@ -1,77 +1,249 @@
-:root{
+:root {
     --nav-color: #032E63;
     --button-color: #C00156;
     --background-color: #F0EFF4;
     --hightlight-color: #D6B109;
-    --br-color-grey:#afafb1;
+    --br-color-grey: #afafb1;
     --light: #f8f9fa;
-    --font-family-menu: Arial,sans-serif;
-  }
+    --font-family-menu: Arial, sans-serif;
+}
+
 .main-container {
     min-height: 100vh;
-    background: radial-gradient(rgb(177, 176, 176),var(--nav-color));
+    background: radial-gradient(rgb(177, 176, 176), var(--nav-color));
 }
-.user-form{
+
+.user-form {
     flex-direction: column;
     border: 1px solid var(--button-color);
     border-radius: 10px;
     width: 74%;
     box-shadow: 2px 2px 12px 2px var(--button-color);
-    background:var(--light)!important;
+    background: var(--light) !important;
     z-index: 10;
     min-height: 786px;
 }
+
 .form-width {
     width: 66%;
 }
-.font-family{
+
+.font-family {
     font-family: var(--font-family-menu)
 }
+
 .signup-logo {
     margin-bottom: 15px;
     font-size: 2rem;
 }
-.website-logo{
+
+.website-logo {
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
     background: var(--nav-color);
 }
-.website-logo > img{
+
+.website-logo>img {
     width: 4rem !important;
 }
-.form-fontsize{
+
+.form-fontsize {
     font-size: 1rem;
 }
-.form-field{
+
+.form-field {
     position: relative;
 }
+
 .form-para {
     padding-left: 1.5rem;
 }
-.form-br{
-    border-color:var(--br-color-grey);
+
+.form-br {
+    border-color: var(--br-color-grey);
 }
-.sign-up__badge-bg{
+
+.sign-up__badge-bg {
     background-color: var(--hightlight-color);
     margin-top: 1.5rem;
 }
-.social-icons > img{
+
+.social-icons>img {
     width: 25px;
     height: 25px;
 }
-.flex-1{
+
+.flex-1 {
     flex: 1;
 }
 
-.signup-btn{
-   margin-top: 1rem;
-   background-color: var(--button-color) !important;
-   color:var(--light) !important;
+.signup-btn {
+    margin-top: 1rem;
+    background-color: var(--button-color) !important;
+    color: var(--light) !important;
 }
+
 .form-icon {
     position: absolute;
     margin-top: 8px;
     margin-left: 5px;
     color: #78787a;
+}
+
+/* ==================== Nav bar style ================================ */
+
+.main-header {
+    background-color: var(--nav-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.7rem;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.main-logo {
+    height: 2.8rem;
+    cursor: pointer;
+    text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* search-box */
+.search-box {
+    background-color: white;
+    width: 35%;
+    height: 2.5rem;
+    padding: 0.3rem;
+    margin: 0, 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+/* Input filed */
+.search-box input {
+    border: none;
+    width: 100%;
+    outline: none;
+    font-size: 0.9rem;
+    border-radius: 0.2;
+}
+
+/* search-box icon */
+.search-icon {
+    color: var(--nav-color);
+}
+
+/* Button */
+.button {
+    background-color: white;
+    width: 7rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2rem;
+}
+
+.login-button {
+    border: none;
+    outline: none;
+    background-color: var(--white);
+    color: var(--nav-color);
+    cursor: pointer;
+}
+
+/* Top main-header menus */
+.topnav-menue {
+    margin-left: 1.5rem;
+}
+
+.nav-item a {
+    font-family: var(--font-family-menu);
+    cursor: pointer;
+}
+
+.responsive {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+
+
+/* ========= Nav bar Media ========== */
+
+@media only screen and (max-width: 853px) {
+   
+  
+    .search-box input::placeholder {
+        font-size: 0.6rem;
+    }
+}
+
+
+@media only screen and (max-width: 862px) {
+    .search-box{
+        width: 30%;
+       }
+    .search-box input::placeholder {
+        font-size: 0.6rem;
+    }
+    .nav-item a {
+        font-family: var(--font-family-menu);
+        cursor: pointer;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    .main-header {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .search-box {
+        width: 100%;
+        margin-left: 0%;
+        padding: 0%;
+        margin-top: 1rem;
+    }
+
+    .search-box input::placeholder {
+        font-size: 0.9rem;
+    }
+
+    .button {
+        margin-left: 0%;
+    }
+
+    .responsive {
+        display: block;
+        width: 100%;
+    }
+
+    .on-responsive {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .hamburger {
+        float: right;
+    }
+    .topnav-menue{
+        width: 100%;
+        margin-left: 0%;
+        display: block;
+        margin-top: 10px;
+      }
 }
