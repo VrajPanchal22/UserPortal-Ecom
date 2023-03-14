@@ -192,7 +192,7 @@ input[type="radio"] {
 /*sortby section*/
 .sortby_section {
     position: sticky;
-    top: 4.5rem;
+    top: 4.2rem;
     height: 4rem;
     display: flex;
     justify-content: space-around;
