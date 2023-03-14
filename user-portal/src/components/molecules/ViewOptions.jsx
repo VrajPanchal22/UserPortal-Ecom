@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import productGallaryContext from '../../contexts/productGallary'
 
 function ViewOptions() {
-    const [viewOption , setViewOption] = useState('grid');
+    const {viewOption ,setViewOption}= useContext(productGallaryContext);
     return (
         <div className=" d-flex flex-row align-items-center">
             <span className="grid-title"><b>grid:</b></span>
