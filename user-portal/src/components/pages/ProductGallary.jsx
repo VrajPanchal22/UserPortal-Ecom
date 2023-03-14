@@ -14,7 +14,6 @@ function ProductGallary() {
     setViewOption
   }
   return (
-    <>
       <div class=" w-100">
         <MainNavbar />
         <div class="main_section d-flex" >
@@ -28,7 +27,6 @@ function ProductGallary() {
         </div>
         <Footer className="footer d-flex align-items-center" />
       </div>
-    </>
   )
 }
 

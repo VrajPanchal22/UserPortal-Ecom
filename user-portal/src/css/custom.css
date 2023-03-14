@@ -246,7 +246,6 @@ input[type="radio"] {
     box-shadow: var(--nav-color)0px 5px 15px;
 }
 .card {
-    width: 14vw;
     border-radius: 2rem;
 }
 .card_details {
@@ -256,15 +255,19 @@ input[type="radio"] {
     height: 17rem;
 }
 .card__img--width {
-    width: 20vw;
+    width: 16vw;
+    height: 18rem;
 }
 .product-section{
-    margin-top: 6rem;
+    margin-top: 1rem;
 }
 .wishlist-icon {
     font-size: 1.5rem;
     color: var(--button-color);
     margin-right: 1rem;
+}
+.card--gridview{
+    width:14vw;
 }
 .card--listview {
     width: 60vw;
