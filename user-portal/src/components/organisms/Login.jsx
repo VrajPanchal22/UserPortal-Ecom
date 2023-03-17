@@ -21,7 +21,7 @@ function Signup() {
     return (
         <div className="main-container d-flex">
             <div className="flex-1 d-flex">
-                <ImgTag className="w-100" src='../../../public/assets/images/bac_removed_3.png' alt='backgroud img' />
+                <ImgTag className="w-100" imgUrl='/assets/images/bac_removed_3.png' alt='backgroud img' />
             </div>
             <div className="d-flex flex-1 align-items-center">
                 <div className="user-form d-flex align-items-center justify-content-center">

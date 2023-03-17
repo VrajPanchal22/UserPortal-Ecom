@@ -29,7 +29,7 @@ function Signup() {
     return (
         <div className="main-container d-flex">
             <div className="flex-1 d-flex">
-                <ImgTag className="w-100" src='../../../public/assets/images/bac_removed_3.png' alt='backgroud img' />
+                <ImgTag className="w-100" src='/assets/images/bac_removed_3.png' alt='backgroud img' />
             </div>
             <div className="d-flex flex-1 align-items-center">
                 <div className="user-form d-flex align-items-center justify-content-center">
@@ -39,7 +39,7 @@ function Signup() {
                             <div className=" d-flex justify-content-between align-items-center">
                                 <div className="signup-logo">Sign Up</div>
                                 <div className="website-logo d-flex justify-content-center align-items-center">
-                                    <ImgTag className="w-100" src='../../../public/assets/images/logo1.png' alt='backgroud img' />
+                                    <ImgTag className="w-100" src='/assets/images/logo1.png' alt='backgroud img' />
                                 </div>
                             </div>
                             <div className="d-flex mt-2 w-100 ">
