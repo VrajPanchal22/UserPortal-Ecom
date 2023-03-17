@@ -1,9 +1,9 @@
 import React from 'react'
 
 function Button(props) {
-    const {buttonText,...rest }= props;
+    const {buttonText,onClick,...rest }= props;
   return (
-   <button {...rest}>{buttonText}</button>
+   <button onClick={onClick} {...rest}>{buttonText}</button>
   )
 }
 

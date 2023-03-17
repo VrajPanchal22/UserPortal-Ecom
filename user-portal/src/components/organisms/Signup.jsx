@@ -70,7 +70,7 @@ function Signup() {
                             <div className="msg position-absolute w-100">
                                 {
                                     msg && msg !== "user created successfully!"
-                                        ?<p className='text-danger'>{msg}</p>:
+                                        ?<p className='text-danger'>Please check your details!</p>:
                                             msg ?<p className='text-success'>Signup successfull!</p>
                                             :null
                                 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import FormInput from '../molecules/FormInput'
 import Button from '../atoms/Button'
 import ImgTag from '../atoms/ImgTag'
@@ -20,6 +21,7 @@ const validationSchema = yup.object({
 
 function Login() {
     const [msg, setMsg] = useState("");
+    const navigate = useNavigate();
     function handlesubmit(values) {
         let data = values
         axios.post('http://localhost:3200/api/user/login', data)
@@ -27,7 +29,15 @@ function Login() {
                 console.log(result)
                 if (result.data.status) {
                     setMsg(result.data.message)
+                    console.log("inside first if");
                     localStorage.setItem('token',result.data.token)
+                    const path = localStorage.getItem('path');
+                    if (path) {
+                      navigate(path);
+                    }else{
+                        console.log("inside else")
+                      navigate('/')
+                    }
                 }
             }).catch((error) => {
                 if (error.response) {
@@ -35,6 +45,17 @@ function Login() {
                   }
             })
     }
+
+
+// function OnLogin() {
+//   const path = localStorage.getItem('path');
+
+//   if (path) {
+//     navigate(path);
+//   }else{
+//     navigate('/home')
+//   }
+// }
 
 
     return (
