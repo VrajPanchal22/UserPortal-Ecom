@@ -330,3 +330,275 @@
     width: 100%;
     height: 100%;
 }
+
+
+
+/*================== Home page Deal of the day =========================== */
+
+.card-content {
+    text-align: center;
+    background-color: var(--background-color);
+    color: #000;
+    opacity: 0.9;
+    width: 100%;
+}
+.day_deal--card{
+    width: 17em;
+}
+
+
+
+@media screen and (max-width: 600px) {
+    .day_deal--card{
+        width: 100%;
+    }
+    .day_deal--card img{
+        width: 50%;
+    }
+    .day_deal-heading{
+        font-size: 1.5em;
+    } 
+}
+
+
+/*==================== Best selling products =================== */
+
+.best_selling_box--card{
+    width: 20em;
+}
+
+
+/* =================Products to bag =======================*/
+
+.circle-box {
+    height: 220px;
+    width: 220px;
+    background: linear-gradient(#032e63 0%, #032e63 10%, #032e63 50%, #032e63 100%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-top: 1rem;
+}
+
+.circle-box::before {
+    content: "";
+    height: 220px;
+    width: 220px;
+    background: linear-gradient(#fff 0%, #fff 60%, #fff 100%);
+    border-radius: 50%;
+    filter: blur(18px);
+}
+
+.circle_box--price {
+    font-size: 0.9em;
+}
+
+.circle_box--img {
+    position: absolute;
+    width: 7em;
+}
+
+
+
+/* ==================Shop by category====================== */
+.category-img{
+    height: 35vh;
+}
+.category-card h4{
+    font-weight: bold;
+}
+
+.half-circle{
+    background-image: url(../../public//assets//images/bgg.jpeg);
+    /* background-color: red; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #032e63;
+    border-radius: 150px 150px 0 0;
+    position: absolute;  
+    bottom: 0;
+    left: 0;  
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    opacity: 0.8;
+    height: auto;
+}
+
+
+
+/* =================== Fly-out ==================== */
+
+
+.flyout {
+    width: 300px;
+    position: absolute;
+    z-index: 1;
+    right: 380px;
+    top: 32px;
+  }
+  .flyout-triangle {
+    width: 0;
+    margin-right: auto;
+    margin-left: auto;
+    border: 12px solid transparent;
+    border-bottom-color: white;
+  }
+  
+  .flyout-container {
+    background: white;
+    padding: 20px;
+    font-size: 1.4em;
+    font-weight: normal;
+    text-align: center;
+    color: #fff;
+    border: 1px solid white;
+    border-radius: 5px;
+    width: 100%;
+  }
+  /* .profile-image{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  } */
+  .profile-icon{
+    color: var(--nav-color);
+  }
+  .user-name{
+    color: var(--nav-color);
+    font-size: 15px;
+  }
+  
+  
+
+
+  
+  @media screen and (max-width: 768px) {
+      .menu_box--circle {
+          border-radius: 50%;
+          border: 2px solid;
+          width: 7rem;
+          height: 7rem;
+          border-color: #f0eff4;
+          text-align: center;
+          margin-top: 1rem;
+          padding: 0.4rem;
+          
+      }
+      .product-img{
+          width: 5em;
+      }
+      .carousel-image{
+          width: 100%;
+          height: 20vh ;
+      }
+  }
+  
+  
+  @media screen and (max-width: 600px) {
+      .product-img{
+          width: 3.5em;
+      }
+      .product-price,.product-name{
+          font-size: 0.7em;
+      }
+      .day_deal--card{
+          width: 100%;
+      }
+      .day_deal--card img{
+          width: 50%;
+      }
+      .day_deal-heading{
+          font-size: 1.5em;
+      }
+      #topDeals{
+          flex-direction: column;
+      }
+    
+      
+  }
+  
+  
+  @media screen and (max-width: 1400px) {
+      .circle-box {
+          width: 180px;
+          height: 180px;
+      }
+      .circle-box::before{
+          width: 180px;
+          height: 180px;
+      }
+      .circle_box--img {
+          width: 5em;
+      }
+      .circle_box--price {
+          font-size: 0.7em;
+      }
+  }
+  
+  @media screen and (max-width: 450px) {
+      .circle-box {
+          width: 120px;
+          height: 120px;
+      }
+      .circle-box::before{
+          width: 120px;
+          height: 120px;
+      }
+      .circle_box--img {
+          width: 3em;
+      }
+      .circle_box--price {
+          font-size: 0.4em;
+      }
+      .best_selling--box{
+          flex-direction: column !important;
+      }
+      .best_selling--heading{
+          font-size: 1.3em;
+          font-weight: bold;
+      }
+      .product-name, .product-price{
+          font-size: 1em;
+      }
+      .best_selling_box--card{
+          width: 100%;
+      }
+      .product-img{
+          width: 50%;
+      }
+      .category-img{
+          width: 100%;
+          height: 25vh;
+      } 
+      .category-card h5{
+          font-size: 0.9rem;
+      }
+      .category-card h4{
+          font-size: 1rem;
+      }
+      .half-circle{
+          height: 10vh;
+      }
+      .category_box--heading{
+          font-size: 1.5rem;
+      }
+      
+  }
+
+  @media only screen and (max-width: 256px) {
+      #menu_box--container{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+      .category-card h5{
+          font-size: 0.7rem;
+      }
+      .category-card h4{
+          font-size: 0.8rem; 
+      }
+  }
+  
