@@ -1,25 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { UncontrolledCarousel } from 'reactstrap';
-
-const items = [
-  {
-    src: '/assets/images/bedsOffer.jpg',
-    altText: 'Slide 1',
-    caption: 'Slide 1'
-  },
-  // {
-  //   src: '/assets/images/bedsOffer.jpg',
-  //   altText: 'Slide 2',
-  //   caption: 'Slide 2'
-  // },
-  // {
-];
+import { getData } from '../../services/api';
 
 const OfferCarousle = () => {
+  const [items, setItems] = useState([])
 
-    return (
-      <UncontrolledCarousel items={items} key={items.altText} />
-    );
+  useEffect(() => {
+    getData('offers').then(res => {
+      const data = res.data
+      const newItems = data.map((element, index) => ({
+          src: element.images,
+        }))
+      setItems(newItems)
+    }).catch(err => {
+      console.log(err)
+    })
+  }, [])
+
+  return (
+    <UncontrolledCarousel items={items} />
+  );
 }
 
 export default OfferCarousle;

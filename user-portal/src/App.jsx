@@ -5,23 +5,10 @@ import Signup from './components/organisms/Signup';
 import Home from './components/pages/Home';
 import ProductGallary from './components/pages/ProductGallary'
 import axios from "axios";
-
-// function App() {
-//   return (
-//     <BrowserRouter>
-//       <Routes>
-//         <Route path='/' element={<Login />}></Route>
-//         <Route path='/signup' element={<Signup />}></Route>
-//       </Routes>
-//       <Routes>
-//         <Route path='/home' element={<Home />} />
-//       </Routes>
-//     </BrowserRouter>
-
-
+import Main from './components/pages/Main';
 
 export const axiosObject = axios.create({
-  baseURL: 'http://localhost:8000/api/',
+  baseURL: 'http://localhost:4000/api/',
   headers: {
     "Access-Control-Allow-Origin": "*"
   }
@@ -29,7 +16,19 @@ export const axiosObject = axios.create({
 
 function App() {
   return (
-    <ProductGallary />
+    <BrowserRouter>
+      {/* <Routes>
+        <Route path='/' element={<Login />}></Route>
+        <Route path='/signup' element={<Signup />}></Route>
+      </Routes> */}
+      <Routes>
+        <Route path='/' element={<Main />}>
+          <Route path='/home' element={<Home />} />
+          <Route path='/productGallary' element={<ProductGallary />} />
+          <Route path='/productGallary/:name' element={<ProductGallary />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
