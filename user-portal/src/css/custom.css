@@ -469,11 +469,21 @@ input[type="radio"] {
     outline: none;
     font-size: 0.9rem;
     border-radius: 0.2;
+   
+}
+.search-box input:focus{
+    background-color: white;
 }
 
 /* search-box icon */
 .search-icon {
     color: var(--nav-color);
+}
+
+.search-button{
+    outline: none;
+    border: none;
+    background-color: white;
 }
 
 /* Button */
