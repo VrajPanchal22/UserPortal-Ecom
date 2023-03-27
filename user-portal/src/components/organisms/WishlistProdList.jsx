@@ -23,9 +23,9 @@ function WishlistProdList() {
       );
       if (res.status === true) {
         setWishlist(wishlist.filter((p) => p.productId !== product.productId));
-        toast.success("deleted successfully!", {
+        toast.success("item removed successfully!", {
           position: toast.POSITION.TOP_RIGHT,
-          autoClose: 1000,
+          autoClose: 10000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -55,28 +55,25 @@ function WishlistProdList() {
   return (
     <>
       <div className="wishlist__container-bg">
-        {
-          noOfProd === 0 ? (
-            <EmptyWishlist />
-          ) : (
-            <>
-              <ToastContainer />
-              <h1 className="wishlist__container-heading">
-                my wishlist <span> {noOfProd} items</span>
-              </h1>
-              <div className="row d-flex wishlist_product-details">
-                {wishlist.map((product) => (
-                  <Card
-                    key={product._id}
-                    product={product}
-                    onDelete={() => handleDelete(product)}
-                  />
-                ))}
-              </div>
-            </>
-          )
-          // wishlist component
-        }
+        {noOfProd === 0 ? (
+          <EmptyWishlist />
+        ) : (
+          <>
+            <ToastContainer />
+            <h1 className="wishlist__container-heading">
+              my wishlist <span> {noOfProd} items</span>
+            </h1>
+            <div className="row d-flex wishlist_product-details">
+              {wishlist.map((product) => (
+                <Card
+                  key={product._id}
+                  product={product}
+                  onDelete={() => handleDelete(product)}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </>
   );
