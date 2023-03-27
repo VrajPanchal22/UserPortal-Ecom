@@ -1,10 +1,13 @@
-import React from 'react'
+import React from "react";
 
 function Button(props) {
-    const {type , className,buttonText }= props;
+  const { type, className, buttonText, icon, onClick } = props;
   return (
-   <button type={type} className={className}>{buttonText}</button>
-  )
+    <button type={type} className={className} onClick={onClick}>
+      {icon}
+      {buttonText}
+    </button>
+  );
 }
 
-export default Button
+export default Button;
