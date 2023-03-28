@@ -1,9 +1,9 @@
 import React from 'react'
 
 function Span(props) {
-    const {className,para,icon} = props;
+    const {className,para,icon,onClick} = props;
   return (
-      <span className={className}>{para}{icon}</span>
+      <span className={className} onClick={onClick}>{para}{icon}</span>
   )
 }
 

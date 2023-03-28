@@ -1,10 +1,10 @@
 import React from 'react'
 
 function Button(props) {
-    const {type , className,buttonText,icon,onClick }= props;
+    const {type , className,buttonText,icon,onClick ,disabled}= props;
     // console.log(onClick)
   return (
-   <button type={type} className={className} onClick={onClick}>{icon} {buttonText}</button>
+   <button type={type} className={className} onClick={onClick} >{icon} {buttonText}</button>
   )
 }
 
