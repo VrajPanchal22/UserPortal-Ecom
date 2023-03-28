@@ -5,7 +5,9 @@ import Signup from './components/organisms/Signup';
 import Home from './components/pages/Home';
 import ProductGallary from './components/pages/ProductGallary'
 import ProductDetails from './components/pages/ProductDetails';
+import MainNavbar from './components/organisms/MainNavbar';
 import axios from "axios";
+import ProductList from './components/organisms/ProductList';
 import Main from './components/pages/Main';
 
 export const axiosObject = axios.create({
