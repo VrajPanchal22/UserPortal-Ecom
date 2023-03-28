@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import Button from '../atoms/Button'
 import ImgTag from '../atoms/ImgTag'
 import NavbarMenus from '../molecules/NavbarMenus'
@@ -8,6 +8,8 @@ import {
   NavbarToggler,
   Nav,
 } from 'reactstrap';
+import { useNavigate, useLocation } from 'react-router-dom'
+
 import FlyOut from '../molecules/FlyOut'
 import { useParams } from 'react-router-dom'
 
@@ -16,7 +18,20 @@ function MainNavbar() {
   const { name } = useParams();
 
   const [isOpen, setIsOpen] = useState(false);
+  const [login,setLogin] = useState(false)
   const toggle = () => setIsOpen(!isOpen);
+console.log(login)
+const location = useLocation()
+const navigate = useNavigate()
+
+useEffect(()=>{
+  if(login) {
+    const currentPath = location.pathname;
+    localStorage.setItem('path',currentPath);
+    navigate('/login')
+  }
+},[login])
+  
 
   const [isFlyoutToggle, setIsFlyoutToggle] = useState(false)
   const handleClick = () => {
@@ -36,10 +51,10 @@ function MainNavbar() {
       />
       <div className="responsive">
         <div className='on-responsive'>
-          <div className="button shadow">
-            <Button className="login-button" buttonText="Login" />
+        <div className="button shadow">
+          <Button className="login-button" buttonText="Login" onClick={()=> setLogin(true) }/>
           </div>
-          <NavbarToggler className='bg-light hamburger' onClick={toggle} />
+             <NavbarToggler className='bg-light hamburger' onClick={toggle} />
         </div>
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>

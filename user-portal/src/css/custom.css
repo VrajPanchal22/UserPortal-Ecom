@@ -57,7 +57,7 @@
 }
 
 .form-para {
-    padding-left: 1.5rem;
+    padding-left: 1.5rem !important;
 }
 
 .form-br {
@@ -70,7 +70,7 @@
 }
 
 .social-icons>img {
-    width: 25px;
+    width: 25px !important;
     height: 25px;
 }
 
@@ -89,6 +89,9 @@
     margin-top: 8px;
     margin-left: 5px;
     color: #78787a;
+}
+.Msg{
+    z-index: 13;
 }
 
 /* product details page */
