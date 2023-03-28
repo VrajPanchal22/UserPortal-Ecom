@@ -1,16 +1,27 @@
 import React from 'react'
 import { FaSearch } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
-function SearchField() {
+function SearchField({ type, placeholder, id, onChange, value }) {
+    const navigate = useNavigate()
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (value) {
+            navigate(`/productGallary/${value}`)
+        }
+    }
     return (
-        <div className='shadow px-2 search-box'>
-            <input  type="text"
-                placeholder="Search for products brand & more.."
-                name="category"
-                id="category" 
+        <form className='shadow px-2 search-box' onSubmit={(e) => handleSubmit(e)} autoComplete="off">
+            <input type={type}
+                placeholder={placeholder}
+                id={id}
+                value={value}
+                onChange={onChange}
             />
-            <FaSearch className="search-icon" />
-        </div>
+            <button type="submit" className='search-button' >
+                <FaSearch className="search-icon" />
+            </button>
+        </form>
     )
 }
 
