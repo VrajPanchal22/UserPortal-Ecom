@@ -3,7 +3,6 @@ import FilterOptions from '../organisms/FilterOptions'
 import ProductList from '../organisms/ProductList'
 import ShortAndViewOptions from '../organisms/ShortAndViewOption'
 import Footer from '../organisms/Footer'
-import MainNavbar from '../organisms/MainNavbar'
 import productGallaryContext from '../../contexts/productGallary'
 
 function ProductGallary() {
@@ -14,9 +13,7 @@ function ProductGallary() {
     setViewOption
   }
   return (
-    <>
       <div class=" w-100">
-        <MainNavbar />
         <div class="main_section d-flex" >
           <productGallaryContext.Provider value={contextValue}>
             <FilterOptions />
@@ -28,7 +25,6 @@ function ProductGallary() {
         </div>
         <Footer className="footer d-flex align-items-center" />
       </div>
-    </>
   )
 }
 
