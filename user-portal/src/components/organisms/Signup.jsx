@@ -15,7 +15,7 @@ const initialValues = {
     emailId: '',
     password: '',
     ReEnterPassword: '',
-    contactNumber: ''
+    contactNumber: '',
 }
 
 const validationSchema = yup.object({
@@ -33,7 +33,7 @@ function Signup() {
     function handlesubmit(values) {
         let data = values
         console.log(data)
-        axios.post('http://localhost:3200/api/user', data)
+        axios.post('http://localhost:4000/api/user', data)
             .then((result) => {
                 console.log(result)
                 if (result.data.status) {
@@ -84,6 +84,7 @@ function Signup() {
                             <FormInput outerDivClass='form-fontsize mt-2' htmlFor='password' label='password ' fieldClass='form-field' iconClass='fa-solid fa-lock form-icon' type='password' inputClass='form-control form-para form-br' id='password' name='password' placeholder="   password" />
                             <FormInput outerDivClass='form-fontsize mt-2' htmlFor='Re-Enter' label='Re-Enter ' fieldClass='form-field' iconClass='fa-solid fa-lock fa-repeat form-icon' type='password' inputClass='form-control form-para form-br' id='Re-Enter' name='ReEnterPassword' placeholder="   Re-Enter your password" />
                             <FormInput outerDivClass='form-fontsize mt-2' htmlFor='contactNumber' label='Mobile-Number ' fieldClass='form-field' iconClass='fa-solid fa-lock fa-address-book form-icon' type='text' inputClass='form-control form-para form-br' id='contactNumber' name='contactNumber' placeholder="   Enter your Mobile-Number" />
+                            {/* <FormInput outerDivClass='form-fontsize mt-2' htmlFor='role' label='role' fieldClass='role' iconClass='fa-solid fa-lock fa-address-book form-icon' type='text' inputClass='form-control form-para form-br' id='role' name='role' placeholder="enter you role" value="user"/> */}
                             <Button type='submit' className='btn w-100 signup-btn' buttonText='Signup' />
                             <div className="sign-up__badge text-center">
                                 <span className="badge badge-secondary badge-bg">OR</span>

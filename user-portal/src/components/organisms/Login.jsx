@@ -24,13 +24,14 @@ function Login() {
     const navigate = useNavigate();
     function handlesubmit(values) {
         let data = values
-        axios.post('http://localhost:3200/api/user/login', data)
+        axios.post('http://localhost:4000/api/user/login', data)
             .then((result) => {
                 console.log(result)
                 if (result.data.status) {
                     setMsg(result.data.message)
                     console.log("inside first if");
                     localStorage.setItem('token',result.data.token)
+                    localStorage.setItem('userData',JSON.stringify(result.data.userData))
                     const path = localStorage.getItem('path');
                     if (path) {
                       navigate(path);

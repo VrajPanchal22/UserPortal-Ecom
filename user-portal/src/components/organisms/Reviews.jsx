@@ -8,6 +8,7 @@ import InputTag from "../atoms/InputTag";
 import Button from '../atoms/Button'
 import ReactStars from 'react-stars'
 import { useEffect, useState } from "react";
+import Atag from "../atoms/Atag";
 
 function Reviews() {
 
@@ -18,7 +19,9 @@ function Reviews() {
     const [comment,setComment] = useState("")
     const [review, setReview] = useState()
     const [postedReview, setPostedReview] = useState([])
+    const [showAll,setShowAll] = useState(false)
     let values ={"productId":id,"comment":comment,"rating":star,"customerName":username.firstName}
+    const limit = 5
 
     async function func() {
         try {
@@ -89,6 +92,7 @@ function Reviews() {
 <Button type="submit" className="submit-btn btn btn-warning text-uppercase text-white mb-1" buttonText="submit" onClick={()=>submit(values)}/>
 
             {
+                showAll?
                 review?.map((rev, index) => {
                     if(rev?.comment){
                     return (
@@ -104,7 +108,29 @@ function Reviews() {
                     }
                     return ""
                 })
+                :
+                review?.slice(0,5)?.map((rev, index) => {
+                    if(rev?.comment){
+                    return (
+                        <div className="row" key={index}>
+                            <div className="col-1">
+                                <RatingBtn star={rev?.rating} />
+                            </div>
+                            <div className="col-11">
+                                <CustomerReviews review={rev} name={username.firstName} func={()=>{deleteReview(postedReview?.[index]?._id)}}/>
+                            </div>
+                        </div>
+                    )
+                    }
+                    return ""
+                })
             }
+        <hr/>
+        {
+            showAll && review?.length > 5
+        ?<Atag className="review-link font-weight-bold" aText="View less" onClick={()=>setShowAll(false)}/>:
+        review?.length >5?<Atag className="review-link font-weight-bold" aText="View all reviews" onClick={()=>setShowAll(true)}/>:""
+        }
         </div>
     )
 }

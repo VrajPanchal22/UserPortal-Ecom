@@ -656,6 +656,9 @@ input[type="radio"] {
   background-color: var(--button-color);
   box-shadow: none !important;
 }
+.active{
+    color:var(--nav-color) !important
+}
 .bag-icon{
     font-size: 1.2rem;
 }
@@ -713,12 +716,19 @@ input[type="radio"] {
 .submit-btn{
     height: 2.090rem;
 }
+.review-link{
+    color: var(--button-color);
+    text-decoration: none;
+}
  /* HOVER */
  .cart-btn:hover{
   color: var(--button-color) ;
   background-color: var(--background-color) ;
   border: 2px solid var(--button-color);
  }
+ .active:hover{
+    color:var(--background-color) !important
+}
  .buy-btn:hover{
   color: var(--nav-color);
   background-color: var(--background-color);
@@ -734,6 +744,9 @@ input[type="radio"] {
  }
  .color-button:hover{
    cursor: pointer;
+}
+.review-link:hover{
+    color: var(--nav-color);
 }
 
 /* product-details */
