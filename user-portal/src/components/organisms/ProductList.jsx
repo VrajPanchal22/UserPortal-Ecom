@@ -7,7 +7,7 @@ function ProductList() {
     const [productList, setProductList] = useState([]);
 
     useEffect(()=>{
-         getData('http://localhost:8000/api/product').then((res)=> {
+         getData('product').then((res)=> {
             console.log(res.products);
             setProductList(res.products);
          })
