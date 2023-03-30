@@ -1,3 +1,8 @@
+import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ProductGallary from "./components/pages/ProductGallary";
+import axios from "axios";
+import WishlistPage from "./components/pages/Wishlist";
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './components/organisms/Login';
@@ -13,12 +18,19 @@ import Main from './components/pages/Main';
 export const axiosObject = axios.create({
   baseURL: 'http://localhost:4000/api/',
   headers: {
-    "Access-Control-Allow-Origin": "*"
-  }
-})
+    "Access-Control-Allow-Origin": "*",
+  },
+});
 
 function App() {
   return (
+    // <>
+    //   <Router>
+    //     <Routes>
+    //       <Route path="/wishlist" element={<WishlistPage />}></Route>
+    //     </Routes>
+    //   </Router>
+    // </>
     <BrowserRouter>
       <Routes>
           <Route path='/login' element={<Login />}></Route>
@@ -28,6 +40,7 @@ function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/productGallary' element={<ProductGallary />} />
           <Route path='/productGallary/:name' element={<ProductGallary />} />
+          <Route path="/wishlist" element={<WishlistPage />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
