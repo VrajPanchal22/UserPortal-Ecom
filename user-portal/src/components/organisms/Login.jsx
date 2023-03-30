@@ -24,13 +24,14 @@ function Login() {
     const navigate = useNavigate();
     function handlesubmit(values) {
         let data = values
-        axios.post('http://localhost:3200/api/user/login', data)
+        axios.post('http://localhost:4000/api/user/login', data)
             .then((result) => {
                 console.log(result)
                 if (result.data.status) {
                     setMsg(result.data.message)
                     console.log("inside first if");
                     localStorage.setItem('token',result.data.token)
+                    localStorage.setItem('userData',JSON.stringify(result.data.userData))
                     const path = localStorage.getItem('path');
                     if (path) {
                       navigate(path);
@@ -61,8 +62,7 @@ function Login() {
     return (
         <div className="main-container d-flex">
             <div className="flex-1 d-flex">
-                <ImgTag className="w-100" imgUrl="/assets/images/bac_removed_3.png" altText='backgroud img' />
-                <img src="" alt="" />
+                <ImgTag className="w-100" imgUrl='/assets/images/bac_removed_3.png' alt='backgroud img' />
             </div>
             <div className="d-flex flex-1 align-items-center">
                 <div className="user-form d-flex align-items-center justify-content-center">

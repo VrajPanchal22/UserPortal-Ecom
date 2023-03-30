@@ -7,7 +7,10 @@
     --light: #f8f9fa;
     --font-family-menu: Arial, sans-serif;
 }
-
+.social-icons > img{
+    width: 25px !important;
+    height: 25px;
+}
 .main-container {
     min-height: 100vh;
     background: radial-gradient(rgb(177, 176, 176), var(--nav-color));
@@ -629,6 +632,149 @@ input[type="radio"] {
     }
 }
 
+/* PRODUCT DETAILS PAGE CSS */
+
+.price-p{
+    font-size: 1.6rem !important;
+}
+.mrp-span{
+   text-decoration: line-through !important;
+   font-size: 1.2rem !important;
+}
+.discount-span{
+    color: var(--hightlight-color);
+    font-size: 1.2rem !important;
+}
+.size-chart{
+    font-size: 0.9rem !important;
+    color: var(--button-color);
+}
+.cart-btn{
+  width: 15rem;
+  height: 3rem;
+  color: var(--background-color);
+  background-color: var(--button-color);
+  box-shadow: none !important;
+}
+.active{
+    color:var(--nav-color) !important
+}
+.bag-icon{
+    font-size: 1.2rem;
+}
+.buy-btn{
+  width: 10rem;
+  height: 3rem;
+  background-color: var(--nav-color);
+  color: var(--background-color);
+  box-shadow: none !important;
+}
+.buy-icon{
+    font-size: 1.4rem;
+}
+.wishlist-btn{
+  width: 10rem;
+  height: 3rem;
+  background-color: var(--background-color);
+  color: var(--button-color);
+  border: 2px solid var(--button-color);
+}
+.size-pill{
+  height: 4rem;
+  width: 8rem;
+  font-size: 1rem;
+  color: var(--nav-color);
+  background-color: white !important;
+  border: 2px solid var(--nav-color) !important;
+  border-radius: 5px !important;
+}
+.brand{
+    font-size: 2.5rem;
+}
+.name{
+    font-size: 1rem;
+}
+.star-icon{
+    color: rgb(75, 194, 75);
+}
+.color-button{
+    width: 3rem !important;
+    height: 3rem !important;
+}
+.color{
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+}
+.product-img-big{
+    width: 30rem;
+    height: 30rem;
+}
+.product-img-small{
+    width: 7rem;
+    height: 7rem;
+}
+.submit-btn{
+    height: 2.090rem;
+}
+.review-link{
+    color: var(--button-color);
+    text-decoration: none;
+}
+ /* HOVER */
+ .cart-btn:hover{
+  color: var(--button-color) ;
+  background-color: var(--background-color) ;
+  border: 2px solid var(--button-color);
+ }
+ .active:hover{
+    color:var(--background-color) !important
+}
+ .buy-btn:hover{
+  color: var(--nav-color);
+  background-color: var(--background-color);
+  border: 2px solid var(--nav-color);
+ }
+ .wishlist-btn:hover{
+    color: var(--background-color);
+    background-color: var(--button-color);
+ }
+ .size-pill:hover{
+  color: var(--background-color) ;
+  background-color: var(--nav-color) !important;
+ }
+ .color-button:hover{
+   cursor: pointer;
+}
+.review-link:hover{
+    color: var(--nav-color);
+}
+
+/* product-details */
+
+@media only screen and (max-width: 1514px){
+.img-container{
+    display: flex;
+    flex-direction: column-reverse;
+}
+.small-img-div{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center;
+}
+}
+
+@media only screen and (max-width: 1214px) and (min-width: 902px){
+    .btn-div{
+    display: flex;
+    flex-direction: column;
+    }
+    }
+
+@media only screen and (max-width: 902px){
+    .right-div{
+        margin-left: 2rem;
+    }
+    }
 
 
 
