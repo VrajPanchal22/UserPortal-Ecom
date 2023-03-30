@@ -4,9 +4,11 @@ import EmptyWishlist from "../molecules/EmptyWishlist";
 import { getData, deleteData } from "../../services/api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 function WishlistProdList() {
   const [wishlist, setWishlist] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getData("wishlist/640b2fc011ca53eae736b4d5").then((res) => {
@@ -48,6 +50,10 @@ function WishlistProdList() {
       toast.error(error.message);
     }
   }
+  function handleOnClick(productId) {
+    navigate(`/productdetails/${productId}`);
+    console.log("productId", productId);
+  }
   const noOfProd = wishlist.length;
   return (
     <>
@@ -63,6 +69,7 @@ function WishlistProdList() {
             <div className="row d-flex wishlist_product-details">
               {wishlist.map((product) => (
                 <Card
+                  onClick={() => handleOnClick(product?.productId)}
                   key={product._id}
                   product={product}
                   onDelete={() => handleDelete(product)}
