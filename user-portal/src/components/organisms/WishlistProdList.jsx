@@ -1,4 +1,3 @@
-// import React from "react";
 import Card from "../molecules/Card";
 import React, { useEffect, useState } from "react";
 import EmptyWishlist from "../molecules/EmptyWishlist";
@@ -11,7 +10,6 @@ function WishlistProdList() {
 
   useEffect(() => {
     getData("wishlist/640b2fc011ca53eae736b4d5").then((res) => {
-      console.log(res.wishlistData.products);
       setWishlist(res.wishlistData.products);
     });
   }, []);
@@ -25,7 +23,7 @@ function WishlistProdList() {
         setWishlist(wishlist.filter((p) => p.productId !== product.productId));
         toast.success("item removed successfully!", {
           position: toast.POSITION.TOP_RIGHT,
-          autoClose: 10000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -43,7 +41,6 @@ function WishlistProdList() {
             </div>
           ),
         });
-        console.log(product.productId, "this product is deleted");
       } else {
         throw new Error("Product could not be deleted");
       }
