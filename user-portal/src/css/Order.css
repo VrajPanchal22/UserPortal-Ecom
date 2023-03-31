@@ -1,0 +1,530 @@
+/*Universal CSS Rules*/
+
+:root {
+    --nav-color: #032e63;
+    --background-color: #ffffff;
+    --button-color: #c00156;
+    --hightlight-color: #d6b109;
+    --FontFamily: Arial, Helvetica, sans-serif;
+  }
+  .order-main-container {
+    margin-top: 5rem;
+    margin-bottom: auto;
+  }
+  * {
+    box-sizing: border-box;
+    font-family: var(--FontFamily);
+  }
+  body {
+    background: #fff;
+  }
+  button {
+    background-color: var(--button-color);
+    color: var(--background-color);
+  }
+  .btn{
+    background-color: var(--button-color);
+  }
+  .btn:focus {
+    outline: 0;
+    box-shadow: none;
+  }
+  .btn:hover,
+  button:hover {
+    outline: 0;
+    background: #d50060;
+  }
+  .btn:hover,
+  button:hover {
+    outline: 0;
+    background: #d50060;
+  }
+  .btn:focus{
+    background: var(--button-color);
+    color:white
+  }
+
+  
+  button:focus {
+    outline: 0;
+    box-shadow: 0 0;
+  }
+  
+  /* CSS of ROW 1 of Container */
+  
+  
+  nav a {
+    color: var(--nav-color);
+    text-decoration: none;
+  }
+  nav a:hover {
+    color: var(--button-color);
+  }
+  .order-navbar{
+    margin-left:0;
+    padding-left:0 ;
+
+  }
+  
+  
+  #dropdownMenuButton {
+    background-color: var(--button-color);
+    color: var(--background-color);
+  }
+  #dropdownMenuButton:focus,
+  #dropdownMenuButton:hover {
+    outline: 0 !important;
+    border: none !important;
+    box-shadow: none;
+    background: #d50060;
+  }
+  .dropdown-item:hover {
+    background-color: var(--nav-color);
+    color: var(--background-color);
+  }
+  
+  /* CSS of ROW 2 of Container*/
+  
+  /* CSS of Row2 when orderlist is empty*/
+  .breadcrumb{
+    background:none;
+  }
+  .order-searchbar {
+    background-color: var(--Footer);
+    width: 60%;
+    margin-top: -15px;
+    /* border: 2px solid red; */
+  
+    /*This Line makes searchbar sticky*/
+    position: sticky;
+    z-index: 1;
+    top: 7.52vh;
+  }
+  .empty-order-list {
+    margin: 20px 0 0 0;
+    width: 100%;
+    min-height: 50vh;
+    background: #fff;
+  }
+  .order-navbar{
+    margin-left: -8px;
+  }
+  .no-order-image {
+    height: auto;
+    width: 140px;
+  }
+  .no-order-container {
+    width: inherit;
+    border: 1px solid var(--nav-color);
+    border-radius: 10px;
+    height: 50vh;
+  }
+  #inputsearch {
+    width: 88%;
+    border: 1px solid var(--nav-color);
+    color: var(--nav-color);
+  }
+  #inputsearch:focus-within {
+    box-shadow: 2px 2px var(--nav-color);
+  }
+  .button-search-order {
+    border-radius: 2px 2px 0 0;
+    width: 12%;
+  }
+  #searchBarId {
+    width: 100%;
+  }
+  .order-list-container {
+    min-height: 50vh;
+  }
+  .form-inline {
+    width: 100%;
+  }
+  .invoice-logo{
+    height: auto;
+    width: 200px;
+    background: rgb(42, 35, 35);
+  }
+  .active{
+    color:#c00156;
+  }
+  
+  
+  /*Row 2 CSS when order are not empty*/
+  
+  #order-item {
+    height: 33%;
+    width: 100%;
+    background: #fff;
+    border: 1px solid var(--nav-color);
+    margin: 0 0 1% 0;
+    border-radius: 10px;
+    padding-bottom: 20px;
+  }
+  .order-list-items {
+    width: 100%;
+    min-height: inherit;
+    /* border: 2px solid black; */
+    background: #fff;
+  }
+  .product-img {
+    height: auto;
+    width: 148px;
+    margin-left: 15%;
+  }
+  div h6 {
+    padding-top: 10px;
+  }
+  
+  .view-item {
+    margin: 5px 5px 5px 0px;
+    background: var(--button-color);
+  }
+  .buy-again {
+    margin: 5px;
+    background: var(--button-color);
+  }
+  .product-info h6 {
+    margin-bottom: 20px;
+  }
+  .detail-item {
+    padding: 6px;
+  }
+  
+  .invoice-link {
+    color: var(--button-color);
+    float: right;
+    padding-top: 1%;
+  }
+  .invoice-link:hover {
+    color: var(--nav-color);
+  }
+  
+  /*Media Queries for main content */
+  @media only screen and (max-width: 1200px) {
+    #inputsearch {
+      width: 85%;
+      font-size: 1rem;
+    }
+    body button {
+      font-size: 1rem;
+    }
+    .button-search-order {
+      width: 15%;
+    }
+  
+    .no-order-image {
+      width: 130px;
+      height: auto;
+    }
+  
+    .product-img {
+      height: 135px;
+      width: 135px;
+      margin-left: 15%;
+    }
+  }
+  
+  @media only screen and (max-width: 992px) {
+    #inputsearch {
+      width: 82%;
+      font-size: 0.9rem;
+    }
+    body button {
+      font-size: 0.9rem;
+    }
+  
+    .no-order-image {
+      width: 120px;
+      height: auto;
+    }
+    .button-search-order {
+      width: 18%;
+      font-size: 0.9rem;
+    }
+    .button-start-shopping {
+      width: 100px;
+      font-size: 12px;
+    }
+    #dropdownMenuButton {
+      width: 100px;
+      font-size: 12px;
+    }
+    .dropdown-item {
+      width: 160px;
+      height: 30px;
+    }
+  
+    h3 {
+      font-size: 1.5rem;
+    }
+    .product-img {
+      height: auto;
+      width: 120px;
+      margin-left: 15%;
+    }
+    #order-item {
+      height: 33%;
+      width: 100%;
+      background: #fff;
+      /* border: 2px solid black; */
+      margin: 0 0 1% 0;
+      border-radius: 8px;
+      font-size: 0.8rem;
+    }
+    h6 {
+      font-size: 0.8rem;
+    }
+    .view-item,
+    .buy-again {
+      font-size: 0.75rem;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    #inputsearch {
+      width: 80%;
+      font-size: 0.8rem;
+    }
+    .button-search-order {
+      width: 20%;
+      font-size: 0.8rem;
+    }
+    .button-start-shopping {
+      width: 100px;
+      font-size: 10px;
+    }
+    #dropdownMenuButton {
+      width: 100px;
+      font-size: 10px;
+    }
+    .order-main-container {
+      margin-top: 13rem;
+    }
+  
+    body {
+      font-size: 0.8rem;
+    }
+    h3 {
+      font-size: 1.25rem;
+    }
+    .no-order-image {
+      height: auto;
+      width: 110px;
+    }
+  
+    .product-img {
+      height: auto;
+      width: 100px;
+      margin-left: 15%;
+    }
+    #order-item {
+      height: 33%;
+      width: 100%;
+      background: #fff;
+      /* border: 2px solid black; */
+      margin: 0 0 1% 0;
+      border-radius: 8px;
+      font-size: 0.7rem;
+    }
+    h6 {
+      font-size: 0.75rem;
+    }
+    .view-item,
+    .buy-again {
+      font-size: 0.7rem;
+    }
+    .order-searchbar {
+      /*This Line makes searchbar sticky*/
+      position: sticky;
+      z-index: 1;
+      top: 21.5vh;
+    }
+  }
+  @media only screen and (max-width: 576px) {
+    #inputsearch {
+      width: 80%;
+      font-size: 0.7rem;
+      border: 0.5px solid var(--nav-color);
+    }
+    #navbar {
+      font-size: 0.7rem;
+      height: 40px;
+      padding: 20px;
+    }
+    .form-inline {
+      margin-top: 5%;
+    }
+    .button-search-order {
+      width: 20%;
+      font-size: 0.6rem;
+    }
+    #dropdownMenuButton {
+      width: 150px;
+      position: absolute;
+      right: 0%;
+      top: 0%;
+      font-size: 0.6rem;
+    }
+    body {
+      font-size: 0.7rem;
+    }
+    h5 {
+      font-size: 0.8rem;
+    }
+    h3 {
+      font-size: 1rem;
+    }
+    .no-order-image {
+      width: 100px;
+      height: auto;
+    }
+    .empty-order-list {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .order-searchbar {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    #dropdownMenuButton {
+      width: 90px;
+      position: absolute;
+      right: 0%;
+      top: 0%;
+      font-size: 0.6rem;
+    }
+    .product-img {
+      height: auto;
+      width: 80px;
+      margin-left: 5%;
+    }
+    #order-item {
+      height: 33%;
+      width: 100%;
+      background: #fff;
+      /* border: 2px solid black; */
+      margin: 0 0 1% 0;
+      border-radius: 8px;
+      font-size: 0.7rem;
+      border: 0.5px solid var(--nav-color);
+    }
+    h6 {
+      font-size: 0.7rem;
+    }
+    .view-item,
+    .buy-again {
+      font-size: 0.6rem;
+    }
+    .order-product-details {
+      position: absolute;
+      bottom: 50px;
+      right: 0px;
+    }
+    .product-info {
+      width: 50vw;
+    }
+    .invoice-link {
+      color: var(--button-color);
+      float: right;
+      padding-top: 1%;
+    }
+    .col-sm-8 {
+      position: absolute;
+      right: 3%;
+    }
+    .order-searchbar {
+      /*This Line makes searchbar sticky*/
+      position: sticky;
+      z-index: 1;
+      top: 19vh;
+    }
+  }
+  @media only screen and (max-width: 450px) {
+    #inputsearch {
+      width: 70%;
+      font-size: 0.6rem;
+    }
+    #navbar {
+      font-size: 0.6rem;
+      padding: 20px;
+      font-size: 0.7rem;
+    }
+    .form-inline {
+      margin-top: 5%;
+    }
+    .button-search-order {
+      width: 30%;
+      font-size: 0.6rem;
+    }
+    #dropdownMenuButton {
+      width: 150px;
+      position: absolute;
+      right: 0%;
+      top: 0%;
+      font-size: 0.6rem;
+    }
+    body {
+      font-size: 0.7rem;
+    }
+    h5 {
+      font-size: 0.8rem;
+    }
+    h3 {
+      font-size: 1rem;
+    }
+    .no-order-image {
+      width: 80px;
+      height: auto;
+    }
+    .empty-order-list {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .order-searchbar {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    #dropdownMenuButton {
+      width: 90px;
+      position: absolute;
+      right: 0%;
+      top: 0%;
+      font-size: 0.6rem;
+    }
+    .product-img {
+      height: auto;
+      width: 70px;
+      margin-left: 5%;
+    }
+    #order-item {
+      height: 33%;
+      width: 100%;
+      background: #fff;
+      margin: 0 0 1% 0;
+      border-radius: 8px;
+      font-size: 0.55rem;
+    }
+    h6 {
+      font-size: 0.55rem;
+    }
+    .view-item,
+    .buy-again {
+      font-size: 0.55rem;
+    }
+    .order-product-details {
+      position: absolute;
+      bottom: 50px;
+      right: 0px;
+    }
+    .product-info {
+      width: 50vw;
+    }
+  }

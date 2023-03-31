@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 function Button(props) {
     const {buttonText,onClick,icon,...rest }= props;
@@ -7,4 +7,4 @@ function Button(props) {
   )
 }
 
-export default Button
+export default Button;

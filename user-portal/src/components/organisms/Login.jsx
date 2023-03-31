@@ -31,8 +31,26 @@ function Login() {
                     setMsg(result.data.message)
                     console.log("inside first if");
                     localStorage.setItem('token',result.data.token)
+                    const tempId = localStorage.getItem("tempUserId")
+                    if(tempId){
+                      localStorage.setItem("userData", JSON.stringify({
+                          "_id":tempId,
+                          "firstName":result.data.userData.firstName,
+                          "lastName":result.data.userData.lastName,
+                          "password":null,
+                          "role":result.data.userData.role,
+                          "_v":result.data.userData._v
+                      }))
+                      localStorage.removeItem("tempUserId")
+                    }else{
+                    localStorage.setItem(
+                      "userData",
+                      JSON.stringify(result.data.userData)
+                    );
+                    }
                     localStorage.setItem('userData',JSON.stringify(result.data.userData))
                     const path = localStorage.getItem('path');
+                    localStorage.removeItem("path")
                     if (path) {
                       navigate(path);
                     }else{
