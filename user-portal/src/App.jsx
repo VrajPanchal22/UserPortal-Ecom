@@ -1,10 +1,10 @@
-import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import ProductGallary from "./components/pages/ProductGallary";
-import axios from "axios";
 import WishlistPage from "./components/pages/Wishlist";
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Order from './components/pages/Order';
+import Invoice from './components/pages/Invoice';
+
+
 import Login from './components/organisms/Login';
 import Signup from './components/organisms/Signup';
 import Home from './components/pages/Home';
@@ -23,14 +23,12 @@ export const axiosObject = axios.create({
 });
 
 function App() {
+  
+ 
+    
+   
+    
   return (
-    // <>
-    //   <Router>
-    //     <Routes>
-    //       <Route path="/wishlist" element={<WishlistPage />}></Route>
-    //     </Routes>
-    //   </Router>
-    // </>
     <BrowserRouter>
       <Routes>
           <Route path='/login' element={<Login />}></Route>
@@ -41,9 +39,12 @@ function App() {
           <Route path='/productGallary' element={<ProductGallary />} />
           <Route path='/productGallary/:name' element={<ProductGallary />} />
           <Route path="/wishlist" element={<WishlistPage />}></Route>
+          <Route path='/orders' element={<Order />}></Route>
+          <Route path='/orders/Invoice' element={<Invoice/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
+    
   );
 }
 
