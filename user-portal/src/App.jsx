@@ -1,7 +1,3 @@
-import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import ProductGallary from "./components/pages/ProductGallary";
-import axios from "axios";
 import WishlistPage from "./components/pages/Wishlist";
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
