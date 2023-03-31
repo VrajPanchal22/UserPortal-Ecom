@@ -1,5 +1,5 @@
 import { getData,postData,deleteData } from "../../services/api";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import RatingBtn from "../atoms/RatingBtn";
 import CustomerPhotos from "../molecules/CustomerPhotos";
 import CustomerReviews from "../molecules/CustomerReviews";
@@ -20,10 +20,18 @@ function Reviews() {
     const [review, setReview] = useState()
     const [postedReview, setPostedReview] = useState([])
     const [showAll,setShowAll] = useState(false)
+    const navigate = useNavigate()
     let values ={"productId":id,"comment":comment,"rating":star,"customerName":username.firstName}
     const limit = 5
 
+    function islogin(){
+        if(!id){
+navigate('/login')
+        }
+    }
+
     async function func() {
+
         try {
             const reviews = await getData(`/review/allReview/${id}`)
             setReview(reviews?.review)
@@ -89,7 +97,7 @@ function Reviews() {
             color2={'#00a300'} 
             className="mb-2"/>
             <InputTag type="text" placeholder="write your review here...." className="mb-2 mr-2" onChange={(e)=>userReview(e)}/>
-<Button type="submit" className="submit-btn btn btn-warning text-uppercase text-white mb-1" buttonText="submit" onClick={()=>submit(values)}/>
+<Button type="submit" className="submit-btn btn btn-warning text-uppercase text-white mb-1" buttonText="submit" onClick={()=>{submit(values);islogin()}}/>
 
             {
                 showAll?

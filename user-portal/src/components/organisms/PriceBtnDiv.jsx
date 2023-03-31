@@ -19,7 +19,7 @@ function PriceBtnDiv(props) {
     const [cartVariants,setCartVariants]=useState([])
     const { id } = useParams();
     const userData =JSON.parse(localStorage.getItem("userData"))
-    const userId=userData._id
+    const userId = userData._id
     let arr=[]
     // console.log("sizebtn::::",isSizeSelected,data)
     let price = mrp - (mrp * discount % 100)
@@ -121,7 +121,7 @@ console.log(isActive,":::::::active")
                 {
                     console.log("pricebtndiv::",selectedVariant)
                 }
-                <ProductShopBtn isSelected={isSizeSelected} index={index} data={data} variant={selectedVariant} cartvariant={cartVariants}/>
+                <ProductShopBtn isSelected={isSizeSelected} index={index} data={data} variant={selectedVariant} cartvariant={cartVariants} userid={userId} productid={id}/>
             </div>
         </div>
 

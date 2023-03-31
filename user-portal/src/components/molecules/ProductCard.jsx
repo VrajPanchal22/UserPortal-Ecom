@@ -3,10 +3,10 @@ import { FaRegHeart } from 'react-icons/fa';
 import productGallaryContext from '../../contexts/productGallary'
 
 
-function ProductCard({ product }) {
+function ProductCard({ product ,onClick}) {
     const {viewOption} =useContext(productGallaryContext);
     return (
-        <div className={`${viewOption==='list'?'col-12 m-2':' col-xl-3 col-lg-4 col-md-6 col-6 d-flex justify-content-center align-items-center'} card-div`} id={product._id}>
+        <div className={`${viewOption==='list'?'col-12 m-2':' col-xl-3 col-lg-4 col-md-6 col-6 d-flex justify-content-center align-items-center'} card-div`} id={product._id} onClick={onClick}>
             <div className={`${viewOption==='list'?'flex-row justify-content-around card--listview':'card--gridview'} card p-2 d-flex align-items-center`}>
                 <img className={`${viewOption==='list'?'card__img--width m-2':'card-img-top card__img'}`}
                     src={product.image} alt="Card image cap" />
