@@ -24,14 +24,32 @@ function Login() {
     const navigate = useNavigate();
     function handlesubmit(values) {
         let data = values
-        axios.post('http://localhost:3200/api/user/login', data)
+        axios.post('http://localhost:4000/api/user/login', data)
             .then((result) => {
                 console.log(result)
                 if (result.data.status) {
                     setMsg(result.data.message)
                     console.log("inside first if");
                     localStorage.setItem('token',result.data.token)
+                    const tempId = localStorage.getItem("tempUserId")
+                    if(tempId){
+                      localStorage.setItem("userData", JSON.stringify({
+                          "_id":tempId,
+                          "firstName":result.data.userData.firstName,
+                          "lastName":result.data.userData.lastName,
+                          "password":null,
+                          "role":result.data.userData.role,
+                          "_v":result.data.userData._v
+                      }))
+                      localStorage.removeItem("tempUserId")
+                    }else{
+                    localStorage.setItem(
+                      "userData",
+                      JSON.stringify(result.data.userData)
+                    );
+                    }
                     const path = localStorage.getItem('path');
+                    localStorage.removeItem("path")
                     if (path) {
                       navigate(path);
                     }else{

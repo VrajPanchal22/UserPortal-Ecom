@@ -34,7 +34,7 @@ export default function CartProductCard() {
       );
       const data = response.data;
       console.log(data);
-      setLoader(true);
+      // setLoader(true);       
       fetchData();
     } catch (error) {
       console.error("Error deleting product from cart:", error);

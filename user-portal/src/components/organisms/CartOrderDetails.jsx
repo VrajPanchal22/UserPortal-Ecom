@@ -14,10 +14,12 @@ export default function CartOrderDetails() {
   const {cartData, fetchData} = useContext(cartContext);
 
   const navigate = useNavigate();
+
   const handleCheckout = () => {
     if (token) {
       navigate("/payment");
     } else {
+      localStorage.setItem("path","/payment")
       navigate("/login");
     }
   };

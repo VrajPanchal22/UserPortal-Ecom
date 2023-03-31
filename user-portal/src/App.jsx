@@ -7,8 +7,9 @@ import Home from './components/pages/Home';
 import ProductGallary from './components/pages/ProductGallary'
 import MainNavbar from './components/organisms/MainNavbar';
 import axios from "axios";
-import ProductList from './components/organisms/ProductList';
 import Main from './components/pages/Main';
+import ProductDetails from "./components/pages/ProductDetails";
+import Payment from "./components/pages/Payemnt";
 
 export const axiosObject = axios.create({
   baseURL: 'http://localhost:4000/api/',
@@ -27,7 +28,11 @@ function App() {
       <Route path='/signup' element={<Signup />}></Route>
       <Route path='/' element={<MainNavbar />}></Route>
       <Route path='/products' element={<ProductGallary />}></Route>
-      <Route path='/products' element={<ProductList />}></Route>
+       <Route path='/product-details' element={<ProductDetails />}></Route>
+       <Route path='/payment' element={<Payment />}></Route>
+       <Route path='/main' element={<Main />}></Route>
+
+
     </Routes>
     </BrowserRouter>
   );
