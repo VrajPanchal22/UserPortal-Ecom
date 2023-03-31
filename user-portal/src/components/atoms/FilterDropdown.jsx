@@ -17,8 +17,6 @@ export default class FilterDropdown extends React.Component {
     this.props.changeFilter(value);
   
   }
-
-
   toggle() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
