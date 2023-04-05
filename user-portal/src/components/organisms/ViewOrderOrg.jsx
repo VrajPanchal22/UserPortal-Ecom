@@ -2,7 +2,6 @@ import moment from "moment";
 import { NavLink } from "react-router-dom";
 import { Button, Badge } from "reactstrap";
 function ViewOrderOrg({obj}) {
-    console.log(obj)
     let {_Id,orderDate,deliveryDate,status,totalAmount,shippingCharge}= obj;
     let {products:[{name,category,image}]}= obj
     let {variant:[{price}]}=obj;
@@ -116,7 +115,6 @@ function getColorByOrderStatus(status) {
             break;
 
     }
-    console.log(color)
     return color
 }
 export default ViewOrderOrg;

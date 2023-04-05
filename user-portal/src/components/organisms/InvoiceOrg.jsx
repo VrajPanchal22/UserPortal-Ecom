@@ -5,9 +5,7 @@ import moment from "moment";
 function InvoiceOrg(props){
   let srNo = 1
   const {billingAddress:{residenceNo,residenceName,area,city,country,pincode,state,street}}= props.obj;
-  console.log(residenceNo,residenceName,area,city,country,pincode,state,street)
   const {_Id,orderDate,deliveryDate,shippingCharge,totalAmount,paymentId,products:[{sellerId,productId,name,category}],variant:[{price,quantity}]}= props.obj;
-  console.log(_Id,orderDate,deliveryDate,productId,sellerId,name,price,quantity,category)
   const invoiceRef = useRef();
   const handlePrint = () => {
     window.print();
