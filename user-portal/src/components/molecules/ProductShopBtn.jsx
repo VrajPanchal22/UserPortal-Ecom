@@ -10,13 +10,13 @@ import { getData, patchData, postData } from "../../services/api";
 import { useNavigate } from "react-router-dom";
 
 function ProductShopBtn(props) {
-  const { isSelected, data, index, variant, cartvariant, userid, productid } = props
+  const { isSelected, data, variant, cartvariant, productid } = props
   // console.log(data,"::::::::data")
   console.log("cartvariant::::", cartvariant, variant?._id, cartvariant.includes(variant?._id))
   console.log(data, variant)
   const [flag, setFlag] = useState(false)
   const [res, setRes] = useState(0)
-  const [size, setSize] = useState("")
+  // const [size, setSize] = useState("")
   const [iswishlisted, setIsWishlisted] = useState(false)
   const navigate = useNavigate()
 
@@ -24,6 +24,7 @@ function ProductShopBtn(props) {
   const handleAddToCart = async () => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     const tempId = localStorage.getItem("tempUserId");
+    console.log(data,"inside add to cart")
     // If the user is not logged in, generate a temporary user ID
     if (!userData && !tempId) {
       console.log("Temp id Generation");
@@ -123,21 +124,14 @@ function ProductShopBtn(props) {
 
   // }, []);
 
-  async function isAdded() {
-    try {
-      if (res && res?.status === true) {
-        toast.success("product added succesfully!!!")
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
 
   async function handleWishlist() {
-    if (userid) {
-
+    const userData =JSON.parse(localStorage.getItem("userData"))
+    
+    if (userData) {
+      const userId = userData._id
       let wishobj = {
-        "userId": userid,
+        "userId": userId,
         "products": {
           "productId": productid,
           "category": data?.category,
@@ -154,7 +148,7 @@ function ProductShopBtn(props) {
       }
       console.log(wishobj)
       try {
-        const list = await getData(`/wishlist/${userid}`)
+        const list = await getData(`/wishlist/${userId}`)
         if (list) {
           console.log("if")
           list?.wishlistData?.products?.map((product) => {
@@ -165,7 +159,7 @@ function ProductShopBtn(props) {
               console.log("else1")
               async function addProduct() {
                 try {
-                  const res = await patchData(`/wishlist/${userid}`,
+                  const res = await patchData(`/wishlist/${userId}`,
                     {
                       product: {
                         "productId": productid,
@@ -189,6 +183,7 @@ function ProductShopBtn(props) {
               }
               addProduct()
             }
+            return ""
           })
         } else {
           console.log("else")
@@ -219,11 +214,11 @@ function ProductShopBtn(props) {
       {
         // res && res.message=== "product add successfully" && size===isSelected
         cartvariant.includes(variant?._id) || res?.status === true ?
-          <Button type="button" className="cart-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1" icon={<BsFillBagFill className="bag-icon mr-2 mb-1" />} buttonText="Go to cart" onClick={() => { setFlag(!flag); handleAddToCart(); setSize(isSelected); navigate('/cart') }} />
+          <Button type="button" className="cart-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1" icon={<BsFillBagFill className="bag-icon mr-2 mb-1" />} buttonText="Go to cart" onClick={() => { setFlag(!flag); handleAddToCart(); navigate('/cart') }} />
           :
-          <Button type="button" className="cart-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1" icon={<BsFillBagFill className="bag-icon mr-2 mb-1" />} buttonText="add to cart" onClick={() => { setFlag(!flag); handleAddToCart(); setSize(isSelected); }} />
+          <Button type="button" className="cart-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1" icon={<BsFillBagFill className="bag-icon mr-2 mb-1" />} buttonText="add to cart" onClick={() => { setFlag(!flag); handleAddToCart(); }} />
       }
-      <Button type="button" className="buy-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1" icon={<BsCartCheckFill className="buy-icon mr-2 mb-1" />} buttonText="buy now" />
+      <Button type="button" className="buy-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1" icon={<BsCartCheckFill className="buy-icon mr-2 mb-1" />} buttonText="buy now" onClick={()=>navigate('/orders')}/>
       {
         iswishlisted
           ? <Button type="button" className="wishlist-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1" icon={<FaRegHeart className="buy-icon mr-2 mb-1" />} buttonText="wishlisted" onClick={() => handleWishlist()} />

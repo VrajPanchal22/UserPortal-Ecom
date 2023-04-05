@@ -44,11 +44,6 @@ async function deleteData(url) {
 export {
     getData,
     postData,
-<<<<<<< HEAD
     deleteData,
     patchData
 }
-=======
-    deleteData
-}
->>>>>>> develop

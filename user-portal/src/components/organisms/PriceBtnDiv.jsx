@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { getData } from '../../services/api';
-import { useState,useEffect } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import 'react-bootstrap';
 import { Button } from 'reactstrap';
@@ -18,8 +18,7 @@ function PriceBtnDiv(props) {
     const [index, setIndex] = useState()
     const [cartVariants,setCartVariants]=useState([])
     const { id } = useParams();
-    const userData =JSON.parse(localStorage.getItem("userData"))
-    const userId = userData._id
+    
     let arr=[]
     // console.log("sizebtn::::",isSizeSelected,data)
     let price = mrp - (mrp * discount % 100)
@@ -37,12 +36,15 @@ function PriceBtnDiv(props) {
         }
 
         sizesByColor[color].push(variants?.[index]?.color === color ? variants?.[index] :"");
-        
+        return ""
     })
 
     async function goToCart() {
+        const userData =JSON.parse(localStorage.getItem("userData"))
+        const userId = userData._id
+        const tempId = localStorage.getItem("tempUserId");
         try {
-            const cartData = await getData(`/cart/${userId}`)
+            const cartData = await getData(`/cart/${userId?userId:tempId}`)
             const products = cartData?.data
            console.log("cartData",products)
            products?.products?.map((product,index)=>{
@@ -50,17 +52,19 @@ function PriceBtnDiv(props) {
                 product?.selectedVariants?.map((variant,index)=>{
                     arr.push(variant?.variantId)
                     setCartVariants(arr)
+                    return ""
                 })
             }
+            return ""
            })
         } catch (error) {
             console.log(error)
         }
     }
 
-useEffect(()=>{
-    goToCart()
-},[userId])
+// useEffect(()=>{
+//     goToCart()
+// },[userId])
 
 function active(val){
     setIsActive(val)
@@ -103,17 +107,18 @@ console.log(isActive,":::::::active")
                     selectColor?
                     Object.keys(selectColor).map((ele, index) => {
                             return (
-                                <Button type="button" className={classname} key={index} onClick={() => { setIsSizeSelected(ele.size); setIndex(index);selectVariant(selectColor[ele]);active(true)}}>
+                                <Button type="button" className={classname} key={selectColor[ele].size} onClick={() => { setIsSizeSelected(ele.size); setIndex(index);selectVariant(selectColor[ele]);active(true)}}>
                                     {selectColor[ele].size}</Button>
                             )
                     }):
                     data?.variants?.map((ele,index)=>{
                         if(ele?.color === selectedVariant?.color){
                             return (
-                                <Button type="button" className={classname} key={index} onClick={() => { setIsSizeSelected(ele.size); setIndex(index);selectVariant(ele);goToCart();active(true)}}>
+                                <Button type="button" className={classname} key={ele.size} onClick={() => { setIsSizeSelected(ele.size); setIndex(index);selectVariant(ele);goToCart();active(true)}}>
                                     {ele?.size}</Button>
                             )
                         }
+                        return ""
                     })
                 }
             </div>
@@ -121,7 +126,7 @@ console.log(isActive,":::::::active")
                 {
                     console.log("pricebtndiv::",selectedVariant)
                 }
-                <ProductShopBtn isSelected={isSizeSelected} index={index} data={data} variant={selectedVariant} cartvariant={cartVariants} userid={userId} productid={id}/>
+                <ProductShopBtn isSelected={isSizeSelected} index={index} data={data} variant={selectedVariant} cartvariant={cartVariants} productid={id}/>
             </div>
         </div>
 

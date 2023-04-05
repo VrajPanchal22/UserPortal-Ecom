@@ -23,11 +23,7 @@ export const axiosObject = axios.create({
 });
 
 function App() {
-  
- 
-    
-   
-    
+
   return (
 
     <BrowserRouter>
@@ -37,16 +33,13 @@ function App() {
           <Route path='/' element={<Main />}>
           <Route path='/productdetails/:id' element={<ProductDetails/>}></Route>
           <Route path='/home' element={<Home />} />
-          <Route path='/wishlist' element={<Home />} />
-          <Route path='/cart' element={<Home />} />
-          <Route path='/productGallary' element={<ProductGallary />} />
-          <Route path='/productGallary/:name' element={<ProductGallary />} />
-          <Route path="/wishlist" element={<WishlistPage />}></Route>
+          {/* <Route path='/productGallary' element={<ProductGallary />} /> */}
+          <Route path='/productGallary' element={<ProductGallary />}/>
           <Route path='/orders' element={<Order />}></Route>
           <Route path='/orders/Invoice' element={<Invoice/>}/>
-          <Route path='/cart' element={<Cart/>}/>
-
         </Route>
+        <Route path="/wishlist" element={<WishlistPage />}></Route>
+        <Route path='/cart' element={<Cart/>}/>
       </Routes>
     </BrowserRouter>
     

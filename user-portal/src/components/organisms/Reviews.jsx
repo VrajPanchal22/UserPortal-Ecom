@@ -21,11 +21,12 @@ function Reviews() {
     const [postedReview, setPostedReview] = useState([])
     const [showAll,setShowAll] = useState(false)
     const navigate = useNavigate()
-    let values ={"productId":id,"comment":comment,"rating":star,"customerName":username.firstName}
+    let values ={"productId":id,"comment":comment,"rating":star,"customerName":username?username.firstName:"guest"}
+    // const tempid = JSON.parse(localStorage.getItem('tempId'))
     const limit = 5
 
     function islogin(){
-        if(!id){
+        if(!user){
 navigate('/login')
         }
     }
@@ -83,11 +84,11 @@ navigate('/login')
 
         <div>
             {/* {console.log("review::::",review)} */}
-            <Para para="rating and reviews" className="text-uppercase font-weight-bold" />
+            {/* <Para para="rating and reviews" className="text-uppercase font-weight-bold" />
             <Para para="customer photos" className="text-uppercase font-weight-bold" />
             <div className="row">
                 <CustomerPhotos />
-            </div>
+            </div> */}
             <Para para="customer reviews" className="text-uppercase font-weight-bold" />
             <ReactStars
             count={5}
@@ -100,7 +101,7 @@ navigate('/login')
 <Button type="submit" className="submit-btn btn btn-warning text-uppercase text-white mb-1" buttonText="submit" onClick={()=>{submit(values);islogin()}}/>
 
             {
-                showAll?
+                showAll && values?
                 review?.map((rev, index) => {
                     if(rev?.comment){
                     return (
@@ -109,7 +110,7 @@ navigate('/login')
                                 <RatingBtn star={rev?.rating} />
                             </div>
                             <div className="col-11">
-                                <CustomerReviews review={rev} name={username.firstName} func={()=>{deleteReview(postedReview?.[index]?._id)}}/>
+                                <CustomerReviews review={rev} name={username?username.firstName:"guest"} func={()=>{deleteReview(postedReview?.[index]?._id)}}/>
                             </div>
                         </div>
                     )
@@ -125,7 +126,7 @@ navigate('/login')
                                 <RatingBtn star={rev?.rating} />
                             </div>
                             <div className="col-11">
-                                <CustomerReviews review={rev} name={username.firstName} func={()=>{deleteReview(postedReview?.[index]?._id)}}/>
+                                <CustomerReviews review={rev} name={username?username.firstName:"guest"} func={()=>{deleteReview(postedReview?.[index]?._id)}}/>
                             </div>
                         </div>
                     )
