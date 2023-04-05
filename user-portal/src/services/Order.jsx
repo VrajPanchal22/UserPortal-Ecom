@@ -7,5 +7,9 @@ async function SearchOrders(url,userId,limit,offset,search){
     let orders = await axios.get(`${url}/${userId}`,{params:{search:search,limit:limit,offset:offset}})
     return orders;
 }
+async function GetOrderById(url){
+    let order = await axios.get(url);
+    return order;
+}
 
-export {FetchOrders,SearchOrders};
+export {FetchOrders,SearchOrders,GetOrderById};
