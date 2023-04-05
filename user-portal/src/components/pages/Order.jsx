@@ -12,6 +12,9 @@ import { LIMIT, OFFSET, SEARCH_URL } from "../../constants/constants";
 // import '../../css/Order.css'
 
 function Order() {
+  let userObj = JSON.parse(localStorage.getItem('userData'));
+  let userId = userObj._id;
+  userId = '64257d8ca7d87d37b085c8dc'
   const ORDER_URL = "http://localhost:4000/api/order";
   let [orderList, setOrderList] = useState([]);
   let [filter, setFilter] = useState("");
@@ -19,16 +22,16 @@ function Order() {
   useEffect(() => {
     if (filter === "Last 30 Days") {
       setFilter("Last30");
-      return;
     }
-    if (filter === "Filter Orders") {
-      setFilter(undefined);
-      return;
+    else if (filter === "Filter Orders") {
+      setFilter(null);
     }
-    fetchdata(ORDER_URL, "u1", LIMIT, OFFSET);
+    else{
+      fetchdata(ORDER_URL, userId, LIMIT, OFFSET);
+    }
   }, [filter]);
   useEffect(() => {
-    SearchOrderData(SEARCH_URL, "u1", LIMIT, OFFSET);
+    SearchOrderData(SEARCH_URL, userId, LIMIT, OFFSET);
   }, [search]);
 
   let fetchdata = async (url, userId, limit, offset) => {
@@ -44,8 +47,9 @@ function Order() {
   }
   async function handlePage(event) {
     const newOffSet = event.selected * LIMIT;
-    let tempresp = await fetchdata(ORDER_URL, "u1", LIMIT, newOffSet);
-    setOrderList(tempresp.data.details);
+    await fetchdata(ORDER_URL, userId, LIMIT, newOffSet,filter); 
+    localStorage.removeItem('ol');
+    localStorage.setItem('ol',JSON.stringify(orderList));
   }
 
   return (
@@ -75,6 +79,9 @@ function Order() {
                   setSearch(value);
                 }}
               />
+               {
+      console.log(filter)
+    }
             </div>
           </div>
           <div className="row">
@@ -86,13 +93,13 @@ function Order() {
                       key={item._Id}
                       _Id={item._Id}
                       name={item.products[0].name}
-                      price={item.products[0].price}
+                      price={item.variant[0].price}
                       orderDate={moment(item.orderDate).format("DD MMM YYYY")}
                       deliveryDate={moment(item.deliveryDate).format(
                         "DD MMM YYYY"
                       )}
                       status={item.status}
-                      imageurl={item.products[0].images[0]}
+                      imageurl={item.products[0].image}
                       order={item}
                     />
                   );
@@ -121,6 +128,7 @@ function Order() {
         </div>
       </div>
     </main>
+   
   );
 }
 
