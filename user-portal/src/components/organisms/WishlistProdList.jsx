@@ -10,8 +10,10 @@ function WishlistProdList() {
   const [wishlist, setWishlist] = useState([]);
   const navigate = useNavigate();
 
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  console.log("user data", userData._id);
   useEffect(() => {
-    getData("wishlist/640b2fc011ca53eae736b4d5").then((res) => {
+    getData(`wishlist/${userData ? userData._id : ""}`).then((res) => {
       setWishlist(res.wishlistData.products);
     });
   }, []);
@@ -19,7 +21,7 @@ function WishlistProdList() {
   async function handleDelete(product) {
     try {
       const res = await deleteData(
-        `wishlist/640b2fc011ca53eae736b4d5/${product.productId}`
+        `wishlist/${userData ? userData._id : ""}/${product.productId}`
       );
       if (res.status === true) {
         setWishlist(wishlist.filter((p) => p.productId !== product.productId));
@@ -52,7 +54,6 @@ function WishlistProdList() {
   }
   function handleOnClick(productId) {
     navigate(`/productdetails/${productId}`);
-    console.log("productId", productId);
   }
   const noOfProd = wishlist.length;
   return (
