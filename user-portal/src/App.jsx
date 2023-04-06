@@ -1,9 +1,8 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import OrderPlaced from "./components/molecules/OrderPlaced";
 
 import ProductList from "./components/organisms/ProductList";
-
+import OrderPlaced from "./components/molecules/OrderPlaced";
 import AddressPage from "./components/pages/AddressPage";
 import Payment from "./components/pages/Payment";
 import Cart from "./components/pages/Cart";
@@ -47,6 +46,7 @@ function App() {
           <Route path="/orders" element={<Order />}></Route>
           <Route path="/orders/Invoice" element={<Invoice />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/order-placed" element={<OrderPlaced />} />
         </Route>
       </Routes>
     </BrowserRouter>

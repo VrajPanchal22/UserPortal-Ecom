@@ -8,27 +8,7 @@ function PaymentMode() {
     useState("cashOnDelivery");
 
   function handlePaymentMethodClick(id) {
-    console.log("id", id);
     setSelectedPaymentMethod(id);
-    // if (id === "cashOnDelivery") {
-    //   setSelectedPaymentMethod(<CashOnDelivery />);
-    // } else if (id === "cardDetails") {
-    //   setSelectedPaymentMethod(<CreditDebit />);
-    // } else if (id === "phonePeGpayPaytm") {
-    //   setSelectedPaymentMethod(<UPIPayment />);
-    // } else if (id === "netBanking") {
-    //   setSelectedPaymentMethod(<NetbankingPayment />);
-    // }
-
-    // if (id === "cashOnDelivary") {
-    //   setSelectedComponent(<CashOnDelivery />);
-    // } else if (id === "cardDetails") {
-    //   setSelectedComponent(<CreditDebit />);
-    // } else if (id === "phonePeGpayPaytm") {
-    //   setSelectedComponent(<UPIPayment />);
-    // } else if (id === "netBanking") {
-    //   setSelectedComponent(<NetbankingPayment />);
-    // }
   }
 
   return (

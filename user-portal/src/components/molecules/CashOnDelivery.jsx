@@ -1,9 +1,19 @@
 import React from "react";
+import { useState } from "react";
+import OrderPlaced from "./OrderPlaced";
+import { useNavigate } from "react-router-dom";
 import ImgTag from "../atoms/ImgTag";
 function CashOnDelivery() {
+  const navigate = useNavigate();
   function handlePlaceOrder() {
     console.log("clicked");
+    if (localStorage.getItem("selectedAddress")) {
+      navigate("/order-placed");
+    } else {
+      alert("no address added");
+    }
   }
+
   return (
     <div id="cashOnDelivery" className="m-3">
       <div className="fs-7 font-weight-bold pt-1">

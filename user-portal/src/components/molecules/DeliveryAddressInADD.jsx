@@ -1,20 +1,35 @@
 import React from "react";
 import { useState } from "react";
+import { useEffect } from "react";
+import { getData } from "../../services/api";
 import AddressModel from "./AddressModel";
 import AddressCard from "./AddressCard";
-function DeliveryAddressInADD({
-  toggle,
-  addresses,
-  removeAddress,
-  setAddresses,
-}) {
-  // const [showModel, setShowModel] = useState(false);
-  // function toggle() {
-  //   setShowModel(!showModel);
-  // }
-  const addAddress = (address) => {
-    setAddresses([...addresses, address]);
+import { deleteData } from "../../services/api";
+function DeliveryAddressInADD({ toggle, setSelectedAddress, addresseFrom }) {
+  const [addresses, setAddresses] = useState([]);
+
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  useEffect(() => {
+    getData(`address/${userData ? userData._id : ""}`).then((res) => {
+      setAddresses(res.data);
+    });
+  }, [addresseFrom]);
+
+  const handleSelectAddress = (addressData) => {
+    setSelectedAddress(addressData);
   };
+  async function handleRemove(address) {
+    try {
+      const res = await deleteData(
+        `address/${userData ? userData._id : ""}/${address._id}`
+      );
+      if (res.status === true) {
+        setAddresses(addresses.filter((A) => A._id !== address._id));
+      }
+    } catch (error) {
+      error(error.message);
+    }
+  }
 
   return (
     <>
@@ -26,9 +41,10 @@ function DeliveryAddressInADD({
         <div id="addresses" className="row">
           {addresses.map((address) => (
             <AddressCard
-              key={address.id}
-              formData={address}
-              onRemove={removeAddress}
+              key={address._id}
+              data={address}
+              onSelect={handleSelectAddress}
+              onDelete={() => handleRemove(address)}
             />
           ))}
         </div>

@@ -3,7 +3,6 @@ import { useState } from "react";
 import AddressCard from "./AddressCard";
 function AddressModel({ toggle, onAddAddress }) {
   const [formData, setFormData] = useState({
-    id: Date.now(),
     name: "",
     phoneNo: "",
     pincode: "",
@@ -13,7 +12,6 @@ function AddressModel({ toggle, onAddAddress }) {
     state: "",
   });
 
-  // addresses = []
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -21,13 +19,21 @@ function AddressModel({ toggle, onAddAddress }) {
       [name]: value,
     });
   };
+
+  const [selectedAddType, setSelectedAddType] = useState();
+
+  const handleAddressType = (value) => {
+    setFormData({
+      ...formData,
+      addressType: value,
+    });
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     onAddAddress(formData);
     setFormData({
-      id: Date.now(),
       name: "",
-      phoneNo: "",
+      contactNo: "",
       pincode: "",
       address: "",
       locality: "",
@@ -35,8 +41,6 @@ function AddressModel({ toggle, onAddAddress }) {
       state: "",
     });
     toggle();
-
-    console.log(formData);
   };
   return (
     <div id="addressWindow" className="model position-absolute h-100 w-100 ">
@@ -119,7 +123,6 @@ function AddressModel({ toggle, onAddAddress }) {
                     value={formData.pincode}
                     onChange={handleInputChange}
                     placeholder="Pincode"
-                    //onChange="pincodeChange(id)"
                   />
                 </div>
               </div>
@@ -178,7 +181,7 @@ function AddressModel({ toggle, onAddAddress }) {
                       value={formData.city}
                       onChange={handleInputChange}
                       placeholder="City"
-                      disabled
+                      // disabled
                     />
                   </div>
                 </div>
@@ -196,7 +199,6 @@ function AddressModel({ toggle, onAddAddress }) {
                       value={formData.state}
                       onChange={handleInputChange}
                       placeholder="State"
-                      disabled
                     />
                   </div>
                 </div>
@@ -215,13 +217,17 @@ function AddressModel({ toggle, onAddAddress }) {
                   name="typeOfAddress"
                   id="home"
                   value="Home"
-                  //checked
                 />
                 <label
                   htmlFor="home"
                   id="homeLabel"
-                  className="model-address-type font-weight-bold py-1 px-3 m-1 text-secondary px-2 mt-2 label-selected"
-                  //onClick="labelChange(id, 'workLabel')"
+                  className={`model-address-type font-weight-bold py-1 px-3 m-1 text-secondary px-2 mt-2 ${
+                    selectedAddType === "Home" ? "label-selected" : ""
+                  }`}
+                  onClick={() => {
+                    handleAddressType("home");
+                    setSelectedAddType("Home");
+                  }}
                 >
                   Home
                 </label>
@@ -236,8 +242,13 @@ function AddressModel({ toggle, onAddAddress }) {
                 <label
                   htmlFor="work"
                   id="workLabel"
-                  className="model-address-type font-weight-bold py-1 px-3 m-1 text-secondary px-2 mt-2"
-                  //onClick="labelChange(id, 'homeLabel')"
+                  className={`model-address-type font-weight-bold py-1 px-3 m-1 text-secondary px-2 mt-2 ${
+                    selectedAddType === "Work" ? "label-selected" : ""
+                  }`}
+                  onClick={() => {
+                    handleAddressType("work");
+                    setSelectedAddType("Work");
+                  }}
                 >
                   Work
                 </label>

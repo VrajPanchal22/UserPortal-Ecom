@@ -1403,7 +1403,7 @@ body{
     cursor: pointer;
 }
 
-.product-img {
+.address-product-img {
     height: 55px;
     min-width: 45px;
 }
@@ -1467,7 +1467,35 @@ body{
 
 
 /* ------------------------general css------------------------- */
-
+.view-order-btn{
+    color: var(--light)!important;
+    background-color: var(--nav-color)!important;
+    border: 1px solid var(--nav-color)!important;
+    box-shadow: 4px 4px 4px 2px var(--toastify-spinner-color-empty-area)!important;
+    width: 100%;
+    height: 4rem;
+    width: 15rem;
+    font-size: larger;
+}
+.remove-btn-hover:hover{
+background-color: var(--nav-color)!important;
+color: var(--light)!important;
+}
+.payment-margin-top{
+    margin-top: 4rem!important;
+}
+.payment-cards{height: 10rem;
+    overflow-y: scroll;}
+.order-continue-shopping{
+    color: var(--nav-color)!important;
+    background-color: var(--light)!important;
+    border: 1px solid var(--nav-color)!important;
+    box-shadow: 4px 4px 4px 2px var(--toastify-spinner-color-empty-area)!important;
+    width: 100%;
+    height: 4rem;
+    width: 15rem;
+    font-size: larger;
+}
 .bg-pink {
     background-color: var(--button-color);
 }

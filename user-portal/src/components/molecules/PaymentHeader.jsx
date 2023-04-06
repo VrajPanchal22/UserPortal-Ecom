@@ -1,25 +1,21 @@
 import React from "react";
-
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 
 import BetterBuyLogo from "../atoms/BetterBuyLogo";
 
 function PaymentHeader() {
+  const navigate = useNavigate();
   const [headers, setHeaders] = useState({
-    isSignUp: getSessionStorageDataByKey("isSignUp", true),
-    isOutOfCart: getSessionStorageDataByKey("isOutOfCart", true),
-    isAddressSelected: getSessionStorageDataByKey("isAddressSelected", false),
-    isPaymentDone: getSessionStorageDataByKey("isPaymentDone", false),
+    isOutOfCart: getLocalStorageDataByKey("isOutOfCart", true),
+    isAddressSelected: getLocalStorageDataByKey("isAddressSelected", false),
+    isPaymentDone: getLocalStorageDataByKey("isPaymentDone", false),
   });
 
-  useEffect(() => {
-    console.log("headers = ", headers);
-  }, []);
-
-  function getSessionStorageDataByKey(key, defaultValue = undefined) {
-    let data = sessionStorage.getItem(key);
+  function getLocalStorageDataByKey(key, defaultValue = undefined) {
+    let data = localStorage.getItem(key);
 
     if (data) {
       try {
@@ -32,11 +28,14 @@ function PaymentHeader() {
     }
   }
 
+  function navigatePayment() {
+    navigate("/address");
+  }
   return (
     <header className="header-payment row d-flex justify-content-center align-items-center px-5 py-4 font-weight-bold border-bottom">
       <BetterBuyLogo />
       <div className="header-payment__tags w-50 d-flex justify-content-between text-center">
-        <a id="header-cartTag" href="#" className="header-payment__tag">
+        <Link id="header-cartTag" to="/cart" className="header-payment__tag">
           <img
             className="header-payment__image"
             src={`assets/images/${
@@ -46,13 +45,12 @@ function PaymentHeader() {
             srcSet=""
           />
           CART
-        </a>
+        </Link>
 
-        <Link
+        <a
           id="header-addressTag"
-          href="#"
-          className="header-payment__tag tag--disabled"
-          to="/address"
+          href="/address"
+          className="header-payment__tag "
         >
           <img
             className="header-payment__image"
@@ -69,7 +67,7 @@ function PaymentHeader() {
             srcSet=""
           />
           ADDRESS
-        </Link>
+        </a>
 
         <a
           id="header-paymentTag"

@@ -5,7 +5,7 @@ function ProductAdressCard() {
     <div className="d-flex align-items-center mt-3 mb-4">
       <ImgTag
         imgUrl="/assets/images/Tshirt1.jpg"
-        className="product-img"
+        className="address-product-img"
         altText="image"
       />
       <div className="d-flex flex-column w-100">
@@ -15,8 +15,7 @@ function ProductAdressCard() {
           data-placement="top"
           title="name"
         >
-          name Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit
-          amet consectetur.
+          name Lorem
         </div>
 
         <div className="fs-8 font-weight-bold text-success ml-3">₹2000</div>

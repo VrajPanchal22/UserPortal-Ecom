@@ -1,50 +1,42 @@
 import React from "react";
 
-function AddressCard({ formData, onRemove }) {
-  //   console.log(formData);
-  const handleRemove = () => {
-    onRemove(formData.id);
-  };
+function AddressCard({ data, onSelect, onDelete }) {
+  function handleSelect() {
+    onSelect(data);
 
+    localStorage.setItem("selectedAddress", JSON.stringify(data));
+  }
   return (
     <div className="col-lg-6 col-12 z-index">
       <div className="card d-flex flex-row card-body my-2">
         <div className="custom-control custom-radio mr-1">
           <input
             type="radio"
-            id={formData.id}
+            id={data._id}
             name="addressSelect"
             className="custom-control-input"
-            //   checked={formData.defaultAddress}
+            onChange={handleSelect}
           />
-          <label className="custom-control-label" htmlFor={formData.id}>
+          <label className="custom-control-label" htmlFor={data._id}>
             <div className="ml-1">
               <div className="d-flex flex-row">
                 <div className="fs-7 font-weight-bold my-1 text-drak-gray">
-                  {formData.name}
+                  {data.name}
                 </div>
 
                 <div className="address-type m-1 px-2 mt-2">
-                  {/* {formData.typeOfAddress} */}
+                  {data.addressType}
                 </div>
-
-                {/* {formData.defaultAddress
-            ?
-            '<div className="address-type m-1 px-2 mt-2">Default</div>'
-            :
-            ""
-        } */}
               </div>
               <div className="mt-2">
-                <div className="fs-8 text-secondary">{formData.address}</div>
+                <div className="fs-8 text-secondary">{data.street}</div>
                 <div className="fs-8 text-secondary">
-                  {formData.city + ", " + formData.state} -{" "}
-                  <span>{formData.pincode}</span>
+                  {data.city + ", " + data.state} - <span>{data.pincode}</span>
                 </div>
                 <div className="fs-8 text-secondary mt-2">
                   <span>Mobile:</span>
                   <span className="font-weight-bold fs-7 text-drak-gray">
-                    {formData.phoneNo}
+                    {data.contactNo}
                   </span>
                 </div>
                 <div className="mt-3 fs-7 text-secondary">
@@ -53,9 +45,9 @@ function AddressCard({ formData, onRemove }) {
                 </div>
                 <div className="mt-3">
                   <button
-                    id={formData.id}
-                    onClick={handleRemove}
-                    className="btn btn-outline-dark fs-8 font-weight-bold text-drak-gray"
+                    id={data.id}
+                    className=" remove-btn-hover btn btn-outline-dark fs-8 font-weight-bold text-drak-gray bg-light "
+                    onClick={onDelete}
                   >
                     REMOVE
                   </button>
