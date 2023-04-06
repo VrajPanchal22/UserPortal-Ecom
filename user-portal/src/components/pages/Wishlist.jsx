@@ -7,7 +7,6 @@ function Wishlist() {
   console.log("wishlist");
   return (
     <div>
-      <MainNavbar />
       <WishlistProdList />
       <Footer className="footer d-flex align-items-center" />
     </div>
