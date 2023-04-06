@@ -17,7 +17,7 @@ function WishlistProdList() {
       setWishlist(res.wishlistData.products);
     });
   }, []);
-
+  console.log("wishlist", wishlist);
   async function handleDelete(product) {
     try {
       const res = await deleteData(
