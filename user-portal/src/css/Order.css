@@ -8,7 +8,7 @@
     --FontFamily: Arial, Helvetica, sans-serif;
   }
   .order-main-container {
-    margin-top: 5rem;
+    /* margin-top: 5rem; */
     margin-bottom: auto;
   }
   * {
@@ -43,13 +43,11 @@
     background: var(--button-color);
     color:white
   }
-
-  
   button:focus {
     outline: 0;
     box-shadow: 0 0;
   }
-  
+ 
   /* CSS of ROW 1 of Container */
   
   
@@ -63,7 +61,14 @@
   .order-navbar{
     margin-left:0;
     padding-left:0 ;
-
+  }
+  .view-orders-link{
+    color: var(--background-color);
+    text-decoration: none;
+  }
+  .view-orders-link:hover{
+    color: var(--background-color);
+    text-decoration: none;
   }
   
   
@@ -145,8 +150,8 @@
     width: 200px;
     background: rgb(42, 35, 35);
   }
-  .active{
-    color:#c00156;
+  .order-detail-header{
+    font-weight: 800;
   }
   
   
@@ -172,6 +177,10 @@
     width: 148px;
     margin-left: 15%;
   }
+  .view-product-img{
+    height: auto;
+    width: 148px;
+  }
   div h6 {
     padding-top: 10px;
   }
@@ -189,6 +198,9 @@
   }
   .detail-item {
     padding: 6px;
+  }
+  .product-link ,.product-link:hover{
+    color: var(--nav-color);
   }
   
   .invoice-link {

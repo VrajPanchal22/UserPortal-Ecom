@@ -1095,7 +1095,7 @@ body{
   border: 2px solid var(--button-color);
  }
  .active:hover{
-    color:var(--background-color) !important
+    color:var(--background-color) 
 }
  .buy-btn:hover{
   color: var(--nav-color);
@@ -1989,4 +1989,13 @@ font-weight: bold;
     .Empty-wishlist-heading > h2{
         font-size: 1.5rem!important;
     }
+}
+
+
+/*Order*/
+#active-link{
+    font-weight: 900;
+}
+#active-link:hover{
+        color:#C00156
 }

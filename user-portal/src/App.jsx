@@ -17,7 +17,12 @@ import ProductGallary from "./components/pages/ProductGallary";
 import ProductDetails from "./components/pages/ProductDetails";
 import MainNavbar from "./components/organisms/MainNavbar";
 import axios from "axios";
+<<<<<<< HEAD
 import Main from "./components/pages/Main";
+=======
+import Main from './components/pages/Main';
+import OrderDetails from "./components/pages/ViewOrder";
+>>>>>>> develop
 
 export const axiosObject = axios.create({
   baseURL: "http://localhost:4000/api/",
@@ -43,10 +48,18 @@ function App() {
           <Route path="/productGallary" element={<ProductGallary />} />
           <Route path="/productGallary/:name" element={<ProductGallary />} />
           <Route path="/wishlist" element={<WishlistPage />}></Route>
+<<<<<<< HEAD
           <Route path="/orders" element={<Order />}></Route>
           <Route path="/orders/Invoice" element={<Invoice />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/order-placed" element={<OrderPlaced />} />
+=======
+          <Route path='/orders' element={<Order />}></Route>
+          <Route path='/orders/Invoice' element={<Invoice/>}/>
+          <Route path="/orders/view-order" element={<OrderDetails/>}/>
+          <Route path='/cart' element={<Cart/>}/>
+
+>>>>>>> develop
         </Route>
       </Routes>
     </BrowserRouter>
