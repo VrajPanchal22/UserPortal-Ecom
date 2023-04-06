@@ -9,6 +9,7 @@ import { FetchOrders, SearchOrders } from "../../services/Order";
 import moment from "moment";
 import Pagination from "../molecules/Pagination";
 import { LIMIT, OFFSET, SEARCH_URL } from "../../constants/constants";
+// import '../../css/Order.css'
 
 function Order() {
   let userObj = JSON.parse(localStorage.getItem('userData'));

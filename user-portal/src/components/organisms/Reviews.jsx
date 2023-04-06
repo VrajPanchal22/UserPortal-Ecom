@@ -1,5 +1,5 @@
 import { getData,postData,deleteData } from "../../services/api";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import RatingBtn from "../atoms/RatingBtn";
 import CustomerPhotos from "../molecules/CustomerPhotos";
 import CustomerReviews from "../molecules/CustomerReviews";
@@ -20,10 +20,19 @@ function Reviews() {
     const [review, setReview] = useState()
     const [postedReview, setPostedReview] = useState([])
     const [showAll,setShowAll] = useState(false)
-    let values ={"productId":id,"comment":comment,"rating":star,"customerName":username.firstName}
+    const navigate = useNavigate()
+    let values ={"productId":id,"comment":comment,"rating":star,"customerName":username?username.firstName:"guest"}
+    // const tempid = JSON.parse(localStorage.getItem('tempId'))
     const limit = 5
 
+    function islogin(){
+        if(!user){
+navigate('/login')
+        }
+    }
+
     async function func() {
+
         try {
             const reviews = await getData(`/review/allReview/${id}`)
             setReview(reviews?.review)
@@ -75,11 +84,11 @@ function Reviews() {
 
         <div>
             {/* {console.log("review::::",review)} */}
-            <Para para="rating and reviews" className="text-uppercase font-weight-bold" />
+            {/* <Para para="rating and reviews" className="text-uppercase font-weight-bold" />
             <Para para="customer photos" className="text-uppercase font-weight-bold" />
             <div className="row">
                 <CustomerPhotos />
-            </div>
+            </div> */}
             <Para para="customer reviews" className="text-uppercase font-weight-bold" />
             <ReactStars
             count={5}
@@ -89,10 +98,10 @@ function Reviews() {
             color2={'#00a300'} 
             className="mb-2"/>
             <InputTag type="text" placeholder="write your review here...." className="mb-2 mr-2" onChange={(e)=>userReview(e)}/>
-<Button type="submit" className="submit-btn btn btn-warning text-uppercase text-white mb-1" buttonText="submit" onClick={()=>submit(values)}/>
+<Button type="submit" className="submit-btn btn btn-warning text-uppercase text-white mb-1" buttonText="submit" onClick={()=>{submit(values);islogin()}}/>
 
             {
-                showAll?
+                showAll && values?
                 review?.map((rev, index) => {
                     if(rev?.comment){
                     return (
@@ -101,7 +110,7 @@ function Reviews() {
                                 <RatingBtn star={rev?.rating} />
                             </div>
                             <div className="col-11">
-                                <CustomerReviews review={rev} name={username.firstName} func={()=>{deleteReview(postedReview?.[index]?._id)}}/>
+                                <CustomerReviews review={rev} name={username?username.firstName:"guest"} func={()=>{deleteReview(postedReview?.[index]?._id)}}/>
                             </div>
                         </div>
                     )
@@ -117,7 +126,7 @@ function Reviews() {
                                 <RatingBtn star={rev?.rating} />
                             </div>
                             <div className="col-11">
-                                <CustomerReviews review={rev} name={username.firstName} func={()=>{deleteReview(postedReview?.[index]?._id)}}/>
+                                <CustomerReviews review={rev} name={username?username.firstName:"guest"} func={()=>{deleteReview(postedReview?.[index]?._id)}}/>
                             </div>
                         </div>
                     )
