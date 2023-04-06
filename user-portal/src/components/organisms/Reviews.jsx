@@ -20,7 +20,7 @@ function Reviews() {
     const [review, setReview] = useState()
     const [postedReview, setPostedReview] = useState([])
     const [showAll,setShowAll] = useState(false)
-    let values ={"productId":id,"comment":comment,"rating":star,"customerName":username.firstName}
+    let values ={"productId":id,"comment":comment,"rating":star,"customerName":username?username.firstName:"guest"}
     const limit = 5
 
     async function func() {
@@ -101,7 +101,7 @@ function Reviews() {
                                 <RatingBtn star={rev?.rating} />
                             </div>
                             <div className="col-11">
-                                <CustomerReviews review={rev} name={username.firstName} func={()=>{deleteReview(postedReview?.[index]?._id)}}/>
+                                <CustomerReviews review={rev} name={username?username.firstName:"guest"} func={()=>{deleteReview(postedReview?.[index]?._id)}}/>
                             </div>
                         </div>
                     )
@@ -117,7 +117,7 @@ function Reviews() {
                                 <RatingBtn star={rev?.rating} />
                             </div>
                             <div className="col-11">
-                                <CustomerReviews review={rev} name={username.firstName} func={()=>{deleteReview(postedReview?.[index]?._id)}}/>
+                                <CustomerReviews review={rev} name={username?username.firstName:"guest"} func={()=>{deleteReview(postedReview?.[index]?._id)}}/>
                             </div>
                         </div>
                     )

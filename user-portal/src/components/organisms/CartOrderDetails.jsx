@@ -5,7 +5,7 @@ import { useContext } from "react";
 import cartContext from "../../contexts/cartContext";
 // import { useNavigate } from "react-router-dom";
 
-const tempId = localStorage.getItem("tempUserId");
+const tempId = sessionStorage.getItem("tempUserId");
 const userData = JSON.parse(localStorage.getItem("userData"));
 
 export default function CartOrderDetails() {
@@ -19,7 +19,7 @@ export default function CartOrderDetails() {
     if (token) {
       navigate("/payment");
     } else {
-      localStorage.setItem("path","/payment")
+      localStorage.setItem("path","/Cart")
       navigate("/login");
     }
   };

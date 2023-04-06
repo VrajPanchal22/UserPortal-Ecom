@@ -32,14 +32,14 @@ function Signup() {
     const [msg, setMsg] = useState("");
     function handlesubmit(values) {
         let data = values
-        console.log(data)
+        // console.log(data)
         axios.post('http://localhost:4000/api/user', data)
             .then((result) => {
                 console.log(result)
                 if (result.data.status) {
-                    console.log("there is a msg for you")
+                    // console.log("there is a msg for you")
                     setMsg(result.data.message)
-                    console.log("msg::::: ",msg)
+                    // console.log("msg::::: ",msg)
                 }
             }).catch((error) => {
                 if (error.response) {
@@ -70,7 +70,7 @@ function Signup() {
                             <div className="msg position-absolute w-100">
                                 {
                                     msg && msg !== "user created successfully!"
-                                        ?<p className='text-danger'>Please check your details!</p>:
+                                        ?<p className='text-danger'>{msg}</p>:
                                             msg ?<p className='text-success'>Signup successfull!</p>
                                             :null
                                 }
@@ -90,7 +90,7 @@ function Signup() {
                                 <span className="badge badge-secondary badge-bg">OR</span>
                             </div>
                             <SocialIcon divClass='social-icons my-2 text-center' imgClass='w-100' urlArr={['google.png', 'facebook.png', 'mail.png']} />
-                            <small id="emailHelp" className="form-text text-muted text-center my-2">Already a user? <Link to='/'>login</Link></small>
+                            <small id="emailHelp" className="form-text text-muted text-center my-2">Already a user? <Link to='/login'>login</Link></small>
                         </Form>
                     </Formik>
                 </div>

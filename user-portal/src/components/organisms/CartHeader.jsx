@@ -1,9 +1,11 @@
 import React, {useState} from 'react'
+import { Navigate, useNavigate } from 'react-router-dom'
 import ImgTag from '../atoms/ImgTag'
 import Carticon from '../molecules/Carticon'
  
 
 export default function CartHeader(props) {
+  const navigate = useNavigate()
     const {className} = props 
 
     const [headers, setHeaders] = useState(
@@ -32,7 +34,7 @@ export default function CartHeader(props) {
   return (
     <header className={className}>
     <div className="header-cart__logo header-payment__logo text-left">
-        <ImgTag className="header-cart__cart-image" imgUrl={'/assets/images/logo-for-white-bg.png'} alt="logo"/>
+        <ImgTag className="header-cart__cart-image" onClick={()=> navigate('/productGallary')} imgUrl={'/assets/images/logo-for-white-bg.png'} alt="logo"/>
     </div>
     <div className='header-cart__tags w-50 d-flex justify-content-between text-center'>
         <Carticon

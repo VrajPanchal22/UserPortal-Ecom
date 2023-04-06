@@ -24,10 +24,6 @@ export const axiosObject = axios.create({
 
 function App() {
   
- 
-    
-   
-    
   return (
 
     <BrowserRouter>
@@ -42,9 +38,8 @@ function App() {
           <Route path="/wishlist" element={<WishlistPage />}></Route>
           <Route path='/orders' element={<Order />}></Route>
           <Route path='/orders/Invoice' element={<Invoice/>}/>
-          <Route path='/cart' element={<Cart/>}/>
-
         </Route>
+          <Route path='/cart' element={<Cart/>}/>
       </Routes>
     </BrowserRouter>
     
