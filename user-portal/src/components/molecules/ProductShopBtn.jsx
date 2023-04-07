@@ -149,18 +149,41 @@ function ProductShopBtn(props) {
         console.log("list", list);
         if (list.wishlistData !== "no data with this id") {
           if (list?.wishlistData?.products?.length > 0) {
-            list?.wishlistData?.products?.map((product) => {
-              console.log("product", product);
-              if (
-                product?.productId === productid &&
-                (list?.wishlistData?.products).length !== 0
-              ) {
-                console.log("if if");
-                toast.success("product already wishlisted");
-                setIsWishlisted(true);
-              }
-              return "";
-            });
+            if (list.wishlistData != "no data with this id") {
+              console.log("if");
+              list?.wishlistData?.products?.map((product) => {
+                if (product?.productId === productid) {
+                  toast.success("product already wishlisted");
+                  setIsWishlisted(true);
+                } else {
+                  console.log("else1");
+                  async function addProduct() {
+                    try {
+                      const res = await patchData(`/wishlist/${userId}`, {
+                        product: {
+                          productId: productid,
+                          category: data?.category,
+                          name: data?.name,
+                          brand: data?.brand,
+                          selectedVarient: {
+                            variantId: variant?._id,
+                            images: variant?.images,
+                            price: variant?.price,
+                            size: variant?.size,
+                            color: variant?.color,
+                          },
+                        },
+                      });
+                      setIsWishlisted(true);
+                    } catch (error) {
+                      console.log(error);
+                    }
+                  }
+                  addProduct();
+                }
+                return "";
+              });
+            }
           } else {
             console.log("if else");
             async function addProduct() {
