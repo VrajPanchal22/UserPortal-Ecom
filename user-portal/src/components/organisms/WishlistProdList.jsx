@@ -7,9 +7,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 function WishlistProdList() {
   const [wishlist, setWishlist] = useState([]);
+  const userid = JSON.parse(localStorage.getItem('userData'))
+  const tempid = JSON.parse(localStorage.getItem('tempId'))
+  console.log(userid._id,tempid)
 
   useEffect(() => {
-    getData("wishlist/640b2fc011ca53eae736b4d5").then((res) => {
+    getData(`wishlist/${userid._id ?userid._id:tempid}`).then((res) => {
       setWishlist(res.wishlistData.products);
     });
   }, []);

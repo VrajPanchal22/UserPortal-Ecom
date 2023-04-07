@@ -10,6 +10,7 @@ import ClearAllFilter from '../molecules/ClearAllFilter'
 import AvailabilityFilter from '../molecules/AvailabilityFilter'
 
 function FilterOptions() {
+
     return (
         <div className="sidebar border rounded">
             <ClearAllFilter />
