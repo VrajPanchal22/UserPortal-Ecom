@@ -23,8 +23,10 @@ function WishlistProdList() {
       const res = await deleteData(
         `wishlist/${userData ? userData._id : ""}/${product.productId}`
       );
+      // navigate("/wihslist");
       if (res.status === true) {
         setWishlist(wishlist.filter((p) => p.productId !== product.productId));
+        console.log("wishlist here is", wishlist);
         toast.success("item removed successfully!", {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 1000,
@@ -52,8 +54,9 @@ function WishlistProdList() {
       toast.error(error.message);
     }
   }
-  function handleOnClick(productId) {
-    navigate(`/productdetails/${productId}`);
+  function handleOnClick(product) {
+    navigate(`/productdetails/${product?.productId}`);
+    console.log(product, "product details");
   }
   const noOfProd = wishlist.length;
   return (
@@ -70,7 +73,7 @@ function WishlistProdList() {
             <div className="row d-flex wishlist_product-details">
               {wishlist.map((product) => (
                 <Card
-                  onClick={() => handleOnClick(product?.productId)}
+                  onClick={() => handleOnClick(product)}
                   key={product._id}
                   product={product}
                   onDelete={() => handleDelete(product)}

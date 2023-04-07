@@ -10,11 +10,12 @@ function Card({ product, onDelete, onClick }) {
       className="wishlist__card-div col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mb-3 d-flex justify-content-center align-items-center"
       id={product._id}
     >
-      <div className="card wishlist__card--secondary " onClick={onClick}>
+      <div className="card wishlist__card--secondary ">
         <img
           src={product.selectedVarient[0].images[0]}
           className="wishlist__card-img"
           alt="image"
+          onClick={onClick}
         />
 
         <div className="wishlist__prod-details ml-1 p-3">

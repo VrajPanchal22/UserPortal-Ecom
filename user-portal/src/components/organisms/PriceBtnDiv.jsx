@@ -1,13 +1,12 @@
 import React from "react";
 import { getData } from "../../services/api";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import "react-bootstrap";
 import { Button } from "reactstrap";
 import Para from "../atoms/Para";
 import Span from "../atoms/Span";
 import ProductShopBtn from "../molecules/ProductShopBtn";
-
 function PriceBtnDiv(props) {
   const { mrp, discount, variants, data, selectedVariant, selectVariant } =
     props;
@@ -17,30 +16,27 @@ function PriceBtnDiv(props) {
   const [index, setIndex] = useState();
   const [cartVariants, setCartVariants] = useState([]);
   const { id } = useParams();
-  const userData = JSON.parse(localStorage.getItem("userData"));
-  const userId = userData._id;
   let arr = [];
   // console.log("sizebtn::::",isSizeSelected,data)
   let price = mrp - ((mrp * discount) % 100);
-
   const sizesByColor = {};
-
   variants?.map((variant, index) => {
     const color = variant.color;
     const size = variant.size;
-
     if (!sizesByColor[color]) {
       sizesByColor[color] = [];
     }
-
     sizesByColor[color].push(
       variants?.[index]?.color === color ? variants?.[index] : ""
     );
+    return "";
   });
-
   async function goToCart() {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    const userId = userData._id;
+    const tempId = localStorage.getItem("tempUserId");
     try {
-      const cartData = await getData(`/cart/${userId}`);
+      const cartData = await getData(`/cart/${userId ? userId : tempId}`);
       const products = cartData?.data;
       console.log("cartData", products);
       products?.products?.map((product, index) => {
@@ -48,26 +44,24 @@ function PriceBtnDiv(props) {
           product?.selectedVariants?.map((variant, index) => {
             arr.push(variant?.variantId);
             setCartVariants(arr);
+            return "";
           });
         }
+        return "";
       });
     } catch (error) {
       console.log(error);
     }
   }
-
-  useEffect(() => {
-    goToCart();
-  }, [userId]);
-
+  // useEffect(()=>{
+  //     goToCart()
+  // },[userId])
   function active(val) {
     setIsActive(val);
   }
-
   const classname = `size-pill badge badge-pill d-flex justify-content-center align-items-center mr-2 text-uppercase font-weight-bold ${
     isActive ? "active" : ""
   }`;
-
   console.log(isActive, ":::::::active");
   return (
     <div className="mainContainer">
@@ -129,7 +123,7 @@ function PriceBtnDiv(props) {
                 <Button
                   type="button"
                   className={classname}
-                  key={index}
+                  key={selectColor[ele].size}
                   onClick={() => {
                     setIsSizeSelected(ele.size);
                     setIndex(index);
@@ -147,7 +141,7 @@ function PriceBtnDiv(props) {
                   <Button
                     type="button"
                     className={classname}
-                    key={index}
+                    key={ele.size}
                     onClick={() => {
                       setIsSizeSelected(ele.size);
                       setIndex(index);
@@ -160,6 +154,7 @@ function PriceBtnDiv(props) {
                   </Button>
                 );
               }
+              return "";
             })}
       </div>
       <div className="">
@@ -170,6 +165,7 @@ function PriceBtnDiv(props) {
           data={data}
           variant={selectedVariant}
           cartvariant={cartVariants}
+          productid={id}
         />
       </div>
     </div>
