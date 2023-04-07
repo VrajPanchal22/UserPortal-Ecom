@@ -13,7 +13,7 @@ import { LIMIT, OFFSET, SEARCH_URL } from "../../constants/constants";
 function Order() {
   let userObj = JSON.parse(localStorage.getItem('userData'));
   let userId = userObj._id;
-  userId = '64257d8ca7d87d37b085c8dc'
+  
   const ORDER_URL = "http://localhost:4000/api/order";
   let [orderList, setOrderList] = useState([]);
   let [filter, setFilter] = useState("");
