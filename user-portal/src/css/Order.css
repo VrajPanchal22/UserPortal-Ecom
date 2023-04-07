@@ -22,9 +22,9 @@
     background-color: var(--button-color);
     color: var(--background-color);
   }
-  .btn{
+  /* .btn{
     background-color: var(--button-color);
-  }
+  } */
   .btn:focus {
     outline: 0;
     box-shadow: none;

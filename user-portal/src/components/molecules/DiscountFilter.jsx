@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import productGallaryContext from '../../contexts/productGallary'
 import InputTag from '../atoms/InputTag'
 
 function DiscountFilter() {
+    const {ilterQuery,setFilterQuery}= useContext(productGallaryContext)
     const discountOption = [10, 20, 30, 40, 50, 60, 70, 80]
     return (
         <div class="filter-option px-2">
@@ -12,7 +14,7 @@ function DiscountFilter() {
                 discountOption.map((discount) => {
                     return (
                         <>
-                            <InputTag type="radio" name="radio1" value={discount} />{discount}% and above<br />
+                            <InputTag type="radio" name="radio1" value={discount} onClick={()=>setFilterQuery(prevState => ({ ...prevState, ['Discount']: discount}))}/>{discount}% and above<br />
                         </>
                     )
                 })

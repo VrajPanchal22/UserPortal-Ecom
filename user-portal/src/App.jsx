@@ -43,15 +43,14 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/productGallary" element={<ProductGallary />} />
           <Route path="/productGallary/:name" element={<ProductGallary />} />
-          <Route path="/wishlist" element={<WishlistPage />}></Route>
 
-          <Route path="/cart" element={<Cart />} />
           <Route path="/order-placed" element={<OrderPlaced />} />
           <Route path="/orders" element={<Order />}></Route>
           <Route path="/orders/Invoice" element={<Invoice />} />
           <Route path="/orders/view-order" element={<OrderDetails />} />
-          <Route path="/cart" element={<Cart />} />
         </Route>
+        <Route path="/wishlist" element={<WishlistPage />}></Route>
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </BrowserRouter>
   );
