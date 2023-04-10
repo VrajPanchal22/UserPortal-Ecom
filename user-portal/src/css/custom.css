@@ -1626,7 +1626,7 @@ font-weight: bold;
         width:15rem !important ;
     }
     .wishlist__container-bg{
-        min-height: 468px!important;
+        min-height: 577px!important;
     }
 }
 @media only screen and (max-width: 403px) {
@@ -1663,7 +1663,7 @@ font-weight: bold;
     }
     
     .wishlist__container-bg{
-        min-height: 727px!important;
+        min-height: 627px!important;
     }
 }
 @media (max-width:480px) {
