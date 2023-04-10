@@ -7,7 +7,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { useState } from "react";
 import Para from "../atoms/Para";
 import { getData, patchData, postData } from "../../services/api";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function ProductShopBtn(props) {
   const { isSelected, data, variant, cartvariant, productid } = props
@@ -19,6 +19,7 @@ function ProductShopBtn(props) {
   // const [size, setSize] = useState("")
   const [iswishlisted, setIsWishlisted] = useState(false)
   const navigate = useNavigate()
+  const location = useLocation()
 
 
   const handleAddToCart = async () => {
@@ -127,9 +128,9 @@ function ProductShopBtn(props) {
 
   async function handleWishlist() {
     const userData = JSON.parse(localStorage.getItem("userData"))
-    const userId = userData._id
-
+    
     if (userData) {
+      const userId = userData._id
 
       let wishobj = {
         "userId": userId,
@@ -153,7 +154,7 @@ function ProductShopBtn(props) {
         console.log("list", list)
         if (list.wishlistData !== "no data with this id") {
           if (list?.wishlistData?.products?.length > 0) {
-            if (list.wishlistData != "no data with this id") {
+            if (list.wishlistData !== "no data with this id") {
               console.log("if")
               list?.wishlistData?.products?.map((product) => {
                 if (product?.productId === productid) {
@@ -231,6 +232,8 @@ function ProductShopBtn(props) {
         console.log(error)
       }
     } else {
+      const currentPath = location.pathname;
+      localStorage.setItem('path', currentPath);
       navigate('/login')
     }
   }
