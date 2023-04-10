@@ -1122,7 +1122,9 @@ body{
 .review-link:hover{
     color: var(--nav-color);
 }
-
+.footer{
+    background-color: var(--nav-color);
+}
 /* product-details */
 
 @media only screen and (max-width: 1514px){
