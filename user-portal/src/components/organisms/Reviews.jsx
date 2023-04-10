@@ -122,10 +122,10 @@ navigate('/login')
                     if(rev?.comment){
                     return (
                         <div className="row" key={index}>
-                            <div className="col-1">
+                            {/* <div className="col-1">
                                 <RatingBtn star={rev?.rating} />
-                            </div>
-                            <div className="col-11">
+                            </div> */}
+                            <div className="col mb-3">
                                 <CustomerReviews review={rev} name={username?username.firstName:"guest"} func={()=>{deleteReview(postedReview?.[index]?._id)}}/>
                             </div>
                         </div>

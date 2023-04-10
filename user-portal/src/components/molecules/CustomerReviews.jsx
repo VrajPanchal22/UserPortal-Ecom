@@ -1,6 +1,7 @@
 import Para from '../atoms/Para'
 import Span from '../atoms/Span'
 import { FaTrashAlt } from 'react-icons/fa';
+import RatingBtn from '../atoms/RatingBtn';
 // import { RiThumbDownFill, RiThumbUpFill } from "react-icons/ri";
 // import { useState } from 'react';
 function CustomerReviews(props) {
@@ -12,6 +13,7 @@ function CustomerReviews(props) {
 
     return (
         <div>
+            <RatingBtn star={review?.rating} />
             <Para para={review.comment} />
             <div className="d-flex justify-content-between">
                 <div>

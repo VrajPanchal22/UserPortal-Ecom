@@ -7,7 +7,8 @@ import { FaRegHeart } from "react-icons/fa";
 import { useState } from "react";
 import Para from "../atoms/Para";
 import { getData, patchData, postData } from "../../services/api";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+
 function ProductShopBtn(props) {
   const { isSelected, data, variant, cartvariant, productid } = props;
   // console.log(data,"::::::::data")
@@ -21,12 +22,15 @@ function ProductShopBtn(props) {
   const [flag, setFlag] = useState(false);
   const [res, setRes] = useState(0);
   // const [size, setSize] = useState("")
-  const [iswishlisted, setIsWishlisted] = useState(false);
-  const navigate = useNavigate();
+  const [iswishlisted, setIsWishlisted] = useState(false)
+  const navigate = useNavigate()
+  const location = useLocation()
+
+
   const handleAddToCart = async () => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     const tempId = localStorage.getItem("tempUserId");
-    console.log(data, "inside add to cart");
+    console.log(data, "inside add to cart")
     // If the user is not logged in, generate a temporary user ID
     if (!userData && !tempId) {
       console.log("Temp id Generation");
@@ -124,9 +128,11 @@ function ProductShopBtn(props) {
   };
   // }, []);
   async function handleWishlist() {
-    const userData = JSON.parse(localStorage.getItem("userData"));
-    const userId = userData._id;
+    const userData = JSON.parse(localStorage.getItem("userData"))
+    
     if (userData) {
+      const userId = userData._id
+
       let wishobj = {
         userId: userId,
         products: {
@@ -145,70 +151,75 @@ function ProductShopBtn(props) {
       };
       console.log(wishobj);
       try {
-        const list = await getData(`/wishlist/${userId}`);
-        console.log("list", list);
+        const list = await getData(`/wishlist/${userId}`)
+        console.log("list", list)
         if (list.wishlistData !== "no data with this id") {
           if (list?.wishlistData?.products?.length > 0) {
-            if (list.wishlistData != "no data with this id") {
-              console.log("if");
+            if (list.wishlistData !== "no data with this id") {
+              console.log("if")
               list?.wishlistData?.products?.map((product) => {
                 if (product?.productId === productid) {
-                  toast.success("product already wishlisted");
-                  setIsWishlisted(true);
+                  toast.success("product already wishlisted")
+                  setIsWishlisted(true)
                 } else {
-                  console.log("else1");
+                  console.log("else1")
                   async function addProduct() {
                     try {
-                      const res = await patchData(`/wishlist/${userId}`, {
-                        product: {
-                          productId: productid,
-                          category: data?.category,
-                          name: data?.name,
-                          brand: data?.brand,
-                          selectedVarient: {
-                            variantId: variant?._id,
-                            images: variant?.images,
-                            price: variant?.price,
-                            size: variant?.size,
-                            color: variant?.color,
-                          },
-                        },
-                      });
-                      setIsWishlisted(true);
+                      const res = await patchData(`/wishlist/${userId}`,
+                        {
+                          product: {
+                            "productId": productid,
+                            "category": data?.category,
+                            "name": data?.name,
+                            "brand": data?.brand,
+                            "selectedVarient": {
+                              "variantId": variant?._id,
+                              "images": variant?.images,
+                              "price": variant?.price,
+                              "size": variant?.size,
+                              "color": variant?.color
+                            }
+                          }
+                        }
+                      )
+                      setIsWishlisted(true)
                     } catch (error) {
-                      console.log(error);
+                      console.log(error)
                     }
                   }
-                  addProduct();
+                  addProduct()
                 }
-                return "";
-              });
+                return ""
+              })
             }
-          } else {
-            console.log("if else");
+          }
+          else {
+            console.log("if else")
             async function addProduct() {
               try {
-                const res = await patchData(`/wishlist/${userId}`, {
-                  product: {
-                    productId: productid,
-                    category: data?.category,
-                    name: data?.name,
-                    brand: data?.brand,
-                    selectedVarient: {
-                      variantId: variant?._id,
-                      images: variant?.images,
-                      price: variant?.price,
-                      size: variant?.size,
-                      color: variant?.color,
-                    },
-                  },
-                });
-                setIsWishlisted(true);
+                const res = await patchData(`/wishlist/${userId}`,
+                  {
+                    product: {
+                      "productId": productid,
+                      "category": data?.category,
+                      "name": data?.name,
+                      "brand": data?.brand,
+                      "selectedVarient": {
+                        "variantId": variant?._id,
+                        "images": variant?.images,
+                        "price": variant?.price,
+                        "size": variant?.size,
+                        "color": variant?.color
+                      }
+                    }
+                  }
+                )
+                setIsWishlisted(true)
               } catch (error) {
-                console.log(error);
+                console.log(error)
               }
             }
-            addProduct();
+            addProduct()
           }
         } else {
           console.log("else");
@@ -222,7 +233,9 @@ function ProductShopBtn(props) {
         console.log(error);
       }
     } else {
-      navigate("/login");
+      const currentPath = location.pathname;
+      localStorage.setItem('path', currentPath);
+      navigate('/login')
     }
   }
   console.log(iswishlisted);
@@ -240,30 +253,16 @@ function ProductShopBtn(props) {
       </div>
       {
         // res && res.message=== "product add successfully" && size===isSelected
-        cartvariant.includes(variant?._id) || res?.status === true ? (
-          <Button
-            type="button"
-            className="cart-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1"
-            icon={<BsFillBagFill className="bag-icon mr-2 mb-1" />}
-            buttonText="Go to cart"
-            onClick={() => {
-              setFlag(!flag);
-              handleAddToCart();
-              navigate("/cart");
-            }}
-          />
-        ) : (
-          <Button
-            type="button"
-            className="cart-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1"
-            icon={<BsFillBagFill className="bag-icon mr-2 mb-1" />}
-            buttonText="add to cart"
-            onClick={() => {
-              setFlag(!flag);
-              handleAddToCart();
-            }}
-          />
-        )
+        cartvariant.includes(variant?._id) || res?.status === true ?
+          <Button type="button" className="cart-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1" icon={<BsFillBagFill className="bag-icon mr-2 mb-1" />} buttonText="Go to cart" onClick={() => { setFlag(!flag); handleAddToCart(); navigate('/cart') }} />
+          :
+          <Button type="button" className="cart-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1" icon={<BsFillBagFill className="bag-icon mr-2 mb-1" />} buttonText="add to cart" onClick={() => { setFlag(!flag); handleAddToCart(); }} />
+      }
+      <Button type="button" className="buy-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1" icon={<BsCartCheckFill className="buy-icon mr-2 mb-1" />} buttonText="buy now" onClick={() => navigate('/orders')} />
+      {
+        iswishlisted
+          ? <Button type="button" className="wishlist-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1" icon={<FaRegHeart className="buy-icon mr-2 mb-1" />} buttonText="wishlisted" onClick={() => handleWishlist()} />
+          : <Button type="button" className="wishlist-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1" icon={<FaRegHeart className="buy-icon mr-2 mb-1" />} buttonText="wishlist" onClick={() => handleWishlist()} />
       }
       <Button
         type="button"

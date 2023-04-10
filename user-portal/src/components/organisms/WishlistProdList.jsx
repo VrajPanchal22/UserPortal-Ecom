@@ -51,6 +51,7 @@ function WishlistProdList() {
         throw new Error("Product could not be deleted");
       }
     } catch (error) {
+      console.log(error)
       toast.error(error.message);
     }
   }

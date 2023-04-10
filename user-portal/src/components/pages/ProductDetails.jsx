@@ -6,7 +6,8 @@ import RatingDiv from "../organisms/RatingDiv";
 import { FaStar } from "react-icons/fa";
 import { getData } from "../../services/api";
 import ProductImgDiv from "../organisms/ProductImgDiv";
-import Reviews from "../organisms/Reviews";
+import Reviews from '../organisms/Reviews'
+import Footer from "../organisms/Footer";
 
 function ProductDetails(props) {
   const [data, setData] = useState();
@@ -31,6 +32,7 @@ function ProductDetails(props) {
   }, [id]);
   // console.log("data",data)
   return (
+<>
     <div className="row">
       {/* {console.log("selectedvariant:::",selectedVariant)} */}
       <div className="col d-flex flex-column align-items-center">
@@ -63,7 +65,9 @@ function ProductDetails(props) {
         <Reviews />
       </div>
     </div>
-  );
+    <Footer className="footer"/>
+    </>
+  )
 }
 
 export default ProductDetails;
