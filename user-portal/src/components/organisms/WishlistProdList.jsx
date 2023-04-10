@@ -4,26 +4,29 @@ import EmptyWishlist from "../molecules/EmptyWishlist";
 import { getData, deleteData } from "../../services/api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 function WishlistProdList() {
   const [wishlist, setWishlist] = useState([]);
-  const userid = JSON.parse(localStorage.getItem('userData'))
-  const tempid = JSON.parse(localStorage.getItem('tempId'))
-  console.log(userid._id,tempid)
+  const navigate = useNavigate();
 
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  console.log("user data", userData._id);
   useEffect(() => {
-    getData(`wishlist/${userid._id ?userid._id:tempid}`).then((res) => {
+    getData(`wishlist/${userData ? userData._id : ""}`).then((res) => {
       setWishlist(res.wishlistData.products);
     });
   }, []);
-
+  console.log("wishlist", wishlist);
   async function handleDelete(product) {
     try {
       const res = await deleteData(
-        `wishlist/640b2fc011ca53eae736b4d5/${product.productId}`
+        `wishlist/${userData ? userData._id : ""}/${product.productId}`
       );
+      // navigate("/wihslist");
       if (res.status === true) {
         setWishlist(wishlist.filter((p) => p.productId !== product.productId));
+        console.log("wishlist here is", wishlist);
         toast.success("item removed successfully!", {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 1000,
@@ -48,8 +51,13 @@ function WishlistProdList() {
         throw new Error("Product could not be deleted");
       }
     } catch (error) {
+      console.log(error)
       toast.error(error.message);
     }
+  }
+  function handleOnClick(product) {
+    navigate(`/productdetails/${product?.productId}`);
+    console.log(product, "product details");
   }
   const noOfProd = wishlist.length;
   return (
@@ -66,6 +74,7 @@ function WishlistProdList() {
             <div className="row d-flex wishlist_product-details">
               {wishlist.map((product) => (
                 <Card
+                  onClick={() => handleOnClick(product)}
                   key={product._id}
                   product={product}
                   onDelete={() => handleDelete(product)}

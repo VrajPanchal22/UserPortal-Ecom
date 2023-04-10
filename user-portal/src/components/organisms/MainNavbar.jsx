@@ -52,7 +52,11 @@ function MainNavbar() {
       <div className="responsive">
         <div className='on-responsive'>
           <div className="button shadow">
-            <Button className="login-button" buttonText="Login" onClick={() => setLogin(true)} />
+            {
+              userData?
+              <Button className="login-button" buttonText="Logout" onClick={() => localStorage.clear()} />
+            : <Button className="login-button" buttonText="Login" onClick={() => setLogin(true)} />
+            }
           </div>
           <NavbarToggler className='bg-light hamburger' onClick={toggle} />
         </div>
