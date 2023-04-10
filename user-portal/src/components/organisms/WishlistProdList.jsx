@@ -20,7 +20,7 @@ function WishlistProdList() {
   async function handleDelete(product) {
     try {
       const res = await deleteData(
-        `wishlist/640b2fc011ca53eae736b4d5/${product.productId}`
+        `wishlist/${userid._id}/${product.productId}`
       );
       if (res.status === true) {
         setWishlist(wishlist.filter((p) => p.productId !== product.productId));
@@ -48,6 +48,7 @@ function WishlistProdList() {
         throw new Error("Product could not be deleted");
       }
     } catch (error) {
+      console.log(error)
       toast.error(error.message);
     }
   }

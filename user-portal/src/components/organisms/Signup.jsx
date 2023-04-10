@@ -8,7 +8,6 @@ import { Formik, Form } from "formik";
 import { Link } from "react-router-dom";
 import * as yup from "yup";
 import SocialIcon from "../molecules/SocialIcon";
-
 const initialValues = {
   firstName: "",
   lastName: "",
@@ -17,7 +16,6 @@ const initialValues = {
   ReEnterPassword: "",
   contactNumber: "",
 };
-
 const validationSchema = yup.object({
   firstName: yup.string("first-name must be string").required("is required !"),
   lastName: yup.string("last-name must be string").required("is equired !"),
@@ -32,7 +30,6 @@ const validationSchema = yup.object({
     .matches(/^[6-9]{1}[0-9]{9}$/, "invalid phone number")
     .required(),
 });
-
 function Signup() {
   const [msg, setMsg] = useState("");
   function handlesubmit(values) {
@@ -54,7 +51,6 @@ function Signup() {
         }
       });
   }
-
   return (
     <div className="main-container d-flex">
       <div className="flex-1 d-flex">
@@ -83,7 +79,7 @@ function Signup() {
                 </div>
               </div>
               <div className="msg position-absolute w-100">
-                {msg && msg !== "User created successfully!" ? (
+                {msg && msg !== "user created successfully!" ? (
                   <p className="text-danger">Please check your details!</p>
                 ) : msg ? (
                   <p className="text-success">Signup successfull!</p>
@@ -182,7 +178,7 @@ function Signup() {
                 id="emailHelp"
                 className="form-text text-muted text-center my-2"
               >
-                Already a user? <Link to="/">login</Link>
+                Already a user? <Link to="/login">login</Link>
               </small>
             </Form>
           </Formik>
@@ -191,5 +187,4 @@ function Signup() {
     </div>
   );
 }
-
 export default Signup;
