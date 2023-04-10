@@ -90,7 +90,7 @@ function Signup() {
                                 <span className="badge badge-secondary badge-bg">OR</span>
                             </div>
                             <SocialIcon divClass='social-icons my-2 text-center' imgClass='w-100' urlArr={['google.png', 'facebook.png', 'mail.png']} />
-                            <small id="emailHelp" className="form-text text-muted text-center my-2">Already a user? <Link to='/'>login</Link></small>
+                            <small id="emailHelp" className="form-text text-muted text-center my-2">Already a user? <Link to='/login'>login</Link></small>
                         </Form>
                     </Formik>
                 </div>
