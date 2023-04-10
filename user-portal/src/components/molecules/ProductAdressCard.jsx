@@ -1,10 +1,13 @@
 import React from "react";
 import ImgTag from "../atoms/ImgTag";
-function ProductAdressCard() {
+function ProductAdressCard({ product }) {
+  console.log("product", product);
+  console.log("selected varients", product.selectedVariants[0].images[0]);
   return (
     <div className="d-flex align-items-center mt-3 mb-4">
       <ImgTag
-        imgUrl="/assets/images/Tshirt1.jpg"
+        imgUrl={product.selectedVariants[0].images[0]}
+        // product.selectedVariants[0].price
         className="address-product-img"
         altText="image"
       />
@@ -15,12 +18,17 @@ function ProductAdressCard() {
           data-placement="top"
           title="name"
         >
-          name Lorem
+          {product.name}
         </div>
 
-        <div className="fs-8 font-weight-bold text-success ml-3">₹2000</div>
+        <div className="fs-8 font-weight-bold text-success ml-3">
+          price : ₹ {product.selectedVariants[0].price}
+        </div>
         <span className="fs-9 ml-3">
-          Qty: <span className="font-weight-bold">1</span>
+          Qty:{" "}
+          <span className="font-weight-bold">
+            {product.selectedVariants[0].quantity}
+          </span>
         </span>
       </div>
     </div>

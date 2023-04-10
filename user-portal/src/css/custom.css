@@ -1428,10 +1428,10 @@ body{
 /* -------------------------address------------------------------- */
 
 .address-type {
-    font-size: 0.6rem;
-    border: 1px solid var(--green);
+    font-size: 13px;
+    border: 1px solid var(--hightlight-color);
     border-radius: 100px;
-    color: var(--green);
+    color: var(--hightlight-color);
     line-height: 15px;
 }
 .z-index{
@@ -1483,10 +1483,54 @@ body{
     width: 15rem;
     font-size: larger;
 }
-.remove-btn-hover:hover{
-background-color: var(--nav-color)!important;
-color: var(--light)!important;
+/* .modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+} */
+.modal-backdrop.show {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+.remove-btn-address{
+    background-color: var(--button-color);
+    border: 1px solid var(--button-color)!important;
 }
+.body-hidden{
+    overflow: hidden;
+}
+.body-visible{
+    overflow: scroll;
+}
+.remove-btn-address:hover{
+color: var(--button-color)!important;
+border:1px solid var(--button-color)!important;
+background-color: var(--light);
+}
+.edit-btn-address{
+    color:var(--button-color);
+    background-color:var(--light);
+    border: 1px solid var(--button-color)!important;
+}
+.edit-btn-address:hover{
+    color:var(--light);
+    background-color:var(--button-color);
+    border: 1px solid var(--button-color)!important;
+}
+/* .edit-btn-address:focus{
+    background: var(--button-color)!important;
+    color:var(--light)!important;
+    border: 1px solid var(--hightlight-color);
+    outline: 0!important;
+    box-shadow: 0 0;
+} */
 .payment-margin-top{
     margin-top: 4rem!important;
 }

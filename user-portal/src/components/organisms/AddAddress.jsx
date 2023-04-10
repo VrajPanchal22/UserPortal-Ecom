@@ -10,13 +10,20 @@ import Button from "../atoms/Button";
 import { postData } from "../../services/api";
 import AddressModel from "../molecules/AddressModel";
 function AddAddress() {
+  const navigate = useNavigate();
+
   localStorage.setItem("isAddressSelected", false);
 
-  const navigate = useNavigate();
   const [showModel, setShowModel] = useState(false);
+  const [addresses, setAddresses] = useState([]);
+  const [selectedAddress, setSelectedAddress] = useState(null);
+
+  console.log("showmodel ----", showModel);
   function toggle() {
     setShowModel(!showModel);
+    console.log("showmodel from toggle func", showModel);
   }
+
   function navigateToPayment() {
     if (selectedAddress) {
       localStorage.setItem("isAddressSelected", true);
@@ -25,8 +32,6 @@ function AddAddress() {
       alert("please select address");
     }
   }
-  const [addresses, setAddresses] = useState([]);
-  const [selectedAddress, setSelectedAddress] = useState(null);
 
   async function handleAddAddress(address) {
     const userData = JSON.parse(localStorage.getItem("userData"));
@@ -52,6 +57,16 @@ function AddAddress() {
   const removeAddress = (id) => {
     setAddresses(addresses.filter((address) => address.id !== id));
   };
+
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+  if (showModel) {
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "visible";
+    document.documentElement.style.overflow = "auto";
+  }
 
   return (
     <div className="bg-white container-payment">

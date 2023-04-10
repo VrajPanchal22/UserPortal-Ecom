@@ -1,7 +1,12 @@
+import axios from "axios";
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
+import { getData } from "../../services/api";
 import AddressCard from "./AddressCard";
 function AddressModel({ toggle, onAddAddress }) {
+  const [pincodeErr, setPincodeErr] = useState("");
+  // console.log("toggle", toggle);
   const [formData, setFormData] = useState({
     name: "",
     phoneNo: "",
@@ -12,6 +17,27 @@ function AddressModel({ toggle, onAddAddress }) {
     state: "",
   });
 
+  useEffect(() => {
+    if (formData.pincode) {
+      axios
+        .get(`https://api.postalpincode.in/pincode/${formData.pincode}`)
+        .then((res) => {
+          const { District, State } = res.data[0].PostOffice[0];
+          setFormData({ ...formData, city: District, state: State });
+          console.log("city", res.data[0].PostOffice[0].District);
+          console.log("state", res.data[0].PostOffice[0].State);
+          console.log("response from pincode", formData.pincode);
+          console.log("form data --------", formData);
+          //console.log("Pincode", res.data[0].PostOffice[0]);
+          setPincodeErr("");
+        })
+        .catch((err) => {
+          console.error(err);
+          setPincodeErr("Invalid pincode. Please enter a valid pincode.");
+        });
+    }
+  }, [formData.pincode]);
+  //console.log("Form data",for)
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -28,8 +54,20 @@ function AddressModel({ toggle, onAddAddress }) {
       addressType: value,
     });
   };
+  const validatePhoneNo = (phoneNo) => {
+    const pattern = /^[6-9]\d{9}$/; // 10 digits starting with 6, 7, 8 or 9
+    return pattern.test(phoneNo);
+  };
+  const [phoneErr, setPhoneNoErr] = useState("");
   const handleSubmit = (event) => {
+    // const validateContact = /^\d{10}$/;
+    toggle();
     event.preventDefault();
+    const isValidPhoneNo = validatePhoneNo(formData.phoneNo);
+    if (!isValidPhoneNo) {
+      setPhoneNoErr("Please enter a valid phone number.");
+      return;
+    }
     onAddAddress(formData);
     setFormData({
       name: "",
@@ -40,10 +78,10 @@ function AddressModel({ toggle, onAddAddress }) {
       city: "",
       state: "",
     });
-    toggle();
+    // console.log("contact------", formData.contactNo.length);
   };
   return (
-    <div id="addressWindow" className="model position-absolute h-100 w-100 ">
+    <div id="addressWindow" className="model position-absolute h-100 w-100">
       <div id="addressMainWindow" className="address-model rounded bg-white">
         <div className="d-flex align-items-center justify-content-between p-3 border-bottom">
           <div className="fs-6 font-weight-bold text-secondary">
@@ -101,6 +139,7 @@ function AddressModel({ toggle, onAddAddress }) {
                   />
                 </div>
               </div>
+              {phoneErr && <div className="text-danger fs-8">{phoneErr}</div>}
             </div>
 
             {/* <!-- address details --> */}
@@ -126,7 +165,9 @@ function AddressModel({ toggle, onAddAddress }) {
                   />
                 </div>
               </div>
-
+              {pincodeErr && (
+                <div className="text-danger fs-8">{pincodeErr}</div>
+              )}
               {/* <!-- Address --> */}
               <div className="d-flex flex-column mt-3 text-secondary">
                 <label htmlFor="address" className="fs-10 mb-0">
@@ -181,7 +222,7 @@ function AddressModel({ toggle, onAddAddress }) {
                       value={formData.city}
                       onChange={handleInputChange}
                       placeholder="City"
-                      // disabled
+                      disabled
                     />
                   </div>
                 </div>
@@ -192,13 +233,14 @@ function AddressModel({ toggle, onAddAddress }) {
                   </label>
                   <div className="border rounded p-1 bg-white">
                     <input
-                      className="w-100 border-0 px-2 fs-8 text-secondary"
+                      className="w-100 border-0 px-2 fs-8 text-secondary "
                       type="text"
                       name="state"
                       id="state"
                       value={formData.state}
                       onChange={handleInputChange}
                       placeholder="State"
+                      disabled
                     />
                   </div>
                 </div>

@@ -41,8 +41,8 @@ function App() {
             element={<ProductDetails />}
           ></Route>
           <Route path="/home" element={<Home />} />
-          <Route path="/productGallary" element={<ProductGallary />} />
-          <Route path="/productGallary/:name" element={<ProductGallary />} />
+          <Route path="/productGallery" element={<ProductGallary />} />
+          <Route path="/productGallery/:name" element={<ProductGallary />} />
 
           <Route path="/order-placed" element={<OrderPlaced />} />
           <Route path="/orders" element={<Order />}></Route>

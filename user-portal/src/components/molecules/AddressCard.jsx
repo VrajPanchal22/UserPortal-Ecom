@@ -29,30 +29,32 @@ function AddressCard({ data, onSelect, onDelete }) {
                 </div>
               </div>
               <div className="mt-2">
-                <div className="fs-8 text-secondary">{data.street}</div>
-                <div className="fs-8 text-secondary">
+                <div className="fs-8 text-secondary text-dark ">
+                  {data.street}
+                </div>
+                <div className="fs-8 text-secondary text-dark ">
                   {data.city + ", " + data.state} - <span>{data.pincode}</span>
                 </div>
-                <div className="fs-8 text-secondary mt-2">
+                <div className="fs-8 text-secondary mt-2 text-dark ">
                   <span>Mobile:</span>
                   <span className="font-weight-bold fs-7 text-drak-gray">
                     {data.contactNo}
                   </span>
                 </div>
-                <div className="mt-3 fs-7 text-secondary">
+                <div className="mt-3 fs-7 text-dark ">
                   <span>• </span>
                   Cash on Delivery available
                 </div>
                 <div className="mt-3">
                   <button
                     id={data.id}
-                    className=" remove-btn-hover btn btn-outline-dark fs-8 font-weight-bold text-drak-gray bg-light "
+                    className="remove-btn-address btn btn-outline-dark fs-8 font-weight-bold text-light "
                     onClick={onDelete}
                   >
                     REMOVE
                   </button>
 
-                  <button className="btn btn-outline-dark fs-8 mx-3 font-weight-bold text-drak-gray disabled">
+                  <button className="btn btn-outline-dark fs-8 mx-3 font-weight-bold edit-btn-address">
                     EDIT
                   </button>
                 </div>
