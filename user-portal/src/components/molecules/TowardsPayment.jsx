@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import ProductAdressCard from "../molecules/ProductAdressCard";
-import ADDPriceDetails from "../molecules/ADDPriceDetails";
+
 import { getData } from "../../services/api";
 import Button from "../atoms/Button";
 import { useState } from "react";
@@ -24,14 +24,8 @@ function TowardsPayment() {
           {cartData.map((product) => (
             <ProductAdressCard key={product._id} product={product} />
           ))}
-
-          {/* <ProductAdressCard />
-          <ProductAdressCard />
-          <ProductAdressCard />
-          <ProductAdressCard /> */}
         </div>
       </div>
-      <ADDPriceDetails cartData={cartData} />
     </>
   );
 }

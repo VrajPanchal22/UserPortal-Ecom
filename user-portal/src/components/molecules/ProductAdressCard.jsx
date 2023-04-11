@@ -7,7 +7,6 @@ function ProductAdressCard({ product }) {
     <div className="d-flex align-items-center mt-3 mb-4">
       <ImgTag
         imgUrl={product.selectedVariants[0].images[0]}
-        // product.selectedVariants[0].price
         className="address-product-img"
         altText="image"
       />

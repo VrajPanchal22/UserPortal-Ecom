@@ -38,7 +38,7 @@ function DeliveryAddressInADD({ toggle, setSelectedAddress, addresseFrom }) {
           Select Delivery Address
         </span>
 
-        <div id="addresses" className="row">
+        <div id="addresses" className="row address-div">
           {addresses.map((address) => (
             <AddressCard
               key={address._id}
