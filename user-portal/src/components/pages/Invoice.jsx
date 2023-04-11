@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { GetOrderById } from "../../services/Order";
 import Loader from "../atoms/Loader";
 import InvoiceOrg from "../organisms/InvoiceOrg";
+import { API_BASE_URL } from "../../config";
 
 function Invoice() {
   const location = useLocation()
@@ -10,7 +11,7 @@ function Invoice() {
   const [dataFetched, setDataFetched] = useState(false);
   const orderId = location.search.slice(1);
   useEffect(() => {
-    fetchOrder(`http://localhost:4000/api/order/admin/${orderId}`);
+    fetchOrder(`${API_BASE_URL}order/admin/${orderId}`);
   }, [])
 
   async function fetchOrder(url) {

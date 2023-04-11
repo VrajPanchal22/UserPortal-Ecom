@@ -9,6 +9,7 @@ import {
 import Loader from "../atoms/Loader";
 import axios from "axios";
 import cartContext from "../../contexts/cartContext";
+import { API_BASE_URL } from "../../config";
 
 export default function CartProductCard() {
   const [quantity, setQuantity] = useState(0);
@@ -22,7 +23,7 @@ export default function CartProductCard() {
   const handleDeleteProduct = async (productId, variantId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:4000/api/cart/${
+        `${API_BASE_URL}cart/${
           !tempId ? userData._id : tempId
         }/${productId}/${variantId}`,
         {
@@ -44,14 +45,14 @@ export default function CartProductCard() {
     try {
       console.log(
         "inc",
-        `http://localhost:4000/api/cart/${
+        `cart/${
           !tempId ? userData._id : tempId
         }/${productId}/${variantId}`,
         { quantity: quantity + 1 }
       );
 
       const response = await axios.patch(
-        `http://localhost:4000/api/cart/${
+        `cart/${
           !tempId ? userData._id : tempId
         }/${productId}/${variantId}`,
         { quantity: quantity + 1 }
@@ -69,14 +70,14 @@ export default function CartProductCard() {
       if (quantity > 0) {
         console.log(
           "dec",
-          `http://localhost:4000/api/cart/${
+          `cart/${
             !tempId ? userData._id : tempId
           }/${productId}/${variantId}`,
           { quantity: quantity }
         );
 
         const response = await axios.patch(
-          `http://localhost:4000/api/cart/${
+          `cart/${
             !tempId ? userData._id : tempId
           }/${productId}/${variantId}`,
           { quantity: quantity - 1 }
@@ -113,15 +114,15 @@ export default function CartProductCard() {
               </div>
               <div className="card-product-details__body">
                 <div className="card-product-details__name fs-6 font-weight-bold">
-                  {product.name.charAt(0).toUpperCase() + product.name.slice(1)}
+                  {product?.name?.charAt(0)?.toUpperCase() + product?.name?.slice(1)}
                 </div>
                 <div className="card-product-details__color fs-6 text-secondary">
                   {" "}
-                  {product.productDetails.brand}{" "}
+                  {product?.productDetails?.brand}{" "}
                 </div>
                 <div className="card-product-details__manufacturer fs-7 text-muted">
                   {" "}
-                  {product.selectedVariants[0].color}{" "}
+                  {product?.selectedVariants[0]?.color}{" "}
                 </div>
                 <div className="card-product-details__btn-wrapper my-2 d-flex flex-column">
                   <span className="pr-2">

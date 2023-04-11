@@ -8,6 +8,7 @@ import { Formik, Form } from "formik";
 import { Link } from "react-router-dom";
 import * as yup from "yup";
 import SocialIcon from "../molecules/SocialIcon";
+import { API_BASE_URL } from "../../config";
 const initialValues = {
   firstName: "",
   lastName: "",
@@ -36,7 +37,7 @@ function Signup() {
     let data = values;
     console.log(data);
     axios
-      .post("http://localhost:4000/api/user", data)
+      .post(`${API_BASE_URL}user`, data)
       .then((result) => {
         console.log(result);
         if (result.data.status) {
@@ -79,8 +80,8 @@ function Signup() {
                 </div>
               </div>
               <div className="msg position-absolute w-100">
-                {msg && msg !== "user created successfully!" ? (
-                  <p className="text-danger">Please check your details!</p>
+                {msg && msg !== "User created successfully!" ? (
+                  <p className="text-danger">{msg}Please check your details!</p>
                 ) : msg ? (
                   <p className="text-success">Signup successfull!</p>
                 ) : null}
