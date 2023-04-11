@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 import { postData } from "../../services/api";
 import ImgTag from "../atoms/ImgTag";
@@ -99,7 +99,7 @@ function CashOnDelivery({ cartData, totalAmount, deliveryCharge }) {
         console.log("error from post order", error.msg);
       }
 
-      navigate("/order-placed");
+      navigate(`/order-placed?userId=${userData._id}`);
     } else {
       alert("no address added");
     }
