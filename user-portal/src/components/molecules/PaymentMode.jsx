@@ -3,7 +3,7 @@ import CashOnDelivery from "./CashOnDelivery";
 import CreditDebit from "./CreditDebit";
 import UPIPayment from "./UPIPayment";
 import NetbankingPayment from "./NetbankingPayment";
-function PaymentMode() {
+function PaymentMode({ cartData, totalAmount, deliveryCharge }) {
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState("cashOnDelivery");
 
@@ -65,7 +65,15 @@ function PaymentMode() {
         </div>
         {/* {selectedPaymentMethod} */}
         <div className="col-lg-8 col-md-8 bg-white">
-          {selectedPaymentMethod === "cashOnDelivery" ? <CashOnDelivery /> : ""}
+          {selectedPaymentMethod === "cashOnDelivery" ? (
+            <CashOnDelivery
+              cartData={cartData}
+              totalAmount={totalAmount}
+              deliveryCharge={deliveryCharge}
+            />
+          ) : (
+            ""
+          )}
           {selectedPaymentMethod === "cardDetails" ? <CreditDebit /> : ""}
           {selectedPaymentMethod === "phonePeGpayPaytm" ? <UPIPayment /> : ""}
           {selectedPaymentMethod === "netBanking" ? <NetbankingPayment /> : ""}

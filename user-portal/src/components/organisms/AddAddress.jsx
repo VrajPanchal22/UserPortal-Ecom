@@ -72,7 +72,7 @@ function AddAddress() {
     <div className="bg-white container-payment">
       <div className="container-fluid">
         <PaymentHeader />
-        <main className="main-container-payment row container mx-auto">
+        <main className="main-container-payment row container mx-auto address-main">
           <DeliveryAddressInADD
             toggle={toggle}
             onAddAddress={handleAddAddress}
