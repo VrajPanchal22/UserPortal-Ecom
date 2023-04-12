@@ -131,7 +131,6 @@ function ProductShopBtn(props) {
           }
         );
         console.log(response.data);
-        console.log(error);
         setRes(response.data);
       } catch (error) {
         console.log(error);
