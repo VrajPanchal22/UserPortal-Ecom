@@ -34,28 +34,52 @@ function Login() {
           const tempId = sessionStorage.getItem("tempUserId");
           console.log("result:", result);
 
-          if (result.data.status === true) {
+          if (
+            result.data.status === true &&
+            result.data.userData.cartProductsInTempId != null
+          ) {
             sessionStorage.removeItem("tempUserId");
           }
-
+          console.log("temp: ", tempId);
           if (tempId) {
             console.log("inside if tempId");
             localStorage.setItem("token", result.data.token);
-            localStorage.setItem(
-              "userData",
-              JSON.stringify({
-                _id: result.data.userData._id,
-                firstName: result.data.userData.firstName,
-                lastName: result.data.userData.lastName,
-                password: null,
-                role: result.data.userData.role,
-                _v: result.data.userData._v,
-                cartProductsInTempId:
-                  result.data.userData.cartProductsInTempId == null
-                    ? null
-                    : tempId,
-              })
-            );
+            console.log("RESULT: ", result);
+            if (result.data.userData.cartProductsInTempId == null) {
+              localStorage.setItem(
+                "userData",
+                JSON.stringify({
+                  _id: result.data.userData._id,
+                  firstName: result.data.userData.firstName,
+                  lastName: result.data.userData.lastName,
+                  password: null,
+                  role: result.data.userData.role,
+                  _v: result.data.userData._v,
+                  cartProductsInTempId:
+                    result.data.userData.cartProductsInTempId == null
+                      ? null
+                      : tempId,
+                })
+              );
+              sessionStorage.removeItem("tempUserId");
+            } else {
+              localStorage.setItem(
+                "userData",
+                JSON.stringify({
+                  _id: result.data.userData._id,
+                  firstName: result.data.userData.firstName,
+                  lastName: result.data.userData.lastName,
+                  password: null,
+                  role: result.data.userData.role,
+                  _v: result.data.userData._v,
+                  cartProductsInTempId:
+                    result.data.userData.cartProductsInTempId == null
+                      ? tempId
+                      : null,
+                })
+              );
+              sessionStorage.removeItem("tempUserId");
+            }
             const userData = JSON.parse(localStorage.getItem("userData"));
 
             try {
@@ -135,7 +159,7 @@ function Login() {
             navigate(path);
             localStorage.removeItem("path");
           } else {
-            navigate("/productGallary");
+            navigate("/home");
           }
         }
       })

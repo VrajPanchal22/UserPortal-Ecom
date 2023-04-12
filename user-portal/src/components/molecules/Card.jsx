@@ -6,7 +6,7 @@ import CardBtn from "../atoms/CardBtn";
 
 function Card({ product, onDelete }) {
   // console.log("array", product.productId);
-  console.log("Product", product)
+  console.log("Product", product) 
   return (
     <div
       className="wishlist__card-div col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mb-3 d-flex justify-content-center align-items-center"
