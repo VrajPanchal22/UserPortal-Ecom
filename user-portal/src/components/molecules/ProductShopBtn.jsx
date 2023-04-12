@@ -269,30 +269,6 @@ function ProductShopBtn(props) {
           />
         )
       }
-      <Button
-        type="button"
-        className="buy-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1"
-        icon={<BsCartCheckFill className="buy-icon mr-2 mb-1" />}
-        buttonText="buy now"
-        onClick={() => navigate("/orders")}
-      />
-      {iswishlisted ? (
-        <Button
-          type="button"
-          className="wishlist-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1"
-          icon={<FaRegHeart className="buy-icon mr-2 mb-1" />}
-          buttonText="wishlisted"
-          onClick={() => handleWishlist()}
-        />
-      ) : (
-        <Button
-          type="button"
-          className="wishlist-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1"
-          icon={<FaRegHeart className="buy-icon mr-2 mb-1" />}
-          buttonText="wishlist"
-          onClick={() => handleWishlist()}
-        />
-      )}
       {/* <Button
         type="button"
         className="buy-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1"

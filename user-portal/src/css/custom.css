@@ -1401,9 +1401,7 @@ body{
     min-height: 70vh;
 }
 
-.main-left-container-payment {
-    border-right: 1px solid #dee2e6 !important;
-}
+
 
 .main-left-container-payment > .card-body {
     border: 1px dashed var(--button-color) !important;
@@ -1485,18 +1483,10 @@ body{
     width: 15rem;
     font-size: larger;
 }
-/* .modal {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1050;
-    display: none;
-    overflow: hidden;
-    -webkit-overflow-scrolling: touch;
-    outline: 0;
-} */
+.address-div{
+    align-items: center;
+    max-width: none;
+}
 .modal-backdrop.show {
     opacity: 1;
     background-color: rgba(0, 0, 0, 0.5);
@@ -1621,6 +1611,7 @@ input:focus {
 
 .footer-container {
     display: flex;
+    /* flex-direction: column; */
 }
 
 
@@ -1662,10 +1653,7 @@ input:focus {
 /* ----------------------media queries---------------------- */
 
 @media only screen and (max-width: 991px) {
-    .main-left-container-payment {
-        border-right: none !important;
-    }
-
+   
     .footer-items-container {
         display: none !important;
     }

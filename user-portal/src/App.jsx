@@ -19,9 +19,10 @@ import MainNavbar from "./components/organisms/MainNavbar";
 import axios from "axios";
 import Main from "./components/pages/Main";
 import OrderDetails from "./components/pages/ViewOrder";
+import { API_BASE_URL } from "./config";
 
 export const axiosObject = axios.create({
-  baseURL: "http://localhost:4000/api/",
+  baseURL: API_BASE_URL,
   headers: {
     "Access-Control-Allow-Origin": "*",
   },
