@@ -1,34 +1,33 @@
 import ProductCard from "../molecules/ProductCard";
+import { Link } from "react-router-dom";
 import { getData } from "../../services/api";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate, useNavigation } from "react-router-dom";
+import productGallaryContext from "../../contexts/productGallary";
 
-function ProductList() {
-  const [productList, setProductList] = useState([]);
+function ProductList(props) {
+  const { query } = props;
+  console.log(query, `product/${query ? "?" + query : ""}`);
+  const { productList, setProductList } = useContext(productGallaryContext);
   const navigate = useNavigate();
+  let path = `product/?${query}`;
+  if (query) {
+    <Link to={path}></Link>;
+  }
+
   useEffect(() => {
-    getData("product").then((res) => {
+    getData(`product/?${query ? query : ""}`).then((res) => {
       // console.log(res.products);
       setProductList(res.products);
     });
-  }, []);
+  }, [query]);
+  console.log(productList, "productlist");
 
-  // async function handleProductDetailPage(product){
-  //   const tempId = sessionStorage.getItem("tempUserId")
-  //   const userData = localStorage.getItem("userData")
-  //   if(!tempId && !userData){
-  //     try{
-  //       console.log("generating TempId")
-  //     const response1 = await axios.post(
-  //       "http://localhost:4000/api/cart/guest"
-  //     );
-  //     sessionStorage.setItem("tempUserId", response1.data.userId);
-  //     }catch(error){
-  //       console.log(error)
-  //     }
-  //   }
-  // }
+  useEffect(() => {
+    console.log("productList changed to:", productList);
+    // ...map function here
+  }, [productList]);
+
   return (
     <div className="row product-section">
       {productList?.map((product) => {
@@ -37,6 +36,7 @@ function ProductList() {
           <ProductCard
             product={product}
             onClick={() => navigate(`/productdetails/${product?._id}`)}
+            key={product?._id}
           />
         );
       })}

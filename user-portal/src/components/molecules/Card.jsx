@@ -4,9 +4,7 @@ import CardCategory from "../atoms/CardCategory";
 import CardProdPrice from "../atoms/CardProdPrice";
 import CardBtn from "../atoms/CardBtn";
 
-function Card({ product, onDelete }) {
-  // console.log("array", product.productId);
-  console.log("Product", product) 
+function Card({ product, onDelete, onClick }) {
   return (
     <div
       className="wishlist__card-div col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mb-3 d-flex justify-content-center align-items-center"
@@ -17,6 +15,7 @@ function Card({ product, onDelete }) {
           src={product.selectedVarient[0].images[0]}
           className="wishlist__card-img"
           alt="image"
+          onClick={onClick}
         />
 
         <div className="wishlist__prod-details ml-1 p-3">

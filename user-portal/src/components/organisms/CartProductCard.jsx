@@ -10,6 +10,7 @@ import Loader from "../atoms/Loader";
 import axios from "axios";
 import cartContext from "../../contexts/cartContext";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../../config";
 
 export default function CartProductCard() {
   const [quantity, setQuantity] = useState(0);
@@ -23,7 +24,7 @@ export default function CartProductCard() {
   const handleDeleteProduct = async (productId, variantId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:4000/api/cart/${
+        `${API_BASE_URL}cart/${
           userData && userData.cartProductsInTempId != null
             ? userData.cartProductsInTempId
             : userData
@@ -56,7 +57,7 @@ export default function CartProductCard() {
       // );
 
       const response = await axios.patch(
-        `http://localhost:4000/api/cart/${
+        `${API_BASE_URL}cart/${
           userData && userData.cartProductsInTempId != null
             ? userData.cartProductsInTempId
             : userData
@@ -85,7 +86,7 @@ export default function CartProductCard() {
         // );
 
         const response = await axios.patch(
-          `http://localhost:4000/api/cart/${
+          `${API_BASE_URL}cart/${
             userData && userData.cartProductsInTempId != null
               ? userData.cartProductsInTempId
               : userData
@@ -149,7 +150,7 @@ export default function CartProductCard() {
 
                   <span className="pr-2">
                     {" "}
-                    Size: <strong>{variant?.size?.toUpperCase()}</strong>{" "}
+                    Size: <strong>{variant?.size?.toUpperCase()}</strong>
                   </span>
                   <span>
                     Quantity:

@@ -12,12 +12,11 @@ import axios from "axios";
 import Loader from "../atoms/Loader";
 import Footer from "../organisms/Footer";
 import CartEmptyContainer from "../organisms/CartEmptyContainer";
+import { API_BASE_URL } from "../../config";
 
 export default function Cart() {
   const [cartData, setCartData] = useState([]);
-
   const [loader, setLoader] = useState(false);
-
   const tempId = sessionStorage.getItem("tempUserId");
   const userData = JSON.parse(localStorage.getItem("userData"));
 
@@ -29,13 +28,15 @@ export default function Cart() {
   const fetchData = async () => {
     try {
       const cartId = userData?.cartProductsInTempId ?? userData?._id ?? tempId;
-      const url = `http://localhost:4000/api/cart/${cartId}`;
+      const url = `${API_BASE_URL}${cartId}`;
       const response = await axios.get(url);
       if (response?.data?.data?.products) {
         setCartData(response.data.data.products);
       }
+      setCartData(response.data.data.products);
+      setLoader(false);
     } catch (error) {
-      console.error("Error fetching cart data:", error);
+      console.error("Error etching cart data:", error);
     } finally {
       setLoader(false);
     }

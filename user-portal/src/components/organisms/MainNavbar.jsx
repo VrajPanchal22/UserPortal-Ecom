@@ -1,32 +1,36 @@
-import React, { useState, useEffect } from "react";
-import Button from "../atoms/Button";
-import ImgTag from "../atoms/ImgTag";
-import NavbarMenus from "../molecules/NavbarMenus";
-import SearchField from "../molecules/SearchField";
-import { Collapse, NavbarToggler, Nav } from "reactstrap";
-import { useNavigate, useLocation } from "react-router-dom";
-import FlyOut from "../molecules/FlyOut";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import Button from '../atoms/Button'
+import ImgTag from '../atoms/ImgTag'
+import NavbarMenus from '../molecules/NavbarMenus'
+import SearchField from '../molecules/SearchField'
+import {
+  Collapse,
+  NavbarToggler,
+  Nav,
+} from 'reactstrap';
+import { useNavigate, useLocation } from 'react-router-dom'
+import FlyOut from '../molecules/FlyOut'
+import { useParams } from 'react-router-dom'
 
 function MainNavbar() {
-  const userData = JSON.parse(localStorage.getItem("userData"));
-  const [inputSearch, setInputSearch] = useState("");
-  const { name } = useParams();
-
+  const [inputSearch, setInputSearch] = useState('')
+  // const { name } = useParams();
   const [isOpen, setIsOpen] = useState(false);
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(false)
   const toggle = () => setIsOpen(!isOpen);
-  console.log(login);
-  const location = useLocation();
-  const navigate = useNavigate();
+  console.log(login)
+  let userData = JSON.parse(localStorage.getItem("userData"))
+  const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (login) {
       const currentPath = location.pathname;
-      localStorage.setItem("path", currentPath);
-      navigate("/login");
+      localStorage.setItem('path', currentPath);
+      navigate('/login')
     }
-  }, [login]);
+  }, [login])
+
 
   const [isFlyoutToggle, setIsFlyoutToggle] = useState(false);
   const handleClick = () => {
@@ -46,19 +50,19 @@ function MainNavbar() {
         onChange={(e) => setInputSearch(e.target.value)}
       />
       <div className="responsive">
-        <div className="on-responsive">
+        <div className='on-responsive'>
           <div className="button shadow">
-            <Button
-              className="login-button"
-              buttonText="Login"
-              onClick={() => setLogin(true)}
-            />
+            {
+              userData?
+              <Button className="login-button" buttonText="Logout" onClick={() => localStorage.clear()} />
+            : <Button className="login-button" buttonText="Login" onClick={() => setLogin(true)} />
+            }
           </div>
-          <NavbarToggler className="bg-light hamburger" onClick={toggle} />
+          <NavbarToggler className='bg-light hamburger' onClick={toggle} />
         </div>
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
-            <NavbarMenus handleClick={handleClick} />
+            <NavbarMenus handleClick={handleClick} name={userData?userData.firstName:""}/>
           </Nav>
         </Collapse>
       </div>

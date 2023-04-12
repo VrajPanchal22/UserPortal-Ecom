@@ -12,7 +12,7 @@ function ProductImgDiv(props){
             {
             src?.map((ele,index)=>{
                 return (
-                    <ImgTag imgUrl={ele} altText={index} className="product-img-small mb-2" onclick={()=>setSelectedImg(index)} key={index}/>
+                    <ImgTag imgUrl={ele} altText={index} className="product-img-small mb-2 ml-2" onclick={()=>setSelectedImg(index)} key={index}/>
                 )
             })
         }

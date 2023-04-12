@@ -8,6 +8,7 @@ import ImgTag from "../atoms/ImgTag";
 import { Formik, Form } from "formik";
 import { Link } from "react-router-dom";
 import * as yup from "yup";
+import { API_BASE_URL } from "../../config";
 
 const initialValues = {
   emailId: "",
@@ -25,7 +26,7 @@ function Login() {
   async function handlesubmit(values) {
     let data = values;
     await axios
-      .post("http://localhost:4000/api/user/login", data)
+      .post(`${API_BASE_URL}user/login`, data)
       .then(async (result) => {
         console.log(result);
         if (result.data.status) {
@@ -84,7 +85,7 @@ function Login() {
 
             try {
               const response = await axios.get(
-                `http://localhost:4000/api/cart/handleBuyNow/${userData._id}/${userData.cartProductsInTempId}`,
+                `${API_BASE_URL}cart/handleBuyNow/${userData._id}/${userData.cartProductsInTempId}`,
                 data
               );
               console.log("data: ", response.data.data.existingUser);
@@ -120,7 +121,7 @@ function Login() {
             try {
               await axios
                 .patch(
-                  `http://localhost:4000/api/user/updateId/${userData._id}`,
+                  `${API_BASE_URL}user/updateId/${userData._id}`,
                   exisitingUserData
                     ? {
                         cartProductsInTempId:

@@ -9,7 +9,7 @@ function ProductCard({ product,onClick }) {
       className={`${
         viewOption === "list"
           ? "col-12 m-2"
-          : " col-xl-3 col-lg-4 col-md-6 col-6 d-flex justify-content-center align-items-center"
+          : " col-xl-3 col-lg-4 col-md-6 col-6 d-flex justify-content-center align-items-center mt-2"
       } card-div`}
       id={product._id}
       onClick={onClick}
@@ -47,7 +47,7 @@ function ProductCard({ product,onClick }) {
             <div className="product-gender">{product.brand}</div>
           </div>
           <div className="product-price">
-            <b>Rs.{product?.variants?.[0]?.price}</b>
+            <b>Rs.{product?.variants[0]?.price}</b>
           </div>
           <div className="alertSection"></div>
         </div>

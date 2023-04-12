@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import {Button} from "reactstrap";
-function OrderList({ _Id, status, orderDate, deliveryDate, price, name ,imageurl,item}) {
+function OrderList({ _Id, status, orderDate, deliveryDate, price, name,imageurl }) {
   return (
     <div
       class="order-list-items"
@@ -12,7 +12,7 @@ function OrderList({ _Id, status, orderDate, deliveryDate, price, name ,imageurl
             <h6>Delivered on {deliveryDate}</h6>
           </div>
           <div class="col-sm-8">
-            <NavLink to={{pathname:"/orders/Invoice",state:{pass:"123"}}} target='_blank' className="invoice-link">
+            <NavLink to={{pathname:"/orders/Invoice",search:_Id}} target='_blank' className="invoice-link">
               Invoice
             </NavLink>
           </div>
@@ -22,7 +22,7 @@ function OrderList({ _Id, status, orderDate, deliveryDate, price, name ,imageurl
             <div class="image-container">
               <img
                 class="product-img"
-                src="/assets/images/watch.jpg"
+                src={imageurl}
                 alt="SmartWatch"
               />
             </div>
@@ -30,7 +30,7 @@ function OrderList({ _Id, status, orderDate, deliveryDate, price, name ,imageurl
           <div class="col-sm-5">
             <div class="product-info">
               <h6>{name}</h6>
-              <Button className='btn my-2 my-sm-0 view-item'>View Item</Button>
+              <Button className='btn my-2 my-sm-0 view-item'><NavLink className="view-orders-link" to={{pathname:"/orders/view-order",search:_Id}}>View Item</NavLink></Button>
               <Button className='btn my-2 my-sm-0 buy-again'>Buy It Again</Button>  
             </div>
           </div>
