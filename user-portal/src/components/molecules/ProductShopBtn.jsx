@@ -8,7 +8,7 @@ import { useState } from "react";
 import Para from "../atoms/Para";
 import { getData, patchData, postData } from "../../services/api";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { API_BASE_URL } from "../../config";
 function ProductShopBtn(props) {
   const { isSelected, data, variant, cartvariant, productid } = props;
   // console.log(data,"::::::::data")
@@ -25,7 +25,6 @@ function ProductShopBtn(props) {
   const [iswishlisted, setIsWishlisted] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-
   const handleAddToCart = async () => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     const tempId = localStorage.getItem("tempUserId");
@@ -34,12 +33,10 @@ function ProductShopBtn(props) {
     if (!userData && !tempId) {
       console.log("Temp id Generation");
       try {
-        const response1 = await axios.post(
-          "http://localhost:4000/api/cart/guest"
-        );
+        const response1 = await axios.post(`${API_BASE_URL}cart/guest`);
         localStorage.setItem("tempUserId", response1.data.userId);
         const response2 = await axios.patch(
-          `http://localhost:4000/api/cart/${response1.data.userId}`,
+          `cart/${response1.data.userId}`,
           {
             product: data,
           },
@@ -58,12 +55,13 @@ function ProductShopBtn(props) {
       console.log("Product Addition in Cart for Not LoggedIn User");
       try {
         const response = await axios.patch(
-          `http://localhost:4000/api/cart/${tempId}`,
+          `${API_BASE_URL}cart/${tempId}`,
           {
             product: {
               productId: data._id,
               name: data.name,
               category: data.category,
+              brand: data?.brand,
               productDetails: data.productDetails,
               images: data.image,
               selectedVariants: [
@@ -93,12 +91,13 @@ function ProductShopBtn(props) {
       console.log("Product addition in cart for logged in user");
       try {
         const response = await axios.patch(
-          `http://localhost:4000/api/cart/${userData._id}`,
+          `${API_BASE_URL}cart/${userData._id}`,
           {
             product: {
               productId: data._id,
               name: data.name,
               category: data.category,
+              brand: data?.brand,
               productDetails: data.productDetails,
               images: data.image,
               selectedVariants: [
@@ -128,10 +127,8 @@ function ProductShopBtn(props) {
   // }, []);
   async function handleWishlist() {
     const userData = JSON.parse(localStorage.getItem("userData"));
-
     if (userData) {
       const userId = userData._id;
-
       let wishobj = {
         userId: userId,
         products: {
@@ -272,7 +269,7 @@ function ProductShopBtn(props) {
           />
         )
       }
-      <Button
+      {/* <Button
         type="button"
         className="buy-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1"
         icon={<BsCartCheckFill className="buy-icon mr-2 mb-1" />}
@@ -280,30 +277,6 @@ function ProductShopBtn(props) {
         onClick={() => navigate("/orders")}
       />
       {iswishlisted ? (
-        <Button
-          type="button"
-          className="wishlist-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1"
-          icon={<FaRegHeart className="buy-icon mr-2 mb-1" />}
-          buttonText="wishlisted"
-          onClick={() => handleWishlist()}
-        />
-      ) : (
-        <Button
-          type="button"
-          className="wishlist-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1"
-          icon={<FaRegHeart className="buy-icon mr-2 mb-1" />}
-          buttonText="wishlist"
-          onClick={() => handleWishlist()}
-        />
-      )}
-      {/* <Button
-        type="button"
-        className="buy-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1"
-        icon={<BsCartCheckFill className="buy-icon mr-2 mb-1" />}
-        buttonText="buy now"
-        onClick={() => navigate("/orders")}
-      /> */}
-      {/* {iswishlisted ? (
         <Button
           type="button"
           className="wishlist-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1"

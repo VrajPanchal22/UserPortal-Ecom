@@ -3,13 +3,14 @@ import { useState,useEffect } from "react";
 import { GetOrderById } from "../../services/Order";
 import ViewOrderOrg from "../organisms/ViewOrderOrg";
 import { useLocation } from "react-router-dom";
+import { API_BASE_URL } from "../../config";
 function OrderDetails() {
     const location = useLocation()
     const [orderdetails, setOrderDetails] = useState([])
     const [dataFetched, setDataFetched] = useState(false);
     const orderId = location.search.slice(1);
     useEffect(() => {
-      fetchOrder(`http://localhost:4000/api/order/admin/${orderId}`);
+      fetchOrder(`${API_BASE_URL}order/admin/${orderId}`);
     }, [])
   
     async function fetchOrder(url) {

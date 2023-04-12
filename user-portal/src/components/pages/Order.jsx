@@ -10,12 +10,14 @@ import moment from "moment";
 import Pagination from "../molecules/Pagination";
 import { LIMIT, OFFSET, SEARCH_URL } from "../../constants/constants";
 // import '../../css/Order.css'
+import { API_BASE_URL } from "../../config";
 
 function Order() {
   let userObj = JSON.parse(localStorage.getItem('userData'));
   let userId = userObj._id;
   
-  const ORDER_URL = "http://localhost:4000/api/order";
+  const ORDER_URL = `${API_BASE_URL}order`;
+  console.log(ORDER_URL)
   let [orderList, setOrderList] = useState([]);
   let [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
@@ -59,7 +61,7 @@ function Order() {
           <div className="row d-flex flex-row justify-content-left align-items-center">
             <div className="col-sm-5 pt-3">
               <div className="order-navbar">
-                <Navbar link1="Home" link2="My Account" link3="My Orders" />
+                <Navbar link1="Home" link2="products" link3="My Orders" />
               </div>
             </div>
             <div className="col-sm-7">

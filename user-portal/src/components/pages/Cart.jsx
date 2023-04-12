@@ -10,7 +10,7 @@ import cartContext from "../../contexts/cartContext";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Loader from "../atoms/Loader";
-
+import { API_BASE_URL } from "../../config";
 export default function Cart() {
   const [cartData, setCartData] = useState([])
   const [error, setError] = useState(null);
@@ -29,7 +29,7 @@ export default function Cart() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/api/cart/${!tempId ? userData._id : tempId}`
+        `${API_BASE_URL}cart/${!tempId ? userData._id : tempId}`
       );
       setCartData(response.data.data.products);
       setLoader(false);

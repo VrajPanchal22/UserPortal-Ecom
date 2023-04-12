@@ -8,6 +8,7 @@ import ImgTag from "../atoms/ImgTag";
 import { Formik, Form } from "formik";
 import { Link } from "react-router-dom";
 import * as yup from "yup";
+import { API_BASE_URL } from "../../config";
 
 const initialValues = {
   emailId: "",
@@ -25,7 +26,7 @@ function Login() {
   function handlesubmit(values) {
     let data = values;
     axios
-      .post("http://localhost:4000/api/user/login", data)
+      .post(`${API_BASE_URL}user/login`, data)
       .then((result) => {
         console.log(result);
         if (result.data.status) {

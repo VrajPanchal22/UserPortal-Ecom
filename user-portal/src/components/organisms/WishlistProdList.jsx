@@ -5,6 +5,7 @@ import { getData, deleteData } from "../../services/api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../../config";
 
 function WishlistProdList() {
   const [wishlist, setWishlist] = useState([]);
@@ -13,7 +14,7 @@ function WishlistProdList() {
   const userData = JSON.parse(localStorage.getItem("userData"));
   console.log("user data", userData._id);
   useEffect(() => {
-    getData(`wishlist/${userData ? userData._id : ""}`).then((res) => {
+    getData(`${API_BASE_URL}wishlist/${userData ? userData._id : ""}`).then((res) => {
       setWishlist(res.wishlistData.products);
     });
   }, []);
@@ -21,7 +22,7 @@ function WishlistProdList() {
   async function handleDelete(product) {
     try {
       const res = await deleteData(
-        `wishlist/${userData ? userData._id : ""}/${product.productId}`
+        `${API_BASE_URL}wishlist/${userData ? userData._id : ""}/${product.productId}`
       );
       // navigate("/wihslist");
       if (res.status === true) {
@@ -51,7 +52,7 @@ function WishlistProdList() {
         throw new Error("Product could not be deleted");
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error(error.message);
     }
   }
@@ -59,13 +60,11 @@ function WishlistProdList() {
     navigate(`/productdetails/${product?.productId}`);
     console.log(product, "product details");
   }
-  const noOfProd = wishlist.length;
+  const noOfProd = wishlist && wishlist.length;
   return (
     <>
       <div className="wishlist__container-bg">
-        {noOfProd === 0 ? (
-          <EmptyWishlist />
-        ) : (
+        {wishlist && wishlist.length > 0 ? (
           <>
             <ToastContainer />
             <h1 className="wishlist__container-heading">
@@ -82,6 +81,8 @@ function WishlistProdList() {
               ))}
             </div>
           </>
+        ) : (
+          <EmptyWishlist />
         )}
       </div>
     </>
