@@ -829,7 +829,7 @@ body{
 }
 
 
-/* Footer */
+/* Cart Footer */
 .footer-cart-text{
     color: var(--nav-color);
 }
@@ -989,7 +989,7 @@ body{
         margin-top: 4px !important; 
     }
 }
-/* ----------------------------------------------------------------------------- */
+/* ----------------------MAIN FOOTER--------------------------------------------------- */
 
 .footer {
     background-color: var(--nav-color);

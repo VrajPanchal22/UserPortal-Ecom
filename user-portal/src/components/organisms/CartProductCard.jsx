@@ -9,14 +9,15 @@ import {
 import Loader from "../atoms/Loader";
 import axios from "axios";
 import cartContext from "../../contexts/cartContext";
+import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../config";
 
 export default function CartProductCard() {
   const [quantity, setQuantity] = useState(0);
-  const tempId = localStorage.getItem("tempUserId");
+  const tempId = sessionStorage.getItem("tempUserId");
   const [loader, setLoader] = useState(false);
   const userData = JSON.parse(localStorage.getItem("userData"));
-
+  const navigate = useNavigate();
   const { cartData, fetchData } = useContext(cartContext);
   console.log("contextValue", cartData);
 
@@ -24,7 +25,11 @@ export default function CartProductCard() {
     try {
       const response = await axios.delete(
         `${API_BASE_URL}cart/${
-          !tempId ? userData._id : tempId
+          userData && userData.cartProductsInTempId != null
+            ? userData.cartProductsInTempId
+            : userData
+            ? userData._id
+            : tempId
         }/${productId}/${variantId}`,
         {
           headers: {
@@ -32,7 +37,7 @@ export default function CartProductCard() {
           },
         }
       );
-      const data = response.data;
+      const data = response?.data;
       console.log(data);
       // setLoader(true);
       fetchData();
@@ -43,23 +48,27 @@ export default function CartProductCard() {
 
   async function incQuantity(productId, variantId, quantity) {
     try {
-      console.log(
-        "inc",
-        `cart/${
-          !tempId ? userData._id : tempId
-        }/${productId}/${variantId}`,
-        { quantity: quantity + 1 }
-      );
+      // console.log(
+      //   "inc",
+      //   `http://localhost:4000/api/cart/${
+      //     !tempId ? userData._id : tempId
+      //   }/${productId}/${variantId}`,
+      //   { quantity: quantity + 1 }
+      // );
 
       const response = await axios.patch(
-        `cart/${
-          !tempId ? userData._id : tempId
+        `${API_BASE_URL}cart/${
+          userData && userData.cartProductsInTempId != null
+            ? userData.cartProductsInTempId
+            : userData
+            ? userData._id
+            : tempId
         }/${productId}/${variantId}`,
         { quantity: quantity + 1 }
       );
-      console.log(response.data.quantity);
+      console.log(response?.data?.quantity);
 
-      setQuantity(response.data.quantity);
+      setQuantity(response?.data?.quantity);
       fetchData();
     } catch (error) {
       console.log(error);
@@ -68,22 +77,26 @@ export default function CartProductCard() {
   async function decQuantity(productId, variantId, quantity) {
     try {
       if (quantity > 0) {
-        console.log(
-          "dec",
-          `cart/${
-            !tempId ? userData._id : tempId
-          }/${productId}/${variantId}`,
-          { quantity: quantity }
-        );
+        // console.log(
+        //   "dec",
+        //   `http://localhost:4000/api/cart/${
+        //     userData ? userData._id : tempId
+        //   }/${productId}/${variantId}`,
+        //   { quantity: quantity }
+        // );
 
         const response = await axios.patch(
-          `cart/${
-            !tempId ? userData._id : tempId
+          `${API_BASE_URL}cart/${
+            userData && userData.cartProductsInTempId != null
+              ? userData.cartProductsInTempId
+              : userData
+              ? userData._id
+              : tempId
           }/${productId}/${variantId}`,
           { quantity: quantity - 1 }
         );
-        console.log(response.data.quantity);
-        setQuantity(response.data.quantity);
+        console.log(response?.data?.quantity);
+        setQuantity(response?.data?.quantity);
         fetchData();
       }
     } catch (error) {
@@ -97,7 +110,8 @@ export default function CartProductCard() {
         <Loader />
       ) : (
         cartData.map((product, index) =>
-          product.selectedVariants.map((variant, index) => (
+          product?.selectedVariants?.map((variant, index) => (
+            // console.log(product?.productId)
             <div
               key={index}
               className="card-product-details d-flex border p-3 mb-3 bg-white rounded "
@@ -108,13 +122,17 @@ export default function CartProductCard() {
                 <img
                   className="card-product-details__img"
                   width="120px"
-                  src={product.selectedVariants[0].images[0]}
+                  src="/assets/images/product-1.webp"
                   alt=""
+                  onClick={() =>
+                    navigate(`/productdetails/${product?.productId}`)
+                  }
                 />
               </div>
               <div className="card-product-details__body">
                 <div className="card-product-details__name fs-6 font-weight-bold">
-                  {product?.name?.charAt(0)?.toUpperCase() + product?.name?.slice(1)}
+                  {product?.name.charAt(0).toUpperCase() +
+                    product?.name.slice(1)}
                 </div>
                 <div className="card-product-details__color fs-6 text-secondary">
                   {" "}
@@ -127,12 +145,12 @@ export default function CartProductCard() {
                 <div className="card-product-details__btn-wrapper my-2 d-flex flex-column">
                   <span className="pr-2">
                     {" "}
-                    <strong>₹ {variant.price}</strong>
+                    <strong>₹ {variant?.price}</strong>
                   </span>
 
                   <span className="pr-2">
                     {" "}
-                    Size: <strong>{variant.size.toUpperCase()}</strong>{" "}
+                    Size: <strong>{variant?.size?.toUpperCase()}</strong>
                   </span>
                   <span>
                     Quantity:
@@ -142,22 +160,22 @@ export default function CartProductCard() {
                       size="lg"
                       onClick={() =>
                         decQuantity(
-                          product.productId,
-                          variant.variantId,
-                          variant.quantity
+                          product?.productId,
+                          variant?.variantId,
+                          variant?.quantity
                         )
                       }
                     />
-                    <strong>{variant.quantity}</strong>
+                    <strong>{variant?.quantity}</strong>
                     <FontAwesomeIcon
                       icon={faCirclePlus}
                       className="mx-2"
                       size="lg"
                       onClick={() =>
                         incQuantity(
-                          product.productId,
-                          variant.variantId,
-                          variant.quantity
+                          product?.productId,
+                          variant?.variantId,
+                          variant?.quantity
                         )
                       }
                     />
@@ -175,7 +193,10 @@ export default function CartProductCard() {
                     type="button"
                     className="product-delete-btn btn btn-sm btn-danger font-weight-bold mb-2 mr-2"
                     onClick={() =>
-                      handleDeleteProduct(product.productId, variant.variantId)
+                      handleDeleteProduct(
+                        product?.productId,
+                        variant?.variantId
+                      )
                     }
                   >
                     Delete

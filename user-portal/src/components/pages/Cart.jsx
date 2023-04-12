@@ -10,90 +10,96 @@ import cartContext from "../../contexts/cartContext";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Loader from "../atoms/Loader";
+import Footer from "../organisms/Footer";
+import CartEmptyContainer from "../organisms/CartEmptyContainer";
 import { API_BASE_URL } from "../../config";
+
 export default function Cart() {
-  const [cartData, setCartData] = useState([])
-  const [error, setError] = useState(null);
+  const [cartData, setCartData] = useState([]);
   const [loader, setLoader] = useState(false);
-
-
-  const tempId = localStorage.getItem("tempUserId")
+  const tempId = sessionStorage.getItem("tempUserId");
   const userData = JSON.parse(localStorage.getItem("userData"));
 
-
-    useEffect(() => {
-      setLoader(true); 
+  useEffect(() => {
+    setLoader(true);  
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        `${API_BASE_URL}cart/${!tempId ? userData._id : tempId}`
-      );
+      const cartId = userData?.cartProductsInTempId ?? userData?._id ?? tempId;
+      const url = `${API_BASE_URL}${cartId}`;
+      const response = await axios.get(url);
+      if (response?.data?.data?.products) {
+        setCartData(response.data.data.products);
+      }
       setCartData(response.data.data.products);
       setLoader(false);
     } catch (error) {
-      setError(error);
+      console.error("Error etching cart data:", error);
+    } finally {
+      setLoader(false);
     }
   };
-
+  console.log("CartData: ", cartData);
+  console.log("cartData length: ", cartData.length);
 
   return (
     <>
       {loader ? (
         <Loader />
       ) : (
-      <cartContext.Provider value={{cartData, fetchData}}>
+        <cartContext.Provider value={{ cartData, fetchData }}>
+          {/* Header */}
+          <CartHeader className="header-cart row d-flex justify-content-center align-items-center px-5 py-4 font-weight-bold border-bottom" />
 
-      {/* Header */}
-      <CartHeader className="header-cart row d-flex justify-content-center align-items-center px-5 py-4 font-weight-bold border-bottom" />
+          {/* Main */}
+          {cartData.length === 0 ? (
+            <CartEmptyContainer />
+          ) : (
+            <div className="main-container container-fuild">
+              <div className="main-container__top-div container col-xl-11 col-lg-12 col-md-12 col-sm-12  d-flex justify-content-center">
+                {/* Left-side-content */}
+                <div
+                  style={{ marginRight: 10, marginTop: 20 }}
+                  className="top-div__left-side col-xl-6 col-lg-7 col-md-7 col-sm-12 mt-5 mr-2 "
+                >
+                  {/* Div-1-Heading  */}
+                  <div className="top-div__heading fs-3 font-weight-bold mb-3">
+                    Shopping Cart
+                  </div>
 
-      {/* Main */}
-   
-      <div className="main-container container-fuild">
+                  {/* Div-2-Product Details  */}
+                  <div className="top-div__product-details__wrapper">
+                    <CartProductCard />
+                  </div>
+                </div>
 
-        {/* Top Container  */}
-        <div className="main-container__top-div container col-xl-11 col-lg-12 col-md-12 col-sm-12  d-flex justify-content-center">
+                {/* Right-side-content  */}
+                <div className="top-div__right-side  col-xl-5 col-lg-5 col-md-5 col-sm-12 mt-5">
+                  {/* Div-3-Order Details */}
+                  <CartOrderDetails />
 
-          {/* Left-side-content */}
-          <div
-            style={{ marginRight: 10, marginTop: 20 }}
-            className="top-div__left-side col-xl-6 col-lg-7 col-md-7 col-sm-12 mt-5 mr-2 ">
+                  {/* Div-4-COUPON */}
+                  <CartCouponDetails />
 
-            {/* Div-1-Heading  */}
-            <div className="top-div__heading fs-3 font-weight-bold mb-3">Shopping Cart</div>
-      
-            {/* Div-2-Product Details  */}
-            <div className="top-div__product-details__wrapper">
-              <CartProductCard    />
+                  {/* Div-5 Return/Refund Policy  */}
+                  <CartReturnPolicy />
+                </div>
+              </div>
+              {/* Similar Products Div */}
+              <CartSimilarProductList />
             </div>
+          )}
 
-          </div>
+          {/* Cart Footer */}
+          <CartFooter />
 
-          {/* Right-side-content  */}
-          <div className="top-div__right-side  col-xl-5 col-lg-5 col-md-5 col-sm-12 mt-5">
+          {/* Footer */}
+          <Footer className="footer" />
 
-            {/* Div-3-Order Details */}
-            <CartOrderDetails />
-
-            {/* Div-4-COUPON */}
-            <CartCouponDetails />
-
-            {/* Div-5 Return/Refund Policy  */}
-            <CartReturnPolicy/>
-
-          </div>
-        </div>
-
-        {/* Div-6 Similar Product Div  */}
-        <CartSimilarProductList/>
-      </div>
-
-      {/* Footer */}
-      <CartFooter/>
-      {/* </CartContext.Provider> */}
-      </cartContext.Provider>
+          {/* </CartContext.Provider> */}
+        </cartContext.Provider>
       )}
     </>
   );

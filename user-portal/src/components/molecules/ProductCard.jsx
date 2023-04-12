@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import productGallaryContext from "../../contexts/productGallary";
 
-function ProductCard({ product, onClick }) {
+function ProductCard({ product,onClick }) {
   const { viewOption } = useContext(productGallaryContext);
   return (
     <div

@@ -14,14 +14,15 @@ function ProductDetails(props) {
   const [selectedVariant, setSelectedVariant] = useState({});
   // console.log("defaultvariant",data?.variants?.[0])
   const { id } = useParams();
-  // console.log(id)
+  // console.log("product id::", id);
   // const [variant,setvariant] = useState()
   useEffect(() => {
     async function func() {
       try {
+        // console.log("product id inside func::", id);
         const d = await getData(`/product/${id}`);
         // console.log("data",data);
-        setData(d.product);
+        setData(d?.product);
         setSelectedVariant(d?.product?.variants?.[0]);
       } catch (error) {
         console.log(error);

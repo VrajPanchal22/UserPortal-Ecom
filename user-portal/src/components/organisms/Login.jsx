@@ -23,47 +23,144 @@ const validationSchema = yup.object({
 function Login() {
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
-  function handlesubmit(values) {
+  async function handlesubmit(values) {
     let data = values;
-    axios
+    await axios
       .post(`${API_BASE_URL}user/login`, data)
-      .then((result) => {
+      .then(async (result) => {
         console.log(result);
         if (result.data.status) {
           setMsg(result.data.message);
-          console.log("inside first if");
-          localStorage.setItem("token", result.data.token);
-          const tempId = localStorage.getItem("tempUserId");
+          // console.log("Token", result.data.token);
+          const tempId = sessionStorage.getItem("tempUserId");
+          console.log("result:", result);
+
+          if (
+            result.data.status === true &&
+            result.data.userData.cartProductsInTempId != null
+          ) {
+            sessionStorage.removeItem("tempUserId");
+          }
+          console.log("temp: ", tempId);
           if (tempId) {
+            console.log("inside if tempId");
+            localStorage.setItem("token", result.data.token);
+            console.log("RESULT: ", result);
+            if (result.data.userData.cartProductsInTempId == null) {
+              localStorage.setItem(
+                "userData",
+                JSON.stringify({
+                  _id: result.data.userData._id,
+                  firstName: result.data.userData.firstName,
+                  lastName: result.data.userData.lastName,
+                  password: null,
+                  role: result.data.userData.role,
+                  _v: result.data.userData._v,
+                  cartProductsInTempId:
+                    result.data.userData.cartProductsInTempId == null
+                      ? null
+                      : tempId,
+                })
+              );
+              sessionStorage.removeItem("tempUserId");
+            } else {
+              localStorage.setItem(
+                "userData",
+                JSON.stringify({
+                  _id: result.data.userData._id,
+                  firstName: result.data.userData.firstName,
+                  lastName: result.data.userData.lastName,
+                  password: null,
+                  role: result.data.userData.role,
+                  _v: result.data.userData._v,
+                  cartProductsInTempId:
+                    result.data.userData.cartProductsInTempId == null
+                      ? tempId
+                      : null,
+                })
+              );
+              sessionStorage.removeItem("tempUserId");
+            }
+            const userData = JSON.parse(localStorage.getItem("userData"));
+
+            try {
+              const response = await axios.get(
+                `${API_BASE_URL}cart/handleBuyNow/${userData._id}/${userData.cartProductsInTempId}`,
+                data
+              );
+              console.log("data: ", response.data.data.existingUser);
+              localStorage.setItem(
+                "existingUser",
+                JSON.stringify(response.data.data)
+              );
+            } catch (error) {
+              console.log(error);
+            }
+            // console.log("exisitingUser:",existingUser)
+            const exisitingUserData = JSON.parse(
+              localStorage.getItem("existingUser")
+            );
+            console.log("exisitingUserData: ", exisitingUserData);
+            if (exisitingUserData) {
+              console.log("exisitingUserData");
+              localStorage.setItem(
+                "userData",
+                JSON.stringify({
+                  _id: result.data.userData._id,
+                  firstName: result.data.userData.firstName,
+                  lastName: result.data.userData.lastName,
+                  password: null,
+                  role: result.data.userData.role,
+                  _v: result.data.userData._v,
+                  cartProductsInTempId:
+                    exisitingUserData.exisitingUserData.cartProductsInTempId,
+                })
+              );
+            }
+            console.log("data storing in db");
+            try {
+              await axios
+                .patch(
+                  `${API_BASE_URL}user/updateId/${userData._id}`,
+                  exisitingUserData
+                    ? {
+                        cartProductsInTempId:
+                          exisitingUserData.exisitingUserData
+                            .cartProductsInTempId,
+                      }
+                    : { cartProductsInTempId: userData.cartProductsInTempId }
+                )
+                .then((data) => console.log(data));
+            } catch (error) {
+              console.log(error);
+            }
+            // localStorage.removeItem("existingUser")
+            // sessionStorage.removeItem("tempUserId");
+          } else {
+            console.log("inside else !tempId");
+            console.log("RESULT: ", result);
+            localStorage.setItem("token", result.data.token);
+
             localStorage.setItem(
               "userData",
               JSON.stringify({
-                _id: tempId,
+                _id: result.data.userData._id,
                 firstName: result.data.userData.firstName,
                 lastName: result.data.userData.lastName,
                 password: null,
                 role: result.data.userData.role,
                 _v: result.data.userData._v,
+                cartProductsInTempId: result.data.userData.cartProductsInTempId,
               })
             );
-            localStorage.removeItem("tempUserId");
-          } else {
-            localStorage.setItem(
-              "userData",
-              JSON.stringify(result.data.userData)
-            );
           }
-          localStorage.setItem(
-            "userData",
-            JSON.stringify(result.data.userData)
-          );
+
           const path = localStorage.getItem("path");
-          localStorage.removeItem("path");
           if (path) {
             navigate(path);
+            localStorage.removeItem("path");
           } else {
-            console.log("inside else");
-            navigate("/");
+            navigate("/home");
           }
         }
       })
@@ -73,17 +170,6 @@ function Login() {
         }
       });
   }
-
-  // function OnLogin() {
-  //   const path = localStorage.getItem('path');
-
-  //   if (path) {
-  //     navigate(path);
-  //   }else{
-  //     navigate('/home')
-  //   }
-  // }
-
   return (
     <div className="main-container d-flex">
       <div className="flex-1 d-flex">

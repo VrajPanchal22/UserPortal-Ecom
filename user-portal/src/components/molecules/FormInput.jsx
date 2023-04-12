@@ -5,7 +5,7 @@ import ErrorMsg from '../atoms/ErrorMsg';
 
 function FormInput(props) {
     const  {type, inputClass, id, name, placeholder, htmlFor , label, outerDivClass,fieldClass,iconClass,errorClass,value } = props;
-  console.log(value)
+  // console.log(value)
     return (
     <div className={outerDivClass}>
       <Label htmlFor={htmlFor}  label={label}/>

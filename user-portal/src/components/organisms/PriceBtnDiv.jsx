@@ -1,12 +1,13 @@
 import React from "react";
 import { getData } from "../../services/api";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "react-bootstrap";
 import { Button } from "reactstrap";
 import Para from "../atoms/Para";
 import Span from "../atoms/Span";
 import ProductShopBtn from "../molecules/ProductShopBtn";
+
 function PriceBtnDiv(props) {
   const { mrp, discount, variants, data, selectedVariant, selectVariant } =
     props;
