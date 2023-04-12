@@ -1871,7 +1871,7 @@ input:focus {
 .wishlist__container-bg {
     background: var(--light);
     overflow: hidden !important;
-    min-height:577px!important
+    min-height:644px!important
 }
 .wishlist__category{
     height:1.3rem
