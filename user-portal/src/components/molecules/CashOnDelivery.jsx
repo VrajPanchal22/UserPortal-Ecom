@@ -12,21 +12,35 @@ function CashOnDelivery({ cartData, totalAmount, deliveryCharge }) {
     console.log("product details from cash on delivery", cartData);
     console.log("names", userData.firstName + userData.lastName);
     console.log("clicked");
-    console.log("testing", cartData[0]?.selectedVariants[0]?.images[0]);
+    //console.log("testing", cartData[0]?.selectedVariants[0]?.images[0]);
 
     const selectedAddress = JSON.parse(localStorage.getItem("selectedAddress"));
     const address = selectedAddress.street;
     console.log("address", address);
 
     let residenceNo, residenceName;
-    const regex = /^(\w+-?\w*)\s*(.*)$/;
-    const matches = regex.exec(address);
-    if (matches) {
-      residenceNo = matches[1];
-      residenceName =
-        matches[2] && matches[2].split(",")[1].trim().split(/\s+/)[0];
+
+    // Split the input string by commas and spaces
+    const parts = address.trim().split(/[,\s]+/);
+
+    // Find the first part that matches the pattern for the residence number
+    const regex = /^(\w+-?\w*)$/;
+    const index = parts.findIndex((part) => regex.test(part));
+
+    if (index >= 0) {
+      // If a residence number is found, extract it and the remaining parts as the residence name
+      residenceNo = parts[index];
+      if (!isNaN(residenceNo)) {
+        // Convert the residence number to a string if it's a number
+        residenceNo = String(residenceNo);
+      }
+      residenceName = parts.slice(index + 1).join(" ");
+    } else {
+      // If no residence number is found, assume that the entire input string is the residence name
+      residenceNo = "D-123";
+      residenceName = address;
     }
-    console.log("residence num", residenceNo);
+    console.log("residence num", typeof residenceNo);
     console.log("residnece name", residenceName);
     console.log("address selected", selectedAddress);
     console.log("testing address", selectedAddress.street);
