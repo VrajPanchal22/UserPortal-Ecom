@@ -9,7 +9,6 @@ import Para from "../atoms/Para";
 import { getData, patchData, postData } from "../../services/api";
 import { useLocation, useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../config";
-
 function ProductShopBtn(props) {
   const { isSelected, data, variant, cartvariant, productid } = props;
   // console.log(data,"::::::::data")
@@ -26,7 +25,6 @@ function ProductShopBtn(props) {
   const [iswishlisted, setIsWishlisted] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-
   const handleAddToCart = async () => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     const tempId = localStorage.getItem("tempUserId");
