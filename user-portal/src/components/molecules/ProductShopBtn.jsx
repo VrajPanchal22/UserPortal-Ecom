@@ -9,7 +9,6 @@ import Para from "../atoms/Para";
 import { getData, patchData, postData } from "../../services/api";
 import { useLocation, useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../config";
-
 function ProductShopBtn(props) {
   const { isSelected, data, variant, cartvariant, productid } = props;
   // console.log(data,"::::::::data")
