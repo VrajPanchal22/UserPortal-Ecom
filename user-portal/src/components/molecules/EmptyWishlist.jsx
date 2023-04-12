@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../atoms/Button";
 import ImgTag from "../atoms/ImgTag";
 import { useNavigate } from "react-router-dom";
+import MainNavbar from "../organisms/MainNavbar";
 
 function EmptyWishlist() {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ function EmptyWishlist() {
   };
   return (
     <>
+      <MainNavbar />
       <div className="empty-wishlistDiv">
         <div className="Empty-wishlist-heading">
           <h2>Your wishlist is empty !</h2>

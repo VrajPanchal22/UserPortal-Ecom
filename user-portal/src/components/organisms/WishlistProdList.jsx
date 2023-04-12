@@ -52,7 +52,7 @@ function WishlistProdList() {
         throw new Error("Product could not be deleted");
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error(error.message);
     }
   }
@@ -60,13 +60,11 @@ function WishlistProdList() {
     navigate(`/productdetails/${product?.productId}`);
     console.log(product, "product details");
   }
-  const noOfProd = wishlist.length;
+  const noOfProd = wishlist && wishlist.length;
   return (
     <>
       <div className="wishlist__container-bg">
-        {noOfProd === 0 ? (
-          <EmptyWishlist />
-        ) : (
+        {wishlist && wishlist.length > 0 ? (
           <>
             <ToastContainer />
             <h1 className="wishlist__container-heading">
@@ -83,6 +81,8 @@ function WishlistProdList() {
               ))}
             </div>
           </>
+        ) : (
+          <EmptyWishlist />
         )}
       </div>
     </>
