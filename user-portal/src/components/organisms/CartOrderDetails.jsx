@@ -5,7 +5,7 @@ import { useContext } from "react";
 import cartContext from "../../contexts/cartContext";
 // import { useNavigate } from "react-router-dom";
 
-const tempId = localStorage.getItem("tempUserId");
+const tempId = sessionStorage.getItem("tempUserId");
 const userData = JSON.parse(localStorage.getItem("userData"));
 
 export default function CartOrderDetails() {

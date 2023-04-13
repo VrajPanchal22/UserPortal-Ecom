@@ -9,7 +9,6 @@ import {
   Nav,
 } from 'reactstrap';
 import { useNavigate, useLocation } from 'react-router-dom'
-
 import FlyOut from '../molecules/FlyOut'
 import { useParams } from 'react-router-dom'
 
@@ -33,17 +32,18 @@ function MainNavbar() {
   }, [login])
 
 
-  const [isFlyoutToggle, setIsFlyoutToggle] = useState(false)
+  const [isFlyoutToggle, setIsFlyoutToggle] = useState(false);
   const handleClick = () => {
-    setIsFlyoutToggle(!isFlyoutToggle)
-  }
+    setIsFlyoutToggle(!isFlyoutToggle);
+  };
 
   return (
     <div className="main-header navbar navbar-expand-md" id="topnav">
       <div className="main-logo d-flex justify-content-center align-items-center mr-2">
-        <ImgTag imgUrl='/assets/images/logo1.png' width="110" alt='logo' />
+        <ImgTag imgUrl="/assets/images/logo1.png" width="110" alt="logo" />
       </div>
-      <SearchField type="text"
+      <SearchField
+        type="text"
         placeholder="Search for products brand & more.."
         id="category"
         value={inputSearch}
@@ -68,8 +68,7 @@ function MainNavbar() {
       </div>
       {isFlyoutToggle ? <FlyOut handleClick={handleClick} /> : null}
     </div>
-  )
+  );
 }
 
-
-export default MainNavbar
+export default MainNavbar;
