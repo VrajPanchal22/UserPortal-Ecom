@@ -28,12 +28,11 @@ export default function Cart() {
   const fetchData = async () => {
     try {
       const cartId = userData?.cartProductsInTempId ?? userData?._id ?? tempId;
-      const url = `${API_BASE_URL}${cartId}`;
+      const url = `${API_BASE_URL}/cart/${cartId}`;
       const response = await axios.get(url);
       if (response?.data?.data?.products) {
         setCartData(response.data.data.products);
       }
-      setCartData(response.data.data.products);
       setLoader(false);
     } catch (error) {
       console.error("Error etching cart data:", error);

@@ -56,13 +56,9 @@ function Login() {
                   password: null,
                   role: result.data.userData.role,
                   _v: result.data.userData._v,
-                  cartProductsInTempId:
-                    result.data.userData.cartProductsInTempId == null
-                      ? null
-                      : tempId,
+                  cartProductsInTempId:tempId,
                 })
               );
-              sessionStorage.removeItem("tempUserId");
             } else {
               localStorage.setItem(
                 "userData",
@@ -71,15 +67,16 @@ function Login() {
                   firstName: result.data.userData.firstName,
                   lastName: result.data.userData.lastName,
                   password: null,
-                  role: result.data.userData.role,
+                  role: result.data.userData.role,  
                   _v: result.data.userData._v,
-                  cartProductsInTempId:
-                    result.data.userData.cartProductsInTempId == null
-                      ? tempId
-                      : null,
+                  cartProductsInTempId:null
+                    
+                  // cartProductsInTempId:
+                  //   result.data.userData.cartProductsInTempId == null
+                  //     ? tempId
+                  //     : null
                 })
               );
-              sessionStorage.removeItem("tempUserId");
             }
             const userData = JSON.parse(localStorage.getItem("userData"));
 
