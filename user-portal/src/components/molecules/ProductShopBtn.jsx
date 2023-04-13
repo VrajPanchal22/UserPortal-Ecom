@@ -269,7 +269,7 @@ function ProductShopBtn(props) {
           />
         )
       }
-      {/* <Button
+      <Button
         type="button"
         className="buy-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1"
         icon={<BsCartCheckFill className="buy-icon mr-2 mb-1" />}
@@ -292,7 +292,7 @@ function ProductShopBtn(props) {
           buttonText="wishlist"
           onClick={() => handleWishlist()}
         />
-      )} */}
+      )}
       <ToastContainer autoClose={1000} />
     </div>
   );

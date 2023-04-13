@@ -40,7 +40,7 @@ function CashOnDelivery({ cartData, totalAmount, deliveryCharge }) {
       residenceNo = "D-123";
       residenceName = address;
     }
-    console.log("residence num", typeof residenceNo);
+    console.log("residence num", residenceNo);
     console.log("residnece name", residenceName);
     console.log("address selected", selectedAddress);
     console.log("testing address", selectedAddress.street);
