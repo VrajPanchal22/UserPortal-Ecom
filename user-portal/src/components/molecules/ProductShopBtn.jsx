@@ -26,8 +26,7 @@ function ProductShopBtn(props) {
   const [iswishlisted, setIsWishlisted] = useState(false)
   
   const navigate = useNavigate();
-  const location = useLocation()
-  // console.log("shopbtn",isSelected,size)
+  const location = useLocation();
 
   const handleAddToCart = async () => {
     const userData = JSON.parse(localStorage.getItem("userData"));
@@ -157,10 +156,10 @@ function ProductShopBtn(props) {
   };
   // }, []);
   async function handleWishlist() {
-    const userData = JSON.parse(localStorage.getItem("userData"))
-    
+    const userData = JSON.parse(localStorage.getItem("userData"));
+
     if (userData) {
-      const userId = userData._id
+      const userId = userData._id;
 
       let wishobj = {
         userId: userId,
