@@ -10,8 +10,7 @@ const navigate = useNavigate()
         <strong>YOUR CART IS EMPTY!!!</strong>
       </h4>
       {/* <p>Your cart is empty. Start shopping now!</p> */}
-
-      <Button onClick={()=>navigate('/home' )}>
+      <Button onClick={()=>navigate('/productGallery' )}>
         <strong>Continue Shopping</strong>
       </Button>
     </div>

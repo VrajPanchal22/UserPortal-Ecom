@@ -39,12 +39,12 @@ function ProductShopBtn(props) {
       console.log("Temp id Generation");
       try {
         const response1 = await axios.post(
-          "http://localhost:4000/api/cart/guest"
+          `${API_BASE_URL}cart/guest`
         );
         sessionStorage.setItem("tempUserId", response1.data.userId);
         console.log("!userData && !token && !tempId");
         const response2 = await axios.patch(
-          `http://localhost:4000/api/cart/${response1.data.userId}`,
+          `${API_BASE_URL}cart/${response1.data.userId}`,
           {
             product: {
               productId: data._id,
@@ -121,7 +121,7 @@ function ProductShopBtn(props) {
       try {
         console.log("userData & Token");
         const response = await axios.patch(
-          `http://localhost:4000/api/cart/${userData.cartProductsInTempId===null ? userData._id : userData.cartProductsInTempId}`,
+          `${API_BASE_URL}cart/${userData.cartProductsInTempId===null ? userData._id : userData.cartProductsInTempId}`,
           {
             product: {
               productId: data._id,

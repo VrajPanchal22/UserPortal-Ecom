@@ -7,7 +7,7 @@ import MainNavbar from "../organisms/MainNavbar";
 function EmptyWishlist() {
   const navigate = useNavigate();
   const handleContineShopping = () => {
-    navigate("/home");
+    navigate("/");
     console.log("homePage");
   };
   return (

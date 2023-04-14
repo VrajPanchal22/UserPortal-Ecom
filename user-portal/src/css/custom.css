@@ -526,6 +526,22 @@ input[type="radio"] {
     font-family: var(--font-family-menu);
     cursor: pointer;
 }
+.nav-item-span{
+    top: -8px;
+    border-width: 1px;
+    border-radius: 80px;
+    right: -8px;
+    border-style: solid;
+    font-size: 14px;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-weight: bolder;
+    background-color: var(--button-color);
+    position: absolute;
+    }  
+.nav-item{
+    position: relative;
+}
 
 .responsive {
     display: flex;
@@ -693,22 +709,9 @@ body{
 .tag--disabled {
     pointer-events: none;
 }
-.nav-item-span{
+ 
 
-
-top: -8px;
-border-width: 1px;
-border-radius: 80px;
-right: -8px;
-border-style: solid;
-padding-left: 8px;
-font-size: 14px;
-padding-right: 8px;
-font-weight: 900;
-background-color: var(--button-color);
-}
 /* Cart Container for empty cart */
-
 .cart-empty-container{
     margin: auto;
     height: 460px;

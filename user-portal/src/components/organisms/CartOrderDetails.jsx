@@ -19,7 +19,7 @@ export default function CartOrderDetails() {
     if (token) {
       navigate("/address");
     } else {
-      localStorage.setItem("path", "/payment");
+      localStorage.setItem("path", "/cart");
       navigate("/login");
     }
   };

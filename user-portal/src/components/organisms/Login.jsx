@@ -59,6 +59,7 @@ function Login() {
                   cartProductsInTempId:tempId,
                 })
               );
+              sessionStorage.removeItem("tempUserId")
             } else {
               localStorage.setItem(
                 "userData",
@@ -157,7 +158,7 @@ function Login() {
             navigate(path);
             localStorage.removeItem("path");
           } else {
-            navigate("/home");
+            navigate("/productGallery");
           }
         }
       })
