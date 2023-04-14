@@ -48,14 +48,6 @@ export default function CartProductCard() {
 
   async function incQuantity(productId, variantId, quantity) {
     try {
-      // console.log(
-      //   "inc",
-      //   `http://localhost:4000/api/cart/${
-      //     !tempId ? userData._id : tempId
-      //   }/${productId}/${variantId}`,
-      //   { quantity: quantity + 1 }
-      // );
-
       const response = await axios.patch(
         `${API_BASE_URL}cart/${
           userData && userData.cartProductsInTempId != null
@@ -77,14 +69,6 @@ export default function CartProductCard() {
   async function decQuantity(productId, variantId, quantity) {
     try {
       if (quantity > 0) {
-        // console.log(
-        //   "dec",
-        //   `http://localhost:4000/api/cart/${
-        //     userData ? userData._id : tempId
-        //   }/${productId}/${variantId}`,
-        //   { quantity: quantity }
-        // );
-
         const response = await axios.patch(
           `${API_BASE_URL}cart/${
             userData && userData.cartProductsInTempId != null

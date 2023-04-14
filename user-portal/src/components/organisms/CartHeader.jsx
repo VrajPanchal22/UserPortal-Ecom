@@ -31,7 +31,7 @@ export default function CartHeader(props) {
       <div className="header-cart__logo header-payment__logo text-left">
         <ImgTag
           className="header-cart__cart-image"
-          onClick={() => navigate("/productGallary")}
+          onClick={() => navigate("/productGallery")}
           imgUrl={"/assets/images/logo-for-white-bg.png"}
           alt="logo"
         />

@@ -381,7 +381,7 @@ input[type="radio"] {
 
 @media (max-width:1200px) {
     .card {
-        /* width: 18vw; */
+        width: 18vw;
     }
 
     .card--listview {
@@ -525,6 +525,22 @@ input[type="radio"] {
 .nav-item a {
     font-family: var(--font-family-menu);
     cursor: pointer;
+}
+.nav-item-span{
+    top: -8px;
+    border-width: 1px;
+    border-radius: 80px;
+    right: -8px;
+    border-style: solid;
+    font-size: 14px;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-weight: bolder;
+    background-color: var(--button-color);
+    position: absolute;
+    }  
+.nav-item{
+    position: relative;
 }
 
 .responsive {
@@ -693,6 +709,19 @@ body{
 .tag--disabled {
     pointer-events: none;
 }
+ 
+
+/* Cart Container for empty cart */
+.cart-empty-container{
+    margin: auto;
+    height: 460px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: var(--nav-color);
+}
+
 
 /* Product Details */
 .card-product-details{
@@ -1101,7 +1130,7 @@ body{
   border: 2px solid var(--button-color);
  }
  .active:hover{
-    color:var(--background-color) 
+    color:var(--background-color) !important
 }
  .buy-btn:hover{
   color: var(--nav-color);
@@ -1125,6 +1154,7 @@ body{
 .footer{
     background-color: var(--nav-color);
 }
+
 /* product-details */
 
 @media only screen and (max-width: 1514px){
@@ -1355,6 +1385,7 @@ body{
     color: var(--nav-color);
     font-size: 15px;
 }
+
 
 /* ========= payment page ===============*/
 /* -----------------------payment container----------------------- */
@@ -1697,6 +1728,9 @@ input:focus {
     }
 }
 
+
+
+
 @media screen and (max-width: 768px) {
     .menu_box--circle {
         border-radius: 50%;
@@ -1859,7 +1893,7 @@ input:focus {
 .wishlist__container-bg {
     background: var(--light);
     overflow: hidden !important;
-    min-height:644px!important
+    min-height:577px!important
 }
 .wishlist__category{
     height:1.3rem
@@ -1963,7 +1997,7 @@ font-weight: bold;
         width:15rem !important ;
     }
     .wishlist__container-bg{
-        min-height: 577px!important;
+        min-height: 468px!important;
     }
 }
 @media only screen and (max-width: 403px) {
@@ -2000,7 +2034,7 @@ font-weight: bold;
     }
     
     .wishlist__container-bg{
-        min-height: 627px!important;
+        min-height: 727px!important;
     }
 }
 @media (max-width:480px) {

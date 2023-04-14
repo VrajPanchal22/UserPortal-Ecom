@@ -1,5 +1,6 @@
 import React from "react";
 import ImgTag from "./ImgTag";
+
 function BetterBuyLogo() {
   return (
     <div className="header-payment__logo-container text-left">

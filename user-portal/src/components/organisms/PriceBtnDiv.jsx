@@ -37,7 +37,8 @@ function PriceBtnDiv(props) {
     const userId = userData._id;
     const tempId = localStorage.getItem("tempUserId");
     try {
-      const cartData = await getData(`cart/${userId ? userId : tempId}`);
+      const cartData = await getData(`cart/${userData ? (userData.cartProductsInTempId != null ? userData.cartProductsInTempId : userData._id) : tempId
+      }`);
       const products = cartData?.data;
       console.log("cartData", products);
       products?.products?.map((product, index) => {

@@ -9,6 +9,7 @@ import Para from "../atoms/Para";
 import { getData, patchData, postData } from "../../services/api";
 import { useLocation, useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../config";
+
 function ProductShopBtn(props) {
   const { isSelected, data, variant, cartvariant, productid } = props;
   // console.log(data,"::::::::data")
@@ -21,25 +22,48 @@ function ProductShopBtn(props) {
   console.log(data, variant);
   const [flag, setFlag] = useState(false);
   const [res, setRes] = useState(0);
-  // const [size, setSize] = useState("")
-  const [iswishlisted, setIsWishlisted] = useState(false);
+  const [size, setSize] = useState("");
+  const [iswishlisted, setIsWishlisted] = useState(false)
+  
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleAddToCart = async () => {
     const userData = JSON.parse(localStorage.getItem("userData"));
-    const tempId = localStorage.getItem("tempUserId");
-    console.log(data, "inside add to cart");
-    // If the user is not logged in, generate a temporary user ID
-    if (!userData && !tempId) {
+    const token = localStorage.getItem("token");
+    const tempId = sessionStorage.getItem("tempUserId");
+
+    // If there is token and userData then add the product into userData._id
+    // If the user is not logged in, generate a temporary user ID and add product into it
+    if (!userData && !token && !tempId) {
       console.log("Temp id Generation");
       try {
-        const response1 = await axios.post(`${API_BASE_URL}cart/guest`);
-        localStorage.setItem("tempUserId", response1.data.userId);
+        const response1 = await axios.post(
+          `${API_BASE_URL}cart/guest`
+        );
+        sessionStorage.setItem("tempUserId", response1.data.userId);
+        console.log("!userData && !token && !tempId");
         const response2 = await axios.patch(
           `${API_BASE_URL}cart/${response1.data.userId}`,
           {
-            product: data,
+            product: {
+              productId: data._id,
+              name: data.name,
+              category: data.category,
+              productDetails: data.productDetails,
+              // images: data.image,
+              brand: data.brand,
+              selectedVariants: [
+                {
+                  images: variant.images,
+                  price: variant.price,
+                  size: variant.size,
+                  color: variant.color,
+                  quantity: 1,
+                  variantId: variant._id,
+                },
+              ],
+            },
           },
           {
             headers: {
@@ -47,12 +71,12 @@ function ProductShopBtn(props) {
             },
           }
         );
-        console.log(response2.data);
-        setRes(response2.data);
+        console.log(response2?.data);
+        setRes(response2?.data);
       } catch (error) {
         console.log(error);
       }
-    } else if (tempId) {
+    } else if (tempId ) {
       //if tempId is generated no need to generate again diretly add product into it
       console.log("Product Addition in Cart for Not LoggedIn User");
       try {
@@ -64,9 +88,9 @@ function ProductShopBtn(props) {
               productId: data._id,
               name: data.name,
               category: data.category,
-              brand: data?.brand,
               productDetails: data.productDetails,
               images: data.image,
+              brand: data.brand,
               selectedVariants: [
                 {
                   images: variant.images,
@@ -93,24 +117,19 @@ function ProductShopBtn(props) {
     } else {
       // Add the product to the user's cart using UserId
       console.log("Product addition in cart for logged in user");
-      console.log("userData", userData);
+      console.log("userData",userData)
       try {
         console.log("userData & Token");
         const response = await axios.patch(
-          `${API_BASE_URL}${
-            userData.cartProductsInTempId === null
-              ? userData._id
-              : userData.cartProductsInTempId
-          }`,
-          // Add the product to the user's cart // Redirect the user to the payment page // ...
+          `${API_BASE_URL}cart/${userData.cartProductsInTempId===null ? userData._id : userData.cartProductsInTempId}`,
           {
             product: {
               productId: data._id,
               name: data.name,
               category: data.category,
-              brand: data?.brand,
               productDetails: data.productDetails,
               images: data.image,
+              brand: data.brand,
               selectedVariants: [
                 {
                   images: variant.images,
@@ -129,7 +148,6 @@ function ProductShopBtn(props) {
             },
           }
         );
-        console.log(response.data);
         setRes(response.data);
       } catch (error) {
         console.log(error);
@@ -161,70 +179,75 @@ function ProductShopBtn(props) {
       };
       console.log(wishobj);
       try {
-        const list = await getData(`/wishlist/${userId}`);
-        console.log("list", list);
+        const list = await getData(`/wishlist/${userId}`)
+        console.log("list", list)
         if (list.wishlistData !== "no data with this id") {
           if (list?.wishlistData?.products?.length > 0) {
             if (list.wishlistData !== "no data with this id") {
-              console.log("if");
+              console.log("if")
               list?.wishlistData?.products?.map((product) => {
                 if (product?.productId === productid) {
-                  toast.success("product already wishlisted");
-                  setIsWishlisted(true);
+                  toast.success("product already wishlisted")
+                  setIsWishlisted(true)
                 } else {
-                  console.log("else1");
+                  console.log("else1")
                   async function addProduct() {
                     try {
-                      const res = await patchData(`/wishlist/${userId}`, {
-                        product: {
-                          productId: productid,
-                          category: data?.category,
-                          name: data?.name,
-                          brand: data?.brand,
-                          selectedVarient: {
-                            variantId: variant?._id,
-                            images: variant?.images,
-                            price: variant?.price,
-                            size: variant?.size,
-                            color: variant?.color,
-                          },
-                        },
-                      });
-                      setIsWishlisted(true);
+                      const res = await patchData(`/wishlist/${userId}`,
+                        {
+                          product: {
+                            "productId": productid,
+                            "category": data?.category,
+                            "name": data?.name,
+                            "brand": data?.brand,
+                            "selectedVarient": {
+                              "variantId": variant?._id,
+                              "images": variant?.images,
+                              "price": variant?.price,
+                              "size": variant?.size,
+                              "color": variant?.color
+                            }
+                          }
+                        }
+                      )
+                      setIsWishlisted(true)
                     } catch (error) {
-                      console.log(error);
+                      console.log(error)
                     }
                   }
-                  addProduct();
+                  addProduct()
                 }
-                return "";
-              });
+                return ""
+              })
             }
-          } else {
-            console.log("if else");
+          }
+          else {
+            console.log("if else")
             async function addProduct() {
               try {
-                const res = await patchData(`/wishlist/${userId}`, {
-                  product: {
-                    productId: productid,
-                    category: data?.category,
-                    name: data?.name,
-                    brand: data?.brand,
-                    selectedVarient: {
-                      variantId: variant?._id,
-                      images: variant?.images,
-                      price: variant?.price,
-                      size: variant?.size,
-                      color: variant?.color,
-                    },
-                  },
-                });
-                setIsWishlisted(true);
+                const res = await patchData(`/wishlist/${userId}`,
+                  {
+                    product: {
+                      "productId": productid,
+                      "category": data?.category,
+                      "name": data?.name,
+                      "brand": data?.brand,
+                      "selectedVarient": {
+                        "variantId": variant?._id,
+                        "images": variant?.images,
+                        "price": variant?.price,
+                        "size": variant?.size,
+                        "color": variant?.color
+                      }
+                    }
+                  }
+                )
+                setIsWishlisted(true)
               } catch (error) {
-                console.log(error);
+                console.log(error)
               }
             }
-            addProduct();
+            addProduct()
           }
         } else {
           console.log("else");
@@ -239,8 +262,8 @@ function ProductShopBtn(props) {
       }
     } else {
       const currentPath = location.pathname;
-      localStorage.setItem("path", currentPath);
-      navigate("/login");
+      localStorage.setItem('path', currentPath);
+      navigate('/login')
     }
   }
   console.log(iswishlisted);
@@ -258,55 +281,17 @@ function ProductShopBtn(props) {
       </div>
       {
         // res && res.message=== "product add successfully" && size===isSelected
-        cartvariant.includes(variant?._id) || res?.status === true ? (
-          <Button
-            type="button"
-            className="cart-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1"
-            icon={<BsFillBagFill className="bag-icon mr-2 mb-1" />}
-            buttonText="Go to cart"
-            onClick={() => {
-              setFlag(!flag);
-              handleAddToCart();
-              navigate("/cart");
-            }}
-          />
-        ) : (
-          <Button
-            type="button"
-            className="cart-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1"
-            icon={<BsFillBagFill className="bag-icon mr-2 mb-1" />}
-            buttonText="add to cart"
-            onClick={() => {
-              setFlag(!flag);
-              handleAddToCart();
-            }}
-          />
-        )
+        cartvariant.includes(variant?._id) || res?.status === true ?
+          <Button type="button" className="cart-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1" icon={<BsFillBagFill className="bag-icon mr-2 mb-1" />} buttonText="Go to cart" onClick={() => { setFlag(!flag); handleAddToCart(); navigate('/cart') }} />
+          :
+          <Button type="button" className="cart-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1" icon={<BsFillBagFill className="bag-icon mr-2 mb-1" />} buttonText="add to cart" onClick={() => { setFlag(!flag); handleAddToCart(); }} />
       }
-      <Button
-        type="button"
-        className="buy-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1"
-        icon={<BsCartCheckFill className="buy-icon mr-2 mb-1" />}
-        buttonText="buy now"
-        onClick={() => navigate("/orders")}
-      />
-      {iswishlisted ? (
-        <Button
-          type="button"
-          className="wishlist-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1"
-          icon={<FaRegHeart className="buy-icon mr-2 mb-1" />}
-          buttonText="wishlisted"
-          onClick={() => handleWishlist()}
-        />
-      ) : (
-        <Button
-          type="button"
-          className="wishlist-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1"
-          icon={<FaRegHeart className="buy-icon mr-2 mb-1" />}
-          buttonText="wishlist"
-          onClick={() => handleWishlist()}
-        />
-      )}
+      <Button type="button" className="buy-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1" icon={<BsCartCheckFill className="buy-icon mr-2 mb-1" />} buttonText="buy now" onClick={() => navigate('/orders')} />
+      {
+        iswishlisted
+          ? <Button type="button" className="wishlist-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1" icon={<FaRegHeart className="buy-icon mr-2 mb-1" />} buttonText="wishlisted" onClick={() => handleWishlist()} />
+          : <Button type="button" className="wishlist-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1" icon={<FaRegHeart className="buy-icon mr-2 mb-1" />} buttonText="wishlist" onClick={() => handleWishlist()} />
+      }
       {/* <Button
         type="button"
         className="buy-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1"
@@ -335,5 +320,4 @@ function ProductShopBtn(props) {
     </div>
   );
 }
-
 export default ProductShopBtn;
