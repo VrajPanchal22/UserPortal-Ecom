@@ -7,6 +7,7 @@ import { Button } from "reactstrap";
 import Para from "../atoms/Para";
 import Span from "../atoms/Span";
 import ProductShopBtn from "../molecules/ProductShopBtn";
+import ImgTag from "../atoms/ImgTag";
 
 function PriceBtnDiv(props) {
   const { mrp, discount, variants, data, selectedVariant, selectVariant } =
@@ -16,6 +17,7 @@ function PriceBtnDiv(props) {
   const [selectColor, setSelectedColor] = useState();
   const [index, setIndex] = useState();
   const [cartVariants, setCartVariants] = useState([]);
+  const [isSizeChart,setIsSizeChart] = useState(false)
   const { id } = useParams();
   let arr = [];
   // console.log("sizebtn::::",isSizeSelected,data)
@@ -115,7 +117,14 @@ function PriceBtnDiv(props) {
         <Span
           para="size chart >"
           className="size-chart text-uppercase font-weight-bold ml-2"
-        />
+        onClick={()=>setIsSizeChart(!isSizeChart)}/>
+      </div>
+      <div>
+        {
+          isSizeChart?
+          <ImgTag imgUrl="/assets/images/size-chart-2.jpeg"/>
+          :""
+        }
       </div>
       <div className="d-flex my-3">
         {selectColor

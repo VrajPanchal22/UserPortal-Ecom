@@ -7,7 +7,7 @@ function AvailabilityFilter() {
   return (
     <div class="filter-option">
     <span class="filter-name m-2"><b>AVAILABILITY</b></span><br/>
-    <input type="checkbox" class="mx-2 mb-3" 
+    <input type="checkbox" class="mx-2 mb-3 available-option" 
     onClick={(event) => {
       const isChecked = event.target.checked;
       if (isChecked) {

@@ -320,6 +320,49 @@ input[type="radio"] {
     width: 95%;
 }
 
+.popularity{
+    cursor: pointer;
+}
+
+.lowToHigh{
+    cursor: pointer;
+}
+
+.highToLow{
+    cursor: pointer;
+}
+
+.whatsNew{
+    cursor: pointer;
+}
+
+.grid-options{
+    cursor: pointer;
+}
+
+.clearAll_btn{
+    cursor: pointer;
+}
+
+.gender-option{
+    cursor: pointer;
+}
+
+.brand-option{
+    cursor: pointer;
+}
+
+.color-option{
+    cursor: pointer;
+}
+
+.size-option{
+    cursor: pointer;
+}
+
+.available-option{
+    cursor: pointer;
+}
 /* media query for product list page */
 @media(max-width:768px) {
     .card-div {
@@ -1027,7 +1070,7 @@ body{
   width: 15rem;
   height: 3rem;
   color: var(--background-color);
-  background-color: var(--button-color);
+  background-color: var(--nav-color);
   box-shadow: none !important;
 }
 .active{
@@ -1096,9 +1139,9 @@ body{
 }
  /* HOVER */
  .cart-btn:hover{
-  color: var(--button-color) ;
+  color: var(--nav-color) ;
   background-color: var(--background-color) ;
-  border: 2px solid var(--button-color);
+  border: 2px solid var(--nav-color);
  }
  .active:hover{
     color:var(--background-color) 

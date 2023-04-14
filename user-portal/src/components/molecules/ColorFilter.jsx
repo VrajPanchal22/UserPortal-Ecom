@@ -11,7 +11,7 @@ function ColorFilter() {
             {colors.map((color) => {
                 return (
                     <div className="colorfilter d-flex flex-row align-items-center ">
-                        <InputTag type="checkbox" className="mx-2" onClick={(event) => {
+                        <InputTag type="checkbox" className="mx-2 color-option" onClick={(event) => {
             const isChecked = event.target.checked;
             if (isChecked) {
               setFilterQuery((prevState) => ({

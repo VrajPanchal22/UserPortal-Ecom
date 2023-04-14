@@ -11,7 +11,7 @@ function SizeFilter() {
                 sizes.map((size) => {
                     return (
                         <>
-                            <input type="checkbox" className="mx-2" 
+                            <input type="checkbox" className="mx-2 size-option" 
                     onClick={(event) => {
             const isChecked = event.target.checked;
             if (isChecked) {
