@@ -10,7 +10,7 @@ function TowardsPayment() {
   const userData = JSON.parse(localStorage.getItem("userData"));
   console.log("userData got", userData);
   useEffect(() => {
-    getData(`cart/${userData ? userData._id : ""}`).then((res) => {
+    getData(`cart/${userData.cartProductsInTempId===null ? userData._id : userData.cartProductsInTempId}`).then((res) => {
       setCartData(res.data.products);
       console.log(res, "response");
     });

@@ -33,7 +33,6 @@ export default function Cart() {
       if (response?.data?.data?.products) {
         setCartData(response.data.data.products);
       }
-      setCartData(response.data.data.products);
       setLoader(false);
     } catch (error) {
       console.error("Error etching cart data:", error);
@@ -81,7 +80,7 @@ export default function Cart() {
                   <CartOrderDetails />
 
                   {/* Div-4-COUPON */}
-                  <CartCouponDetails />
+                  {/* <CartCouponDetails /> */}
 
                   {/* Div-5 Return/Refund Policy  */}
                   <CartReturnPolicy />

@@ -4,7 +4,7 @@ import Button from "../atoms/Button";
 function OrderPlaced() {
   const navigate = useNavigate();
   function handleContinueShopping() {
-    navigate("/home");
+    navigate("/");
   }
   function handleOrderDetail() {
     navigate("/orders");
