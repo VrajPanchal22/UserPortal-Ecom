@@ -7,7 +7,7 @@ import productGallaryContext from '../../contexts/productGallary';
 import Button from '../atoms/Button';
 
 function PriceRangeFilter() {
-    const {ilterQuery,setFilterQuery}= useContext(productGallaryContext)
+    const {filterQuery,setFilterQuery}= useContext(productGallaryContext)
     const [value, setValue] = useState([30,60]);
   return (
     <div className="filter-option">
@@ -28,7 +28,7 @@ function PriceRangeFilter() {
         <div className="mx-1 my-3">
         <RangeSlider min="20" max = "100000" value={value} onInput={setValue} step={"5"} className="range-slider"/>
         </div>
-        <Button buttonText="Set" onClick={()=>setFilterQuery(prevState => ({ ...prevState, 'max':value[1],'min':value[0] }))}/>
+        <Button buttonText="Set" className="btn mb-3 ml-3 set-btn" onClick={()=>setFilterQuery(prevState => ({ ...prevState, 'max':value[1],'min':value[0] }))}/>
     </div>
   )
 }

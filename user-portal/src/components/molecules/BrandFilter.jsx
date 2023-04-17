@@ -8,7 +8,7 @@ import InputTag from '../atoms/InputTag'
 
 function BrandFilter() {
 
-    const { filterqQuery, setFilterQuery } = useContext(productGallaryContext)
+    const { filterQuery, setFilterQuery } = useContext(productGallaryContext)
     // const [clearAll,setClearAll] = useState(false)
     // const [checked,setChecked] = useState(false)
 
@@ -45,7 +45,7 @@ function BrandFilter() {
                 ),
               }));
             }
-          }}/>{brand.toUpperCase()}<br />
+          }} checked={filterQuery.Brand.includes(brand)}/>{brand.toUpperCase()}<br />
                         </>
                     )
                 })

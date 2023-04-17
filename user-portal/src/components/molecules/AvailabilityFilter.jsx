@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import productGallaryContext from '../../contexts/productGallary'
 
 function AvailabilityFilter() {
-  const {ilterQuery,setFilterQuery}= useContext(productGallaryContext)
+  const {filterQuery,setFilterQuery}= useContext(productGallaryContext)
 
   return (
     <div class="filter-option">
@@ -23,7 +23,7 @@ function AvailabilityFilter() {
           ),
         }));
       }
-    }}/> Include Out of Stock<br/>
+    }} checked={filterQuery.Available.includes('Include Out of Stock')}/> Include Out of Stock<br/>
 </div>
   )
 }
