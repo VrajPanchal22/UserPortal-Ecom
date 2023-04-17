@@ -320,6 +320,10 @@ input[type="radio"] {
     width: 95%;
 }
 
+.sort-option {
+    cursor: pointer;
+  }
+  
 /* media query for product list page */
 @media(max-width:768px) {
     .card-div {
@@ -690,6 +694,7 @@ body{
 .header-cart__cart-image {
     height: max(90px, 8vw);
     max-height: 130px;
+    cursor: pointer;
 }
 .header-cart__tag {
     font-size: 0.9rem;

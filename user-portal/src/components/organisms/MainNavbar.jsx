@@ -11,6 +11,8 @@ import {
 import { useNavigate, useLocation } from 'react-router-dom'
 import FlyOut from '../molecules/FlyOut'
 import { useParams } from 'react-router-dom'
+import cartContext from "../../contexts/cartContext";
+import { useContext } from "react";
 
 function MainNavbar() {
   const [inputSearch, setInputSearch] = useState('')
@@ -22,6 +24,8 @@ function MainNavbar() {
   let userData = JSON.parse(localStorage.getItem("userData"))
   const location = useLocation()
   const navigate = useNavigate()
+  const { cartData, fetchData, productsInCart, clearCart } =
+  useContext(cartContext);
 
   useEffect(() => {
     if (login) {
@@ -52,11 +56,23 @@ function MainNavbar() {
       <div className="responsive">
         <div className='on-responsive'>
           <div className="button shadow">
-            {
-              userData?
-              <Button className="login-button" buttonText="Logout" onClick={() => localStorage.clear()} />
-            : <Button className="login-button" buttonText="Login" onClick={() => setLogin(true)} />
-            }
+          {userData ? (
+              <Button
+                className="login-button"
+                buttonText="Logout"
+                onClick={() => {
+                  localStorage.clear();
+                  clearCart();
+                  fetchData();
+                }}
+              />
+            ) : (
+              <Button
+                className="login-button"
+                buttonText="Login"
+                onClick={() => setLogin(true)}
+              />
+            )}
           </div>
           <NavbarToggler className='bg-light hamburger' onClick={toggle} />
         </div>
