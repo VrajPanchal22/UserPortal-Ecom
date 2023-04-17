@@ -9,6 +9,8 @@ import { Formik, Form } from "formik";
 import { Link } from "react-router-dom";
 import * as yup from "yup";
 import { API_BASE_URL } from "../../config";
+import { useContext } from "react";
+import cartContext from "../../contexts/cartContext";
 
 const initialValues = {
   emailId: "",
@@ -21,6 +23,7 @@ const validationSchema = yup.object({
 });
 
 function Login() {
+  const { cartData, fetchData, productsInCart } = useContext(cartContext);
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
   async function handlesubmit(values) {
@@ -56,10 +59,11 @@ function Login() {
                   password: null,
                   role: result.data.userData.role,
                   _v: result.data.userData._v,
-                  cartProductsInTempId:tempId,
+                  cartProductsInTempId:null,
                 })
               );
               sessionStorage.removeItem("tempUserId")
+              fetchData()
             } else {
               localStorage.setItem(
                 "userData",
@@ -70,7 +74,7 @@ function Login() {
                   password: null,
                   role: result.data.userData.role,  
                   _v: result.data.userData._v,
-                  cartProductsInTempId:null
+                  cartProductsInTempId:tempId
                     
                   // cartProductsInTempId:
                   //   result.data.userData.cartProductsInTempId == null
@@ -78,9 +82,10 @@ function Login() {
                   //     : null
                 })
               );
+              fetchData()
             }
             const userData = JSON.parse(localStorage.getItem("userData"));
-
+            fetchData()
             try {
               const response = await axios.get(
                 `${API_BASE_URL}cart/handleBuyNow/${userData._id}/${userData.cartProductsInTempId}`,
@@ -114,6 +119,7 @@ function Login() {
                     exisitingUserData.exisitingUserData.cartProductsInTempId,
                 })
               );
+              fetchData()
             }
             console.log("data storing in db");
             try {
@@ -151,6 +157,7 @@ function Login() {
                 cartProductsInTempId: result.data.userData.cartProductsInTempId,
               })
             );
+            fetchData()
           }
 
           const path = localStorage.getItem("path");
@@ -167,6 +174,7 @@ function Login() {
           setMsg(error.response.data.message);
         }
       });
+      fetchData()
   }
   return (
     <div className="main-container d-flex">
