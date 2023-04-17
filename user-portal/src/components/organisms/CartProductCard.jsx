@@ -6,7 +6,7 @@ import {
   faCirclePlus,
   faCircleMinus,
 } from "@fortawesome/free-solid-svg-icons";
-import Loader from "../atoms/Loader";
+// import Loader from "../atoms/Loader";
 import axios from "axios";
 import cartContext from "../../contexts/cartContext";
 import { useNavigate } from "react-router-dom";
@@ -15,12 +15,15 @@ import { API_BASE_URL } from "../../config";
 export default function CartProductCard() {
   const [quantity, setQuantity] = useState(0);
   const tempId = sessionStorage.getItem("tempUserId");
-  const [loader, setLoader] = useState(false);
+  // const [loader, setLoader] = useState(false);
   const userData = JSON.parse(localStorage.getItem("userData"));
   const navigate = useNavigate();
-  const { cartData, fetchData } = useContext(cartContext);
+  const { cartData, fetchData, productsInCart } = useContext(cartContext);
   console.log("contextValue", cartData);
 
+  useEffect(() => {
+    fetchData();
+  }, []);
   const handleDeleteProduct = async (productId, variantId) => {
     try {
       const response = await axios.delete(
@@ -90,9 +93,10 @@ export default function CartProductCard() {
 
   return (
     <>
-      {loader ? (
-        <Loader />
-      ) : (
+      {
+        // loader ? (
+        //   <Loader />
+        // ) : (
         cartData.map((product, index) =>
           product?.selectedVariants?.map((variant, index) => (
             // console.log(product?.productId)
@@ -105,6 +109,7 @@ export default function CartProductCard() {
               <div className="card-product-details__figure mr-3 ">
                 <img
                   className="card-product-details__img"
+                  style={{ cursor: "pointer" }}
                   width="120px"
                   src="/assets/images/product-1.webp"
                   alt=""
@@ -140,6 +145,7 @@ export default function CartProductCard() {
                     Quantity:
                     <FontAwesomeIcon
                       icon={faCircleMinus}
+                  style={{ cursor: "pointer" }}
                       className="mx-2"
                       size="lg"
                       onClick={() =>
@@ -153,6 +159,7 @@ export default function CartProductCard() {
                     <strong>{variant?.quantity}</strong>
                     <FontAwesomeIcon
                       icon={faCirclePlus}
+                  style={{ cursor: "pointer" }}
                       className="mx-2"
                       size="lg"
                       onClick={() =>
@@ -185,19 +192,19 @@ export default function CartProductCard() {
                   >
                     Delete
                   </button>
-                  <button
+                  {/* <button
                     type="button"
                     className="product-wishlist-btn btn btn-sm bg-white rounded font-weight-bold mb-2"
                   >
                     <FontAwesomeIcon icon={faHeart} />
                     <span className="fs-7 font-weight-bold pl-1">WISHLIST</span>
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
           ))
         )
-      )}
+      }
     </>
   );
 }

@@ -320,6 +320,10 @@ input[type="radio"] {
     width: 95%;
 }
 
+.sort-option {
+    cursor: pointer;
+  }
+  
 .set-btn{
     background-color: var(--button-color);
 }
@@ -737,6 +741,7 @@ body{
 .header-cart__cart-image {
     height: max(90px, 8vw);
     max-height: 130px;
+    cursor: pointer;
 }
 .header-cart__tag {
     font-size: 0.9rem;
