@@ -21,14 +21,14 @@
   button {
     background-color: var(--button-color);
     color: var(--background-color);
-  }
-  /* .btn{
+  } 
+  .btn{
     background-color: var(--button-color);
-  } */
+  }
   .btn:focus {
     outline: 0;
     box-shadow: none;
-  }
+  } 
   .btn:hover,
   button:hover {
     outline: 0;
@@ -47,7 +47,12 @@
     outline: 0;
     box-shadow: 0 0;
   }
- 
+  .button-start-shopping{
+    background-color: var(--button-color);
+    color: var(--background-color);
+
+  }
+  
   /* CSS of ROW 1 of Container */
   
   
@@ -69,6 +74,10 @@
   .view-orders-link:hover{
     color: var(--background-color);
     text-decoration: none;
+  }
+  .navbar-item-active{
+    text-decoration: underline;
+    color:var(--nav-color)
   }
   
   
@@ -150,12 +159,23 @@
     width: 200px;
     background: rgb(42, 35, 35);
   }
-  .order-detail-header{
+  .order-detail-header{ 
     font-weight: 800;
   }
   
   
   /*Row 2 CSS when order are not empty*/
+  .active-link{
+    text-decoration: underline;
+    color: var(--nav-color) !important;
+    font-weight: 900;
+  }
+  .active-link:hover{
+    text-decoration: underline;
+    font-weight: 900;
+    color: var(--nav-color) !important;
+
+  }
   
   #order-item {
     height: 33%;
