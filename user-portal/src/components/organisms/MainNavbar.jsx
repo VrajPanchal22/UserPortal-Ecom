@@ -13,22 +13,24 @@ import FlyOut from '../molecules/FlyOut'
 import { useParams } from 'react-router-dom'
 
 function MainNavbar() {
+  let {name} = useParams()
   const [inputSearch, setInputSearch] = useState('')
-  // const { name } = useParams();
+  console.log("inputsearch",inputSearch)
   const [isOpen, setIsOpen] = useState(false);
   const [login, setLogin] = useState(false)
   const toggle = () => setIsOpen(!isOpen);
-  console.log(login)
   let userData = JSON.parse(localStorage.getItem("userData"))
   const location = useLocation()
   const navigate = useNavigate()
 
+ 
   useEffect(() => {
     if (login) {
       const currentPath = location.pathname;
       localStorage.setItem('path', currentPath);
       navigate('/login')
     }
+
   }, [login])
 
 
@@ -40,7 +42,7 @@ function MainNavbar() {
   return (
     <div className="main-header navbar navbar-expand-md" id="topnav">
       <div className="main-logo d-flex justify-content-center align-items-center mr-2">
-        <ImgTag imgUrl="/assets/images/logo1.png" width="110" alt="logo" />
+        <ImgTag imgUrl="/assets/images/logo1.png" width="110" alt="logo" onClick={()=>navigate('/home')}/>
       </div>
       <SearchField
         type="text"
@@ -54,7 +56,7 @@ function MainNavbar() {
           <div className="button shadow">
             {
               userData?
-              <Button className="login-button" buttonText="Logout" onClick={() => localStorage.clear()} />
+              <Button className="login-button" buttonText="Logout" onClick={() => {localStorage.clear();navigate('/home')}} />
             : <Button className="login-button" buttonText="Login" onClick={() => setLogin(true)} />
             }
           </div>
