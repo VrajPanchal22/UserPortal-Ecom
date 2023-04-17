@@ -4,14 +4,16 @@ import { getData } from "../../services/api";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useNavigation } from "react-router-dom";
 import productGallaryContext from "../../contexts/productGallary";
+import NoProduct from "../atoms/no-product";
 
 function ProductList(props) {
-  const {name} = useParams()
-  console.log("productlistparams:::",name)
+  const { name } = useParams()
+  // console.log("productlistparams:::",name)
   const { query } = props;
   console.log(query, `product/${query ? "?" + query : ""}`);
   const { productList, setProductList } = useContext(productGallaryContext);
   const navigate = useNavigate();
+  const searchArr = []
   let path = `product/?${query}`;
   if (query) {
     <Link to={path}></Link>;
@@ -33,30 +35,36 @@ function ProductList(props) {
   return (
     <div className="row product-section">
       {
-      name
-      ?productList?.map((product) => {
-        // console.log(product);
-        if(product?.name === name || product?.brand === name){
-        return (
-          <ProductCard
-            product={product}
-            onClick={() => navigate(`/productdetails/${product?._id}`)}
-            key={product?._id}
-          />
-        );
+        name
+          ? productList?.map((product) => {
+            console.log("searcharr:::",searchArr.length)
+            if (product?.name?.toLowerCase() === name || product?.brand?.toLowerCase() === name) {
+              searchArr.push(product)
+              return (
+                <ProductCard
+                  product={product}
+                  onClick={() => navigate(`/productdetails/${product?._id}`)}
+                  key={product?._id}
+                />
+              );
+            }
+          }
+          )
+          : productList?.map((product) => {
+            // console.log(product);
+            return (
+              <ProductCard
+                product={product}
+                onClick={() => navigate(`/productdetails/${product?._id}`)}
+                key={product?._id}
+              />
+            );
+          })
       }
-    }
-    )
-    :productList?.map((product) => {
-        // console.log(product);
-        return (
-          <ProductCard
-            product={product}
-            onClick={() => navigate(`/productdetails/${product?._id}`)}
-            key={product?._id}
-          />
-        );
-      })
+      {
+        name && searchArr.length === 0
+        ? <NoProduct/>
+        :""
       }
     </div>
   );

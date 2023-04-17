@@ -319,7 +319,9 @@ input[type="radio"] {
 .product-details {
     width: 95%;
 }
-
+.no-product{
+    margin-top: 8rem !important
+}
 .set-btn{
     background-color: var(--button-color);
 }
