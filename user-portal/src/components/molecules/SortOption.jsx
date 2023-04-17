@@ -36,10 +36,11 @@ function newArrival(){
                 </button>
             </p>
 
-            <button className="dropdown btn btn-secondary dropdown-toggle sort-by" type="button"
+            {/* <button className="dropdown btn btn-secondary dropdown-toggle sort-by" type="button"
                 id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Sort By
-            </button>
+            </button> */}
+            
             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 {
                     sortOption.map((option)=>{

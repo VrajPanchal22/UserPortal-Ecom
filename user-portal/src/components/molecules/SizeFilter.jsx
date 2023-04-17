@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import productGallaryContext from '../../contexts/productGallary';
 
 function SizeFilter() {
-    const {ilterQuery,setFilterQuery}= useContext(productGallaryContext)
+    const {filterQuery,setFilterQuery}= useContext(productGallaryContext)
     const sizes = ['2xl', '2xs', '3xl', '3xs', '4xl', 'free size', 'l', 'm', 's', 'xl', 'xs'];
     return (
         <div className=" filter-option">
@@ -11,7 +11,7 @@ function SizeFilter() {
                 sizes.map((size) => {
                     return (
                         <>
-                            <input type="checkbox" className="mx-2" 
+                            <input type="checkbox" className="mx-2 size-option" 
                     onClick={(event) => {
             const isChecked = event.target.checked;
             if (isChecked) {
@@ -27,7 +27,7 @@ function SizeFilter() {
                 ),
               }));
             }
-          }}/>{size.toUpperCase()}<br />
+          }} checked={filterQuery.Size.includes(size)}/>{size.toUpperCase()}<br />
                         </>
                     )
                 })

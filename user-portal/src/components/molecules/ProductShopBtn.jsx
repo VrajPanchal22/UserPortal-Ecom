@@ -275,6 +275,58 @@ function ProductShopBtn(props) {
     }
   }
   console.log(iswishlisted);
+
+async function handleBuyNow(){
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  if(userData){
+
+    console.log("Product addition in cart on buy now");
+    console.log("userData", userData);
+    try {
+      const response = await axios.patch(
+        `${API_BASE_URL}cart/${
+          userData.cartProductsInTempId === null
+            ? userData._id
+            : userData.cartProductsInTempId
+        }`,
+        // Add the product to the user's cart // Redirect the user to the payment page // ...
+        {
+          product: {
+            productId: data._id,
+            name: data.name,
+            category: data.category,
+            brand: data?.brand,
+            productDetails: data.productDetails,
+            images: data.image,
+            selectedVariants: [
+              {
+                images: variant.images,
+                price: variant.price,
+                size: variant.size,
+                color: variant.color,
+                quantity: 1,
+                variantId: variant._id,
+              },
+            ],
+          },
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data);
+      setRes(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+
+  }else{
+    navigate('/login')
+  }
+}
+
   return (
     <div className="btn-div">
       {console.log("res::::", res)}
@@ -294,7 +346,7 @@ function ProductShopBtn(props) {
           :
           <Button type="button" className="cart-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1" icon={<BsFillBagFill className="bag-icon mr-2 mb-1" />} buttonText="add to cart" onClick={() => { setFlag(!flag); handleAddToCart(); }} />
       }
-      <Button type="button" className="buy-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1" icon={<BsCartCheckFill className="buy-icon mr-2 mb-1" />} buttonText="buy now" onClick={() => navigate('/orders')} />
+      {/* <Button type="button" className="buy-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1" icon={<BsCartCheckFill className="buy-icon mr-2 mb-1" />} buttonText="buy now" onClick={() => navigate('/orders')} /> */}
       {
         iswishlisted
           ? <Button type="button" className="wishlist-btn btn rounded text-uppercase font-weight-bold mr-2 mt-1" icon={<FaRegHeart className="buy-icon mr-2 mb-1" />} buttonText="wishlisted" onClick={() => handleWishlist()} />

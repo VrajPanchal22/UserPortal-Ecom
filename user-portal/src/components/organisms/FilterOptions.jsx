@@ -18,9 +18,9 @@ function FilterOptions() {
             <BrandFilter />
             <PriceRangeFilter />
             <ColorFilter />
-            <DiscountFilter />
+            {/* <DiscountFilter /> */}
             <SizeFilter />
-            <RatingFilter />
+            {/* <RatingFilter /> */}
             <AvailabilityFilter />
         </div>
     )

@@ -15,18 +15,19 @@ import cartContext from "../../contexts/cartContext";
 import { useContext } from "react";
 
 function MainNavbar() {
+  let {name} = useParams()
   const [inputSearch, setInputSearch] = useState('')
-  // const { name } = useParams();
+  console.log("inputsearch",inputSearch)
   const [isOpen, setIsOpen] = useState(false);
   const [login, setLogin] = useState(false)
   const toggle = () => setIsOpen(!isOpen);
-  console.log(login)
   let userData = JSON.parse(localStorage.getItem("userData"))
   const location = useLocation()
   const navigate = useNavigate()
   const { cartData, fetchData, productsInCart, clearCart } =
   useContext(cartContext);
 
+ 
   useEffect(() => {
     if (login) {
       const currentPath = location.pathname;
@@ -44,7 +45,7 @@ function MainNavbar() {
   return (
     <div className="main-header navbar navbar-expand-md" id="topnav">
       <div className="main-logo d-flex justify-content-center align-items-center mr-2">
-        <ImgTag imgUrl="/assets/images/logo1.png" width="110" alt="logo" />
+        <ImgTag imgUrl="/assets/images/logo1.png" width="110" alt="logo" onClick={()=>navigate('/home')}/>
       </div>
       <SearchField
         type="text"

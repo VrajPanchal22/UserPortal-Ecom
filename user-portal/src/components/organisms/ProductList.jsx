@@ -1,11 +1,13 @@
 import ProductCard from "../molecules/ProductCard";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getData } from "../../services/api";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useNavigation } from "react-router-dom";
 import productGallaryContext from "../../contexts/productGallary";
 
 function ProductList(props) {
+  const {name} = useParams()
+  console.log("productlistparams:::",name)
   const { query } = props;
   console.log(query, `product/${query ? "?" + query : ""}`);
   const { productList, setProductList } = useContext(productGallaryContext);
@@ -30,7 +32,22 @@ function ProductList(props) {
 
   return (
     <div className="row product-section">
-      {productList?.map((product) => {
+      {
+      name
+      ?productList?.map((product) => {
+        // console.log(product);
+        if(product?.name === name || product?.brand === name){
+        return (
+          <ProductCard
+            product={product}
+            onClick={() => navigate(`/productdetails/${product?._id}`)}
+            key={product?._id}
+          />
+        );
+      }
+    }
+    )
+    :productList?.map((product) => {
         // console.log(product);
         return (
           <ProductCard
@@ -39,7 +56,8 @@ function ProductList(props) {
             key={product?._id}
           />
         );
-      })}
+      })
+      }
     </div>
   );
 }
