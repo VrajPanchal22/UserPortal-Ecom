@@ -24,7 +24,7 @@ function TowardsPayment() {
           {cartData.map((product) => (
             <ProductAdressCard key={product._id} product={product} />
           ))}
-        </div>
+        </div>  
       </div>
     </>
   );

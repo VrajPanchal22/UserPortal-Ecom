@@ -59,7 +59,7 @@ function Login() {
                   password: null,
                   role: result.data.userData.role,
                   _v: result.data.userData._v,
-                  cartProductsInTempId:null,
+                  cartProductsInTempId: tempId
                 })
               );
               sessionStorage.removeItem("tempUserId")
@@ -74,12 +74,8 @@ function Login() {
                   password: null,
                   role: result.data.userData.role,  
                   _v: result.data.userData._v,
-                  cartProductsInTempId:tempId
-                    
-                  // cartProductsInTempId:
-                  //   result.data.userData.cartProductsInTempId == null
-                  //     ? tempId
-                  //     : null
+                  // cartProductsInTempId:tempId
+                  cartProductsInTempId:result.data.userData.cartProductsInTempId 
                 })
               );
               fetchData()
