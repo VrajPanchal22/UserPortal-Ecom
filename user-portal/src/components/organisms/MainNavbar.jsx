@@ -42,7 +42,7 @@ function MainNavbar() {
   return (
     <div className="main-header navbar navbar-expand-md" id="topnav">
       <div className="main-logo d-flex justify-content-center align-items-center mr-2">
-        <ImgTag imgUrl="/assets/images/logo1.png" width="110" alt="logo" onClick={()=>navigate('/home')}/>
+        <ImgTag imgUrl="/assets/images/logo1.png" width="110" alt="logo" onClick={()=>navigate('/')}/>
       </div>
       <SearchField
         type="text"
@@ -56,7 +56,7 @@ function MainNavbar() {
           <div className="button shadow">
             {
               userData?
-              <Button className="login-button" buttonText="Logout" onClick={() => {localStorage.clear();navigate('/home')}} />
+              <Button className="login-button" buttonText="Logout" onClick={() => {localStorage.clear();navigate('/')}} />
             : <Button className="login-button" buttonText="Login" onClick={() => setLogin(true)} />
             }
           </div>
