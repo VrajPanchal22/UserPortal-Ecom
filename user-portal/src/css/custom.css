@@ -319,11 +319,9 @@ input[type="radio"] {
 .product-details {
     width: 95%;
 }
-
-.sort-option {
-    cursor: pointer;
-  }
-  
+.no-product{
+    margin-top: 8rem !important
+}
 .set-btn{
     background-color: var(--button-color);
 }
