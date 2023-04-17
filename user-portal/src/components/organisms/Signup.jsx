@@ -5,7 +5,7 @@ import FormInput from "../molecules/FormInput";
 import Button from "../atoms/Button";
 import ImgTag from "../atoms/ImgTag";
 import { Formik, Form } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import SocialIcon from "../molecules/SocialIcon";
 import { API_BASE_URL } from "../../config";
@@ -32,6 +32,7 @@ const validationSchema = yup.object({
     .required(),
 });
 function Signup() {
+  const navigate = useNavigate();
   const [msg, setMsg] = useState("");
   function handlesubmit(values) {
     let data = values;
@@ -44,6 +45,7 @@ function Signup() {
           console.log("there is a msg for you");
           setMsg(result.data.message);
           console.log("msg::::: ", msg);
+          navigate("/login");
         }
       })
       .catch((error) => {
@@ -80,7 +82,7 @@ function Signup() {
                 </div>
               </div>
               <div className="msg position-absolute w-100">
-                {msg && msg !== "User created successfully!" ? (
+                {msg && msg == "User created successfully!" ? (
                   <p className="text-danger">Signup successfull!</p>
                 ) : msg ? (
                   <p className="text-success">Please check your details!</p>

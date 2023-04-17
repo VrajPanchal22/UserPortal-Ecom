@@ -9,6 +9,8 @@ import Para from "../atoms/Para";
 import { getData, patchData, postData } from "../../services/api";
 import { useLocation, useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../config";
+import { useContext } from "react";
+import cartContext from "../../contexts/cartContext";
 
 function ProductShopBtn(props) {
   const { isSelected, data, variant, cartvariant, productid } = props;
@@ -27,6 +29,8 @@ function ProductShopBtn(props) {
   
   const navigate = useNavigate();
   const location = useLocation();
+  const { cartData, fetchData, productsInCart } = useContext(cartContext);
+
 
   const handleAddToCart = async () => {
     const userData = JSON.parse(localStorage.getItem("userData"));
@@ -73,6 +77,7 @@ function ProductShopBtn(props) {
         );
         console.log(response2?.data);
         setRes(response2?.data);
+        fetchData()
       } catch (error) {
         console.log(error);
       }
@@ -111,6 +116,7 @@ function ProductShopBtn(props) {
         );
         console.log(response.data);
         setRes(response.data);
+        fetchData()
       } catch (error) {
         console.log(error);
       }
@@ -149,10 +155,12 @@ function ProductShopBtn(props) {
           }
         );
         setRes(response.data);
+        fetchData()
       } catch (error) {
         console.log(error);
       }
     }
+    fetchData()
   };
   // }, []);
   async function handleWishlist() {

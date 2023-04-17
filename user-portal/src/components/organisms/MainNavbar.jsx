@@ -11,17 +11,21 @@ import {
 import { useNavigate, useLocation } from 'react-router-dom'
 import FlyOut from '../molecules/FlyOut'
 import { useParams } from 'react-router-dom'
+import cartContext from "../../contexts/cartContext";
+import { useContext } from "react";
 
 function MainNavbar() {
   let {name} = useParams()
   const [inputSearch, setInputSearch] = useState('')
-  console.log("inputsearch",inputSearch)
+  // console.log("inputsearch",inputSearch)
   const [isOpen, setIsOpen] = useState(false);
   const [login, setLogin] = useState(false)
   const toggle = () => setIsOpen(!isOpen);
   let userData = JSON.parse(localStorage.getItem("userData"))
   const location = useLocation()
   const navigate = useNavigate()
+  const { cartData, fetchData, productsInCart, clearCart } =
+  useContext(cartContext);
 
  
   useEffect(() => {
@@ -30,7 +34,6 @@ function MainNavbar() {
       localStorage.setItem('path', currentPath);
       navigate('/login')
     }
-
   }, [login])
 
 
@@ -54,11 +57,23 @@ function MainNavbar() {
       <div className="responsive">
         <div className='on-responsive'>
           <div className="button shadow">
-            {
-              userData?
-              <Button className="login-button" buttonText="Logout" onClick={() => {localStorage.clear();navigate('/')}} />
-            : <Button className="login-button" buttonText="Login" onClick={() => setLogin(true)} />
-            }
+          {userData ? (
+              <Button
+                className="login-button"
+                buttonText="Logout"
+                onClick={() => {
+                  localStorage.clear();
+                  clearCart();
+                  fetchData();
+                }}
+              />
+            ) : (
+              <Button
+                className="login-button"
+                buttonText="Login"
+                onClick={() => setLogin(true)}
+              />
+            )}
           </div>
           <NavbarToggler className='bg-light hamburger' onClick={toggle} />
         </div>
