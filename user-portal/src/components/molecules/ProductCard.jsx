@@ -20,6 +20,7 @@ function ProductCard({ product,onClick }) {
             ? "flex-row justify-content-around card--listview"
             : "card--gridview"
         } card p-2 d-flex align-items-center`}
+        style={{ cursor: "pointer" }}
       >
         <img
           className={`${

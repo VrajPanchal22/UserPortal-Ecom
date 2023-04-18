@@ -57,7 +57,10 @@ function CashOnDelivery({ cartData, totalAmount, deliveryCharge }) {
         const res = await postData(`order`, {
           _Id: "10",
           user: {
-            userId: userData._id,
+            userId:
+              userData.cartProductsInTempId == null
+                ? userData._id
+                : userData.cartProductsInTempId,
             name: userData.firstName + "" + userData.lastName,
             email: userData.emailId,
             contactNo: userData.contactNumber,
@@ -104,7 +107,6 @@ function CashOnDelivery({ cartData, totalAmount, deliveryCharge }) {
               price: cartData[0]?.selectedVariants[0]?.price,
               size: cartData[0]?.selectedVariants[0]?.size,
               color: cartData[0]?.selectedVariants[0]?.color,
-              noOfProducts: 7,
               quantity: cartData[0]?.selectedVariants[0]?.quantity,
             },
           ],
@@ -113,7 +115,13 @@ function CashOnDelivery({ cartData, totalAmount, deliveryCharge }) {
         console.log("error from post order", error.msg);
       }
 
-      navigate(`/order-placed?userId=${userData._id}`);
+      navigate(
+        `/order-placed?userId=${
+          userData.cartProductsInTempId == null
+            ? userData._id
+            : userData.cartProductsInTempId
+        }`
+      );
     } else {
       alert("no address added");
     }
