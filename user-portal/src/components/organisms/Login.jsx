@@ -59,7 +59,7 @@ function Login() {
                   password: null,
                   role: result.data.userData.role,
                   _v: result.data.userData._v,
-                  cartProductsInTempId:null,
+                  cartProductsInTempId:result.data.userData.cartProductsInTempId == null ? null  : tempId 
                 })
               );
               sessionStorage.removeItem("tempUserId")
@@ -74,12 +74,8 @@ function Login() {
                   password: null,
                   role: result.data.userData.role,  
                   _v: result.data.userData._v,
-                  cartProductsInTempId:tempId
-                    
-                  // cartProductsInTempId:
-                  //   result.data.userData.cartProductsInTempId == null
-                  //     ? tempId
-                  //     : null
+                  // cartProductsInTempId:tempId
+                  cartProductsInTempId:result.data.userData.cartProductsInTempId == null ? tempId : null  
                 })
               );
               fetchData()
@@ -154,7 +150,7 @@ function Login() {
                 password: null,
                 role: result.data.userData.role,
                 _v: result.data.userData._v,
-                cartProductsInTempId: result.data.userData.cartProductsInTempId,
+                cartProductsInTempId: result.data.userData.cartProductsInTempId == null ? null : result.data.userData.cartProductsInTempId 
               })
             );
             fetchData()
@@ -165,7 +161,7 @@ function Login() {
             navigate(path);
             localStorage.removeItem("path");
           } else {
-            navigate("/productGallery");
+            navigate("/productGallary");
           }
         }
       })

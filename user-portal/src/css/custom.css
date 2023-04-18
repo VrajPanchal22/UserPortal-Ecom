@@ -264,7 +264,7 @@ input[type="radio"] {
 
 .dropdown {
     display: none;
-    background-color: var(--button-color);
+    /* background-color: var(--button-color); */
 }
 
 .filter-btn {
@@ -546,6 +546,9 @@ input[type="radio"] {
     border: none;
     background-color: white;
 }
+.search-button:hover{
+    background-color: white;
+}
 
 /* Button */
 .button {
@@ -564,6 +567,9 @@ input[type="radio"] {
     background-color: var(--white);
     color: var(--nav-color);
     cursor: pointer;
+}
+.login-button:hover{
+    background-color: var(--white);
 }
 
 /* Top main-header menus */
@@ -804,26 +810,7 @@ body{
     color: #C00156;
     font-weight: bold;
 }
-.dropdown{
-    display: inline-block !important;
-}
-.dropdown-item{
-    color: var(--nav-color);
-}
-.dropdown-item:hover{
-    background-color: #fff; 
-    color:var(--nav-color);
-}
-.dropdown-btn{
-    border-color:var(--nav-color);
-}
-.dropdown-btn:focus{
-    box-shadow: 0 0 0 0;
-}
-.dropdown-menu {
-    min-width: 73px !important;
-    border-color:var(--nav-color);
-}
+
 
 
 /* Order Details */

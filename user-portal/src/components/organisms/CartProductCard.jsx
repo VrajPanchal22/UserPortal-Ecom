@@ -111,8 +111,8 @@ export default function CartProductCard() {
                   className="card-product-details__img"
                   style={{ cursor: "pointer" }}
                   width="120px"
-                  src="/assets/images/product-1.webp"
-                  alt=""
+                  src={variant?.images[0]}
+                  alt="error"
                   onClick={() =>
                     navigate(`/productdetails/${product?.productId}`)
                   }
