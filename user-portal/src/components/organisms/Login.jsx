@@ -59,7 +59,7 @@ function Login() {
                   password: null,
                   role: result.data.userData.role,
                   _v: result.data.userData._v,
-                  cartProductsInTempId: tempId
+                  cartProductsInTempId: null
                 })
               );
               sessionStorage.removeItem("tempUserId")
@@ -161,7 +161,7 @@ function Login() {
             navigate(path);
             localStorage.removeItem("path");
           } else {
-            navigate("/productGallery");
+            navigate("/productGallary");
           }
         }
       })

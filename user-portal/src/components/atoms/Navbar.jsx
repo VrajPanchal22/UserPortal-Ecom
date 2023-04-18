@@ -7,7 +7,7 @@ const Navbar = ({link1,link2,link3}) => {
     <>
       <Breadcrumb>
         <BreadcrumbItem ><NavLink to="/Home">{link1}</NavLink></BreadcrumbItem>
-        <BreadcrumbItem><NavLink to="/productGallery">{link2}</NavLink></BreadcrumbItem>
+        <BreadcrumbItem><NavLink to="/productGallary">{link2}</NavLink></BreadcrumbItem>
         <BreadcrumbItem id='active-link'><NavLink to="/orders">{link3}</NavLink></BreadcrumbItem>
       </Breadcrumb>
     </>
