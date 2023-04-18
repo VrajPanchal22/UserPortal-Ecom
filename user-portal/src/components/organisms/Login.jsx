@@ -59,7 +59,7 @@ function Login() {
                   password: null,
                   role: result.data.userData.role,
                   _v: result.data.userData._v,
-                  cartProductsInTempId: null
+                  cartProductsInTempId:result.data.userData.cartProductsInTempId == null ? null  : tempId 
                 })
               );
               sessionStorage.removeItem("tempUserId")
@@ -72,10 +72,10 @@ function Login() {
                   firstName: result.data.userData.firstName,
                   lastName: result.data.userData.lastName,
                   password: null,
-                  role: result.data.userData.role,
+                  role: result.data.userData.role,  
                   _v: result.data.userData._v,
                   // cartProductsInTempId:tempId
-                  cartProductsInTempId:result.data.userData.cartProductsInTempId
+                   cartProductsInTempId:result.data.userData.cartProductsInTempId == null ? null : tempId  
                 })
               );
               fetchData()
@@ -140,6 +140,7 @@ function Login() {
             console.log("inside else !tempId");
             console.log("RESULT: ", result);
             localStorage.setItem("token", result.data.token);
+
             localStorage.setItem(
               "userData",
               JSON.stringify({
@@ -149,11 +150,12 @@ function Login() {
                 password: null,
                 role: result.data.userData.role,
                 _v: result.data.userData._v,
-                cartProductsInTempId: result.data.userData.cartProductsInTempId,
+                cartProductsInTempId: result.data.userData.cartProductsInTempId == null ? null : result.data.userData.cartProductsInTempId 
               })
             );
             fetchData()
           }
+
           const path = localStorage.getItem("path");
           if (path) {
             navigate(path);
