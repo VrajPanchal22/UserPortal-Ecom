@@ -23,10 +23,11 @@ function AddAddress() {
     setShowModel(!showModel);
     console.log("showmodel from toggle func", showModel);
   }
-
+  console.log("selected address", selectedAddress);
   function navigateToPayment() {
     if (selectedAddress) {
       localStorage.setItem("isAddressSelected", true);
+      console.log("selected address", selectedAddress);
       navigate("/payment");
     } else {
       alert("please select address");
@@ -38,7 +39,7 @@ function AddAddress() {
     try {
       const res = await postData(`address`, {
         userId: userData._id,
-        addressType: address.addressType,
+        addressType: address.selectedAddType,
         name: address.name,
         contactNo: address.phoneNo,
         pincode: address.pincode,
@@ -47,6 +48,8 @@ function AddAddress() {
         city: address.city,
         state: address.state,
       });
+      console.log("respondse", res);
+      console.log("name", address);
       setAddresses([...addresses, res]);
       setSelectedAddress(res);
     } catch (error) {
