@@ -103,6 +103,7 @@ function PriceBtnDiv(props) {
               onClick={() => {
                 setSelectedColor(sizesByColor[ele]);
                 active(ele);
+                selectVariant(sizesByColor[ele][0])
               }}
             >
               <div
