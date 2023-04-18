@@ -59,7 +59,7 @@ function Login() {
                   password: null,
                   role: result.data.userData.role,
                   _v: result.data.userData._v,
-                  cartProductsInTempId: tempId
+                  cartProductsInTempId: null
                 })
               );
               sessionStorage.removeItem("tempUserId")

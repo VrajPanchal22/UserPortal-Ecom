@@ -14,7 +14,7 @@ import { API_BASE_URL } from "../../config";
 
 function Order() {
   let userObj = JSON.parse(localStorage.getItem('userData'));
-  let userId = userObj.cartProductsInTempId == null ? userObj._id : userObj.cartProductsInTempId
+  let userId = userObj.cartProductsInTempId ? userObj.cartProductsInTempId: userObj._id
   
   const ORDER_URL = `${API_BASE_URL}order`;
   console.log(ORDER_URL)

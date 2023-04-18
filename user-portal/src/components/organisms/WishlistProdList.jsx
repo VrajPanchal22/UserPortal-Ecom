@@ -15,7 +15,7 @@ function WishlistProdList() {
   const tempId = sessionStorage.getItem("tempUserId");
   // console.log("user data", userData._id);
   useEffect(() => {
-    getData(`${API_BASE_URL}wishlist/${userData?.cartProductsInTempId ?? userData?._id ?? tempId}`).then((res) => {
+    getData(`${API_BASE_URL}wishlist/${userData?._id}`).then((res) => {
       setWishlist(res.wishlistData.products);
     });
   }, []);
@@ -23,7 +23,7 @@ function WishlistProdList() {
   async function handleDelete(product) {
     try {
       const res = await deleteData(
-        `${API_BASE_URL}wishlist/${userData?.cartProductsInTempId ?? userData?._id ?? tempId}/${product.productId}`
+        `${API_BASE_URL}wishlist/${userData?._id}/${product.productId}`
       );
       // navigate("/wihslist");
       if (res.status === true) {
