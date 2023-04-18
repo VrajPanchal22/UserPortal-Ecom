@@ -75,7 +75,7 @@ function Login() {
                   role: result.data.userData.role,  
                   _v: result.data.userData._v,
                   // cartProductsInTempId:tempId
-                   cartProductsInTempId:result.data.userData.cartProductsInTempId == null ? null : tempId  
+                  cartProductsInTempId:result.data.userData.cartProductsInTempId == null ? tempId : null  
                 })
               );
               fetchData()
