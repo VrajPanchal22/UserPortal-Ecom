@@ -72,10 +72,10 @@ function Login() {
                   firstName: result.data.userData.firstName,
                   lastName: result.data.userData.lastName,
                   password: null,
-                  role: result.data.userData.role,  
+                  role: result.data.userData.role,
                   _v: result.data.userData._v,
                   // cartProductsInTempId:tempId
-                  cartProductsInTempId:result.data.userData.cartProductsInTempId 
+                  cartProductsInTempId:result.data.userData.cartProductsInTempId
                 })
               );
               fetchData()
@@ -140,7 +140,6 @@ function Login() {
             console.log("inside else !tempId");
             console.log("RESULT: ", result);
             localStorage.setItem("token", result.data.token);
-
             localStorage.setItem(
               "userData",
               JSON.stringify({
@@ -155,7 +154,6 @@ function Login() {
             );
             fetchData()
           }
-
           const path = localStorage.getItem("path");
           if (path) {
             navigate(path);

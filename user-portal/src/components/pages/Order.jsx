@@ -21,6 +21,7 @@ function Order() {
   let [orderList, setOrderList] = useState([]);
   let [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
+  const [count,setCount] = useState(3);
   useEffect(() => {
     if (filter === "Last 30 Days") {
       setFilter("Last30");
@@ -40,7 +41,10 @@ function Order() {
     let response = await FetchOrders(url + `/${userId}`, {
       params: { limit: limit, offset: offset, filter: filter },
     });
+    
     setOrderList(response.data.details);
+    setCount(response.data.count);
+
     return response.data.details;
   };
   async function SearchOrderData(url, userId, limit, offset) {
@@ -114,12 +118,12 @@ function Order() {
               )}
             </div>
           </div>
-          <div className="row">
+          <div className="row pt-2">
             <div className="col-3"></div>
             <div className="col-6">
               {
                 <Pagination
-                  totalCount={30}
+                  totalCount={count}
                   currentPage={0}
                   handlePageClick={(e) => handlePage(e)}
                 />
