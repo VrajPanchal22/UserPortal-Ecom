@@ -15,6 +15,9 @@ function CashOnDelivery({ cartData, totalAmount, deliveryCharge }) {
     //console.log("testing", cartData[0]?.selectedVariants[0]?.images[0]);
 
     const selectedAddress = JSON.parse(localStorage.getItem("selectedAddress"));
+    if (!selectedAddress) {
+      alert("add or select your address in address page");
+    }
     const address = selectedAddress.street;
     console.log("address", address);
 
@@ -115,11 +118,7 @@ function CashOnDelivery({ cartData, totalAmount, deliveryCharge }) {
         console.log("error from post order", error.msg);
       }
 
-      navigate(
-        `/order-placed?userId=${
-          userData._id
-        }`
-      );
+      navigate(`/order-placed?userId=${userData._id}`);
     } else {
       alert("no address added");
     }

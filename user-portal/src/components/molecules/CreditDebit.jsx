@@ -7,6 +7,9 @@ function CreditDebit({ cartData, totalAmount, deliveryCharge }) {
   async function handlePayment() {
     const userData = JSON.parse(localStorage.getItem("userData"));
     const selectedAddress = JSON.parse(localStorage.getItem("selectedAddress"));
+    if (!selectedAddress) {
+      alert("add or select your address in address page");
+    }
     const address = selectedAddress.street;
     console.log("address", address);
 
