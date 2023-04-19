@@ -1,69 +1,164 @@
 import axios from "axios";
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
 function AddressModel({ toggle, onAddAddress }) {
-  const [pincodeErr, setPincodeErr] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [selectedAddType, setSelectedAddType] = useState("");
+  // const [pincodeErr, setPincodeErr] = useState("");
+  // console.log("toggle", toggle);
+  const [formData, setFormData] = useState({
+    name: "",
+    phoneNo: "",
+    pincode: "",
+    address: "",
+    locality: "",
+    city: "",
+    state: "",
+    addressType: "Home",
+  });
+  useEffect(() => {
+    if (formData.pincode) {
+      axios
+        .get(`https://api.postalpincode.in/pincode/${formData.pincode}`)
+        .then((res) => {
+          const { District, State } = res.data[0].PostOffice[0];
+          //console.log(District, State, "adress state distroce");
+          setFormData({ ...formData, city: District, state: State });
+          console.log("city", res.data[0].PostOffice[0].District);
+          console.log("state", res.data[0].PostOffice[0].State);
+          console.log("response from pincode", formData.pincode);
+          console.log("form data --------", formData);
+          //console.log("Pincode", res.data[0].PostOffice[0]);
+          setPincodeErr("");
+        })
+        .catch((err) => {
+          console.error(err);
+          setPincodeErr("Invalid pincode. Please enter a valid pincode.");
+        });
+    }
+  }, [formData.pincode]);
+  //console.log("Form data",for)
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+  const [selectedAddType, setSelectedAddType] = useState("Home");
+  const handleAddressType = (value) => {
+    setFormData({
+      ...formData,
+      addressType: value,
+    });
+  };
+  // const validatePhoneNo = (phoneNo) => {
+  //   const pattern = /^[6-9]\d{9}$/; // 10 digits starting with 6, 7, 8 or 9
+  //   return pattern.test(phoneNo);
+  // };
+  const validateName = (name) => {
+    return name.trim().length > 0;
+  };
 
-  console.log("selected", selectedAddType);
-  const formik = useFormik({
-    initialValues: {
+  const validatePhoneNo = (phoneNo) => {
+    const pattern = /^[6-9]\d{9}$/; // 10 digits starting with 6, 7, 8 or 9
+    return pattern.test(phoneNo);
+  };
+
+  const validatePincode = (pincode) => {
+    const pattern = /^\d{6}$/; // 6 digits
+    return pattern.test(pincode);
+  };
+
+  const validateAddress = (address) => {
+    return address.trim().length > 0;
+  };
+
+  const validateLocality = (locality) => {
+    return locality.trim().length > 0;
+  };
+
+  const validateCity = (city) => {
+    return city.trim().length > 0;
+  };
+
+  const validateState = (state) => {
+    return state.trim().length > 0;
+  };
+
+  const [nameErr, setNameErr] = useState("");
+  const [phoneErr, setPhoneNoErr] = useState("");
+  const [pincodeErr, setPincodeErr] = useState("");
+  const [addressErr, setAddressErr] = useState("");
+  const [localityErr, setLocalityErr] = useState("");
+  const [cityErr, setCityErr] = useState("");
+  const [stateErr, setStateErr] = useState("");
+
+  // const [phoneErr, setPhoneNoErr] = useState("");
+  const handleSubmit = (event) => {
+    // const validateContact = /^\d{10}$/;
+
+    event.preventDefault();
+    const isValidName = validateName(formData.name);
+    if (!isValidName) {
+      setNameErr("Please enter a valid name.");
+      return;
+    }
+
+    const isValidPhoneNo = validatePhoneNo(formData.phoneNo);
+    if (!isValidPhoneNo) {
+      setPhoneNoErr("Please enter a valid phone number.");
+      return;
+    }
+
+    const isValidPincode = validatePincode(formData.pincode);
+    if (!isValidPincode) {
+      setPincodeErr("Please enter a valid pincode.");
+      return;
+    }
+
+    const isValidAddress = validateAddress(formData.address);
+    if (!isValidAddress) {
+      setAddressErr("Please enter a valid address.");
+      return;
+    }
+
+    const isValidLocality = validateLocality(formData.locality);
+    if (!isValidLocality) {
+      setLocalityErr("Please enter a valid locality.");
+      return;
+    }
+
+    const isValidCity = validateCity(formData.city);
+    if (!isValidCity) {
+      setCityErr("Please enter a valid city.");
+      return;
+    }
+
+    const isValidState = validateState(formData.state);
+    if (!isValidState) {
+      setStateErr("Please enter a valid state.");
+      return;
+    }
+    // const isValidPhoneNo = validatePhoneNo(formData.phoneNo);
+    // if (!isValidPhoneNo) {
+    //   setPhoneNoErr("Please enter a valid phone number.");
+    //   return;
+    // }
+    onAddAddress(formData);
+    setFormData({
       name: "",
-      phoneNo: "",
+      contactNo: "",
       pincode: "",
       address: "",
       locality: "",
       city: "",
       state: "",
-      selectedAddType: "home",
-    },
-    validationSchema: Yup.object({
-      name: Yup.string().required("Name is required"),
-      phoneNo: Yup.string()
-        .matches(/^[6-9]\d{9}$/, "Invalid phone number")
-        .required("Phone number is required"),
-      pincode: Yup.string().required("Pincode is required"),
-      address: Yup.string().required("Address is required"),
-      locality: Yup.string().required("Locality is required"),
-      //city: Yup.string().required("City is required"),
-      //state: Yup.string().required("State is required"),
-    }),
-    onSubmit: (values) => {
-      console.log("values form form", values);
-      if (values.pincode) {
-        axios
-          .get(`https://api.postalpincode.in/pincode/${values.pincode}`)
-          .then((res) => {
-            console.log("pincode responce------------------", res);
-            const { District, State } = res.data[0].PostOffice[0];
-            console.log("distrct", District, State);
-            //const updatedValues = { ...values, city: District, state: State };
-            formik.setFieldValue("city", District);
-            formik.setFieldValue("state", State);
-            const updatedAddress = { ...values, city: District, state: State };
-            console.log("uodated", updatedAddress);
-            onAddAddress(updatedAddress);
-            toggle();
-          })
-          .catch((err) => {
-            console.error("err]]]]]]]]]]]]]]]]]]]", err);
-            setPincodeErr("Invalid pincode. Please enter a valid pincode.");
-          });
-      }
-    },
-  });
-  const handleAddressTypeChange = (event) => {
-    setSelectedAddType(event.target.value);
-    formik.setFieldValue("selectedAddType", event.target.value);
-
-    console.log("selectedAddType", typeof selectedAddType);
+    });
+    toggle();
+    // console.log("contact------", formData.contactNo.length);
   };
-  console.log("formik data", formik);
   return (
     <div id="addressWindow" className="model position-absolute h-100 w-100">
       <div id="addressMainWindow" className="address-model rounded bg-white">
@@ -79,14 +174,14 @@ function AddressModel({ toggle, onAddAddress }) {
           />
         </div>
         <div className="p-3">
-          <form onSubmit={formik.handleSubmit}>
-            {/* contact details */}
+          <form action="#" id="addressForm" onSubmit={handleSubmit}>
+            {/* <!-- contact details --> */}
             <div className="">
               <div className="fs-7 font-weight-bold text-secondary">
                 Contact Details
               </div>
-
-              {/* name */}
+              {/* <!-- input component --> */}
+              {/* <!-- name --> */}
               <div className="d-flex flex-column mt-3 text-secondary">
                 <label htmlFor="name" className="fs-10 mb-0">
                   Name *
@@ -98,14 +193,12 @@ function AddressModel({ toggle, onAddAddress }) {
                     name="name"
                     id="name"
                     placeholder="Name"
-                    {...formik.getFieldProps("name")}
+                    value={formData.name}
+                    onChange={handleInputChange}
                   />
                 </div>
-                {formik.touched.name && formik.errors.name ? (
-                  <div className="text-danger fs-8">{formik.errors.name}</div>
-                ) : null}
               </div>
-
+              {nameErr && <div className="text-danger fs-8">{nameErr}</div>}
               {/* <!-- phone no --> */}
               <div className="d-flex flex-column mt-3 text-secondary">
                 <label htmlFor="phoneNo" className="fs-10 mb-0">
@@ -117,24 +210,19 @@ function AddressModel({ toggle, onAddAddress }) {
                     type="number"
                     name="phoneNo"
                     id="phoneNo"
-                    placeholder="Phone number "
-                    {...formik.getFieldProps("phoneNo")}
+                    value={formData.phoneNo}
+                    onChange={handleInputChange}
+                    placeholder="Phone number   "
                   />
                 </div>
-                {formik.touched.phoneNo && formik.errors.phoneNo ? (
-                  <div className="text-danger fs-8">
-                    {formik.errors.phoneNo}
-                  </div>
-                ) : null}
               </div>
+              {phoneErr && <div className="text-danger fs-8">{phoneErr}</div>}
             </div>
-
             {/* <!-- address details --> */}
             <div className="mt-4">
               <div className="fs-7 font-weight-bold text-secondary">
                 Address
               </div>
-
               {/* <!-- pincode --> */}
               <div className="d-flex flex-column mt-3 text-secondary">
                 <label htmlFor="pincode" className="fs-10 mb-0">
@@ -146,19 +234,15 @@ function AddressModel({ toggle, onAddAddress }) {
                     type="number"
                     name="pincode"
                     id="pincode"
-                    // value={formData.pincode}
-                    // onChange={handleInputChange}
-                    placeholder="pincode"
-                    {...formik.getFieldProps("pincode")}
+                    value={formData.pincode}
+                    onChange={handleInputChange}
+                    placeholder="Pincode"
                   />
                 </div>
-                {pincodeErr && (
-                  <div className="text-danger fs-8">{pincodeErr}</div>
-                )}
               </div>
-              {formik.touched.pincode && formik.errors.pincode ? (
-                <div className="text-danger fs-8">{formik.errors.pincode}</div>
-              ) : null}
+              {pincodeErr && (
+                <div className="text-danger fs-8">{pincodeErr}</div>
+              )}
               {/* <!-- Address --> */}
               <div className="d-flex flex-column mt-3 text-secondary">
                 <label htmlFor="address" className="fs-10 mb-0">
@@ -170,20 +254,15 @@ function AddressModel({ toggle, onAddAddress }) {
                     type="text"
                     name="address"
                     id="address"
-                    // value={formData.address}
-                    // onChange={handleInputChange}
+                    value={formData.address}
+                    onChange={handleInputChange}
                     placeholder="Address"
-                    {...formik.getFieldProps("address")}
                   />
                 </div>
-
-                {formik.touched.address && formik.errors.address ? (
-                  <div className="text-danger fs-8">
-                    {formik.errors.address}
-                  </div>
-                ) : null}
               </div>
-
+              {addressErr && (
+                <div className="text-danger fs-8">{addressErr}</div>
+              )}
               {/* <!-- locality/town --> */}
               <div className="d-flex flex-column mt-3 text-secondary">
                 <label htmlFor="locality" className="fs-10 mb-0">
@@ -195,19 +274,15 @@ function AddressModel({ toggle, onAddAddress }) {
                     type="text"
                     name="locality"
                     id="locality"
-                    // value={formData.locality}
-                    // onChange={handleInputChange}
+                    value={formData.locality}
+                    onChange={handleInputChange}
                     placeholder="Locality/Town"
-                    {...formik.getFieldProps("locality")}
                   />
                 </div>
-                {formik.touched.locality && formik.errors.locality ? (
-                  <div className="text-danger fs-8">
-                    {formik.errors.locality}
-                  </div>
-                ) : null}
               </div>
-
+              {localityErr && (
+                <div className="text-danger fs-8">{localityErr}</div>
+              )}
               {/* <!-- city and state --> */}
               <div
                 id="city&State"
@@ -223,19 +298,14 @@ function AddressModel({ toggle, onAddAddress }) {
                       type="text"
                       name="city"
                       id="city"
-                      // defaultValue={city}
-                      value={formik.values.city}
-                      onChange={formik.handleChange}
+                      value={formData.city}
+                      onChange={handleInputChange}
                       placeholder="City"
                       disabled
-                      {...formik.getFieldProps("city")}
                     />
                   </div>
-                  {/* {formik.touched.city && formik.errors.city ? (
-                    <div className="text-danger fs-8">{formik.errors.city}</div>
-                  ) : null} */}
                 </div>
-
+                {cityErr && <div className="text-danger fs-8">{cityErr}</div>}
                 <div className="d-flex flex-column mt-3 ml-1 text-secondary">
                   <label htmlFor="state" className="fs-10 mb-0">
                     State *
@@ -246,63 +316,65 @@ function AddressModel({ toggle, onAddAddress }) {
                       type="text"
                       name="state"
                       id="state"
-                      // defaultValue={state}
-                      value={formik.values.state}
-                      onChange={formik.handleChange}
+                      value={formData.state}
+                      onChange={handleInputChange}
                       placeholder="State"
                       disabled
-                      {...formik.getFieldProps("state")}
                     />
                   </div>
-                  {/* {formik.touched.state && formik.errors.state ? (
-                    <div className="text-danger fs-8">
-                      {formik.errors.state}
-                    </div>
-                  ) : null} */}
                 </div>
+                {stateErr && <div className="text-danger fs-8">{stateErr}</div>}
               </div>
             </div>
-
             <div className="mt-4">
               <div className="fs-7 font-weight-bold text-secondary">
                 Save Address as
               </div>
-
               <div className="d-flex">
                 <input
+                  className="d-none"
                   type="radio"
-                  name="addressType"
+                  name="typeOfAddress"
                   id="home"
-                  value="home"
-                  className={`model-address-type font-weight-bold py-1 px-3 m-1 text-secondary px-2  ${
-                    selectedAddType === "home" ? "label-selected" : ""
-                  }`}
-                  // defaultChecked={selectedAddType === "home"}
-                  defaultChecked
-                  onChange={handleAddressTypeChange}
+                  // checked
+                  value="Home"
                 />
-                <label htmlFor="home" className="fs-10 mb-0">
+                <label
+                  htmlFor="home"
+                  id="homeLabel"
+                  className={`model-address-type font-weight-bold py-1 px-3 m-1 text-secondary px-2 mt-2 ${
+                    selectedAddType === "Home" ? "label-selected" : ""
+                  }`}
+                  onClick={() => {
+                    handleAddressType("home");
+                    setSelectedAddType("Home");
+                  }}
+                >
                   Home
                 </label>
-
                 <input
+                  className="d-none"
                   type="radio"
-                  name="addressType"
+                  name="typeOfAddress"
                   id="work"
-                  value="work"
-                  className={`model-address-type font-weight-bold py-1 px-3 m-1 text-secondary px-2  ${
-                    selectedAddType === "work" ? "label-selected" : ""
-                  }`}
-                  checked={selectedAddType === "work"}
-                  onChange={handleAddressTypeChange}
+                  value="Work"
                 />
-                <label htmlFor="work" className="fs-10 mb-0">
+                <label
+                  htmlFor="work"
+                  id="workLabel"
+                  className={`model-address-type font-weight-bold py-1 px-3 m-1 text-secondary px-2 mt-2 ${
+                    selectedAddType === "Work" ? "label-selected" : ""
+                  }`}
+                  onClick={() => {
+                    handleAddressType("work");
+                    setSelectedAddType("Work");
+                  }}
+                >
                   Work
                 </label>
               </div>
             </div>
-
-            {/* <div className="mt-3">
+            <div className="mt-3">
               <input
                 type="checkbox"
                 name="defaultAddress"
@@ -314,8 +386,7 @@ function AddressModel({ toggle, onAddAddress }) {
               >
                 Make this my default address
               </label>
-            </div> */}
-
+            </div>
             <button
               type="submit"
               className="btn btn-block font-weight-bold btn-sm text-white py-2 mt-5 bg-pink"
@@ -329,5 +400,4 @@ function AddressModel({ toggle, onAddAddress }) {
     </div>
   );
 }
-
 export default AddressModel;

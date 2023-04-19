@@ -39,7 +39,7 @@ function AddAddress() {
     try {
       const res = await postData(`address`, {
         userId: userData._id,
-        addressType: address.selectedAddType,
+        addressType: address.addressType,
         name: address.name,
         contactNo: address.phoneNo,
         pincode: address.pincode,

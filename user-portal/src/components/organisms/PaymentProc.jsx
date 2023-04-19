@@ -75,9 +75,15 @@ function PaymentProc() {
           <div className="card px-2 py-3 mt-4">
             <div className="">
               <div className="payment-cards">
-                {cartData.map((product) => (
-                  <ProductAdressCard key={product._id} product={product} />
-                ))}
+                {cartData.map((product) =>
+                  product?.selectedVariants?.map((variant, index) => (
+                    <ProductAdressCard
+                      key={product._id}
+                      product={product}
+                      variant={variant}
+                    />
+                  ))
+                )}
               </div>
             </div>
 
