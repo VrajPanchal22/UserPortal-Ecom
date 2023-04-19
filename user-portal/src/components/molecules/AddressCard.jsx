@@ -1,11 +1,14 @@
 import React from "react";
-
+import { useEffect } from "react";
 function AddressCard({ data, onSelect, onDelete }) {
   function handleSelect() {
     onSelect(data);
 
     localStorage.setItem("selectedAddress", JSON.stringify(data));
   }
+  useEffect(() => {
+    localStorage.removeItem("selectedAddress");
+  }, []);
   return (
     <div className="col-lg-6 col-12 z-index">
       <div className="card d-flex flex-row card-body my-2">

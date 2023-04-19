@@ -1,12 +1,13 @@
 import React from "react";
 import ImgTag from "../atoms/ImgTag";
-function ProductAdressCard({ product }) {
+function ProductAdressCard({ product, variant }) {
   console.log("product", product);
+  console.log("varient-------", variant);
   console.log("selected varients", product.selectedVariants[0].images[0]);
   return (
     <div className="d-flex align-items-center mt-3 mb-4">
       <ImgTag
-        imgUrl={product.selectedVariants[0].images[0]}
+        imgUrl={variant?.images[0]}
         className="address-product-img"
         altText="image"
       />

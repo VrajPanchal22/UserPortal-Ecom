@@ -36,7 +36,7 @@ function ProductGallary() {
 
   return (
     <div className=" w-100">
-      <div className="main_section d-flex">
+      <div className="main_section d-flex mb-5">
         <productGallaryContext.Provider value={contextValue}>
           <FilterOptions />
           <div class="product_section container-fluid">

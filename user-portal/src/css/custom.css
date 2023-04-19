@@ -1930,7 +1930,7 @@ input:focus {
 .wishlist__container-bg {
     background: var(--light);
     overflow: hidden !important;
-    min-height:577px!important
+    min-height:669px
 }
 .wishlist__category{
     height:1.3rem
@@ -2033,9 +2033,9 @@ font-weight: bold;
     .wishlist__card--secondary{
         width:15rem !important ;
     }
-    .wishlist__container-bg{
+    /* .wishlist__container-bg{
         min-height: 468px!important;
-    }
+    } */
 }
 @media only screen and (max-width: 403px) {
     .wishlist__btn-cart-del{
@@ -2070,9 +2070,9 @@ font-weight: bold;
         padding: 0.5rem !important;
     }
     
-    .wishlist__container-bg{
+    /* .wishlist__container-bg{
         min-height: 727px!important;
-    }
+    } */
 }
 @media (max-width:480px) {
     .card__img {
@@ -2086,9 +2086,9 @@ font-weight: bold;
     }
    
 }
-@media (max-width:2343px) {
+@media (max-width:995px) {
     .wishlist__container-bg{
-        min-height:1047px;
+        min-height:689px;
     }
 }
 @media (max-width:879px) {

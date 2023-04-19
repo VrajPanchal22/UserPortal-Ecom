@@ -12,7 +12,6 @@ function EmptyWishlist() {
   };
   return (
     <>
-      <MainNavbar />
       <div className="empty-wishlistDiv">
         <div className="Empty-wishlist-heading">
           <h2>Your wishlist is empty !</h2>

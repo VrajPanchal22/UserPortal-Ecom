@@ -10,7 +10,13 @@ function TowardsPayment() {
   const userData = JSON.parse(localStorage.getItem("userData"));
   console.log("userData got", userData);
   useEffect(() => {
-    getData(`cart/${userData.cartProductsInTempId===null ? userData._id : userData.cartProductsInTempId}`).then((res) => {
+    getData(
+      `cart/${
+        userData.cartProductsInTempId === null
+          ? userData._id
+          : userData.cartProductsInTempId
+      }`
+    ).then((res) => {
       setCartData(res.data.products);
       console.log(res, "response");
     });
@@ -21,10 +27,16 @@ function TowardsPayment() {
     <>
       <div className="">
         <div className="payment-cards">
-          {cartData.map((product) => (
-            <ProductAdressCard key={product._id} product={product} />
-          ))}
-        </div>  
+          {cartData.map((product) =>
+            product?.selectedVariants?.map((variant, index) => (
+              <ProductAdressCard
+                key={product._id}
+                product={product}
+                variant={variant}
+              />
+            ))
+          )}
+        </div>
       </div>
     </>
   );
