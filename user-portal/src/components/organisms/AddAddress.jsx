@@ -30,7 +30,7 @@ function AddAddress() {
       console.log("selected address", selectedAddress);
       navigate("/payment");
     } else {
-      alert("please select address");
+      alert("please add or select address");
     }
   }
 

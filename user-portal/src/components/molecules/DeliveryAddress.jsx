@@ -25,7 +25,7 @@ function DeliveryAddress({ selectedAddress }) {
                 </div>
               </>
             ) : (
-              <div> no address selected</div>
+              <div> no address selected </div>
             )}
           </div>
 
