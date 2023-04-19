@@ -108,7 +108,7 @@ function AddressModel({ toggle, onAddAddress }) {
 
     const isValidPhoneNo = validatePhoneNo(formData.phoneNo);
     if (!isValidPhoneNo) {
-      setPhoneNoErr("Please enter a valid phone number.");
+      setPhoneNoErr("Please enter a valid phone number of 10 digits");
       return;
     }
 
@@ -374,7 +374,7 @@ function AddressModel({ toggle, onAddAddress }) {
                 </label>
               </div>
             </div>
-            <div className="mt-3">
+            {/* <div className="mt-3">
               <input
                 type="checkbox"
                 name="defaultAddress"
@@ -386,7 +386,7 @@ function AddressModel({ toggle, onAddAddress }) {
               >
                 Make this my default address
               </label>
-            </div>
+            </div> */}
             <button
               type="submit"
               className="btn btn-block font-weight-bold btn-sm text-white py-2 mt-5 bg-pink"

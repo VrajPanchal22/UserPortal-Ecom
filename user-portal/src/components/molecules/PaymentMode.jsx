@@ -74,9 +74,33 @@ function PaymentMode({ cartData, totalAmount, deliveryCharge }) {
           ) : (
             ""
           )}
-          {selectedPaymentMethod === "cardDetails" ? <CreditDebit /> : ""}
-          {selectedPaymentMethod === "phonePeGpayPaytm" ? <UPIPayment /> : ""}
-          {selectedPaymentMethod === "netBanking" ? <NetbankingPayment /> : ""}
+          {selectedPaymentMethod === "cardDetails" ? (
+            <CreditDebit
+              cartData={cartData}
+              totalAmount={totalAmount}
+              deliveryCharge={deliveryCharge}
+            />
+          ) : (
+            ""
+          )}
+          {selectedPaymentMethod === "phonePeGpayPaytm" ? (
+            <UPIPayment
+              cartData={cartData}
+              totalAmount={totalAmount}
+              deliveryCharge={deliveryCharge}
+            />
+          ) : (
+            ""
+          )}
+          {selectedPaymentMethod === "netBanking" ? (
+            <NetbankingPayment
+              cartData={cartData}
+              totalAmount={totalAmount}
+              deliveryCharge={deliveryCharge}
+            />
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </>
