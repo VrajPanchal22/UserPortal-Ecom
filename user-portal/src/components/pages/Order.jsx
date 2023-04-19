@@ -13,23 +13,23 @@ import { LIMIT, OFFSET, SEARCH_URL } from "../../constants/constants";
 import { API_BASE_URL } from "../../config";
 
 function Order() {
-  let userObj = JSON.parse(localStorage.getItem('userData'));
-  let userId = userObj.cartProductsInTempId ? userObj.cartProductsInTempId: userObj._id
-  
+  let userObj = JSON.parse(localStorage.getItem("userData"));
+  let userId = userObj.cartProductsInTempId
+    ? userObj.cartProductsInTempId
+    : userObj._id;
+
   const ORDER_URL = `${API_BASE_URL}order`;
-  console.log(ORDER_URL)
+  console.log(ORDER_URL);
   let [orderList, setOrderList] = useState([]);
   let [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
-  const [count,setCount] = useState(3);
+  const [count, setCount] = useState(3);
   useEffect(() => {
     if (filter === "Last 30 Days") {
       setFilter("Last30");
-    }
-    else if (filter === "Filter Orders") {
+    } else if (filter === "Filter Orders") {
       setFilter(null);
-    }
-    else{
+    } else {
       fetchdata(ORDER_URL, userId, LIMIT, OFFSET);
     }
   }, [filter]);
@@ -41,7 +41,7 @@ function Order() {
     let response = await FetchOrders(url + `/${userId}`, {
       params: { limit: limit, offset: offset, filter: filter },
     });
-    
+
     setOrderList(response.data.details);
     setCount(response.data.count);
 
@@ -53,9 +53,9 @@ function Order() {
   }
   async function handlePage(event) {
     const newOffSet = event.selected * LIMIT;
-    await fetchdata(ORDER_URL, userId, LIMIT, newOffSet,filter); 
-    localStorage.removeItem('ol');
-    localStorage.setItem('ol',JSON.stringify(orderList));
+    await fetchdata(ORDER_URL, userId, LIMIT, newOffSet, filter);
+    localStorage.removeItem("ol");
+    localStorage.setItem("ol", JSON.stringify(orderList));
   }
 
   return (
@@ -85,9 +85,7 @@ function Order() {
                   setSearch(value);
                 }}
               />
-               {
-      console.log(filter)
-    }
+              {console.log(filter)}
             </div>
           </div>
           <div className="row">
@@ -123,7 +121,7 @@ function Order() {
             <div className="col-6">
               {
                 <Pagination
-                  totalCount={count}
+                  totalCount={100}
                   currentPage={0}
                   handlePageClick={(e) => handlePage(e)}
                 />
@@ -134,7 +132,6 @@ function Order() {
         </div>
       </div>
     </main>
-   
   );
 }
 

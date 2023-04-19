@@ -2,10 +2,10 @@ import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { getData } from "../../services/api";
-import AddressCard from "./AddressCard";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 function AddressModel({ toggle, onAddAddress }) {
-  const [pincodeErr, setPincodeErr] = useState("");
+  // const [pincodeErr, setPincodeErr] = useState("");
   // console.log("toggle", toggle);
   const [formData, setFormData] = useState({
     name: "",
@@ -15,14 +15,15 @@ function AddressModel({ toggle, onAddAddress }) {
     locality: "",
     city: "",
     state: "",
+    addressType: "Home",
   });
-
   useEffect(() => {
     if (formData.pincode) {
       axios
         .get(`https://api.postalpincode.in/pincode/${formData.pincode}`)
         .then((res) => {
           const { District, State } = res.data[0].PostOffice[0];
+          //console.log(District, State, "adress state distroce");
           setFormData({ ...formData, city: District, state: State });
           console.log("city", res.data[0].PostOffice[0].District);
           console.log("state", res.data[0].PostOffice[0].State);
@@ -45,29 +46,106 @@ function AddressModel({ toggle, onAddAddress }) {
       [name]: value,
     });
   };
-
-  const [selectedAddType, setSelectedAddType] = useState();
-
+  const [selectedAddType, setSelectedAddType] = useState("Home");
   const handleAddressType = (value) => {
     setFormData({
       ...formData,
       addressType: value,
     });
   };
+  // const validatePhoneNo = (phoneNo) => {
+  //   const pattern = /^[6-9]\d{9}$/; // 10 digits starting with 6, 7, 8 or 9
+  //   return pattern.test(phoneNo);
+  // };
+  const validateName = (name) => {
+    return name.trim().length > 0;
+  };
+
   const validatePhoneNo = (phoneNo) => {
     const pattern = /^[6-9]\d{9}$/; // 10 digits starting with 6, 7, 8 or 9
     return pattern.test(phoneNo);
   };
+
+  const validatePincode = (pincode) => {
+    const pattern = /^\d{6}$/; // 6 digits
+    return pattern.test(pincode);
+  };
+
+  const validateAddress = (address) => {
+    return address.trim().length > 0;
+  };
+
+  const validateLocality = (locality) => {
+    return locality.trim().length > 0;
+  };
+
+  const validateCity = (city) => {
+    return city.trim().length > 0;
+  };
+
+  const validateState = (state) => {
+    return state.trim().length > 0;
+  };
+
+  const [nameErr, setNameErr] = useState("");
   const [phoneErr, setPhoneNoErr] = useState("");
+  const [pincodeErr, setPincodeErr] = useState("");
+  const [addressErr, setAddressErr] = useState("");
+  const [localityErr, setLocalityErr] = useState("");
+  const [cityErr, setCityErr] = useState("");
+  const [stateErr, setStateErr] = useState("");
+
+  // const [phoneErr, setPhoneNoErr] = useState("");
   const handleSubmit = (event) => {
     // const validateContact = /^\d{10}$/;
-    toggle();
+
     event.preventDefault();
-    const isValidPhoneNo = validatePhoneNo(formData.phoneNo);
-    if (!isValidPhoneNo) {
-      setPhoneNoErr("Please enter a valid phone number.");
+    const isValidName = validateName(formData.name);
+    if (!isValidName) {
+      setNameErr("Please enter a valid name.");
       return;
     }
+
+    const isValidPhoneNo = validatePhoneNo(formData.phoneNo);
+    if (!isValidPhoneNo) {
+      setPhoneNoErr("Please enter a valid phone number of 10 digits");
+      return;
+    }
+
+    const isValidPincode = validatePincode(formData.pincode);
+    if (!isValidPincode) {
+      setPincodeErr("Please enter a valid pincode.");
+      return;
+    }
+
+    const isValidAddress = validateAddress(formData.address);
+    if (!isValidAddress) {
+      setAddressErr("Please enter a valid address.");
+      return;
+    }
+
+    const isValidLocality = validateLocality(formData.locality);
+    if (!isValidLocality) {
+      setLocalityErr("Please enter a valid locality.");
+      return;
+    }
+
+    const isValidCity = validateCity(formData.city);
+    if (!isValidCity) {
+      setCityErr("Please enter a valid city.");
+      return;
+    }
+
+    const isValidState = validateState(formData.state);
+    if (!isValidState) {
+      setStateErr("Please enter a valid state.");
+      return;
+    }
+    // const isValidPhoneNo = validatePhoneNo(formData.phoneNo);
+    // if (!isValidPhoneNo) {
+    //   setPhoneNoErr("Please enter a valid phone number.");
+    //   return;
+    // }
     onAddAddress(formData);
     setFormData({
       name: "",
@@ -78,6 +156,7 @@ function AddressModel({ toggle, onAddAddress }) {
       city: "",
       state: "",
     });
+    toggle();
     // console.log("contact------", formData.contactNo.length);
   };
   return (
@@ -101,9 +180,7 @@ function AddressModel({ toggle, onAddAddress }) {
               <div className="fs-7 font-weight-bold text-secondary">
                 Contact Details
               </div>
-
               {/* <!-- input component --> */}
-
               {/* <!-- name --> */}
               <div className="d-flex flex-column mt-3 text-secondary">
                 <label htmlFor="name" className="fs-10 mb-0">
@@ -121,7 +198,7 @@ function AddressModel({ toggle, onAddAddress }) {
                   />
                 </div>
               </div>
-
+              {nameErr && <div className="text-danger fs-8">{nameErr}</div>}
               {/* <!-- phone no --> */}
               <div className="d-flex flex-column mt-3 text-secondary">
                 <label htmlFor="phoneNo" className="fs-10 mb-0">
@@ -141,13 +218,11 @@ function AddressModel({ toggle, onAddAddress }) {
               </div>
               {phoneErr && <div className="text-danger fs-8">{phoneErr}</div>}
             </div>
-
             {/* <!-- address details --> */}
             <div className="mt-4">
               <div className="fs-7 font-weight-bold text-secondary">
                 Address
               </div>
-
               {/* <!-- pincode --> */}
               <div className="d-flex flex-column mt-3 text-secondary">
                 <label htmlFor="pincode" className="fs-10 mb-0">
@@ -185,7 +260,9 @@ function AddressModel({ toggle, onAddAddress }) {
                   />
                 </div>
               </div>
-
+              {addressErr && (
+                <div className="text-danger fs-8">{addressErr}</div>
+              )}
               {/* <!-- locality/town --> */}
               <div className="d-flex flex-column mt-3 text-secondary">
                 <label htmlFor="locality" className="fs-10 mb-0">
@@ -203,7 +280,9 @@ function AddressModel({ toggle, onAddAddress }) {
                   />
                 </div>
               </div>
-
+              {localityErr && (
+                <div className="text-danger fs-8">{localityErr}</div>
+              )}
               {/* <!-- city and state --> */}
               <div
                 id="city&State"
@@ -226,7 +305,7 @@ function AddressModel({ toggle, onAddAddress }) {
                     />
                   </div>
                 </div>
-
+                {cityErr && <div className="text-danger fs-8">{cityErr}</div>}
                 <div className="d-flex flex-column mt-3 ml-1 text-secondary">
                   <label htmlFor="state" className="fs-10 mb-0">
                     State *
@@ -244,20 +323,20 @@ function AddressModel({ toggle, onAddAddress }) {
                     />
                   </div>
                 </div>
+                {stateErr && <div className="text-danger fs-8">{stateErr}</div>}
               </div>
             </div>
-
             <div className="mt-4">
               <div className="fs-7 font-weight-bold text-secondary">
                 Save Address as
               </div>
-
               <div className="d-flex">
                 <input
                   className="d-none"
                   type="radio"
                   name="typeOfAddress"
                   id="home"
+                  // checked
                   value="Home"
                 />
                 <label
@@ -273,7 +352,6 @@ function AddressModel({ toggle, onAddAddress }) {
                 >
                   Home
                 </label>
-
                 <input
                   className="d-none"
                   type="radio"
@@ -296,8 +374,7 @@ function AddressModel({ toggle, onAddAddress }) {
                 </label>
               </div>
             </div>
-
-            <div className="mt-3">
+            {/* <div className="mt-3">
               <input
                 type="checkbox"
                 name="defaultAddress"
@@ -309,8 +386,7 @@ function AddressModel({ toggle, onAddAddress }) {
               >
                 Make this my default address
               </label>
-            </div>
-
+            </div> */}
             <button
               type="submit"
               className="btn btn-block font-weight-bold btn-sm text-white py-2 mt-5 bg-pink"
@@ -324,5 +400,4 @@ function AddressModel({ toggle, onAddAddress }) {
     </div>
   );
 }
-
 export default AddressModel;

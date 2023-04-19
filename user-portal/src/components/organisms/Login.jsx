@@ -59,11 +59,14 @@ function Login() {
                   password: null,
                   role: result.data.userData.role,
                   _v: result.data.userData._v,
-                  cartProductsInTempId:result.data.userData.cartProductsInTempId == null ? null  : tempId 
+                  cartProductsInTempId:
+                    result.data.userData.cartProductsInTempId == null
+                      ? null
+                      : tempId,
                 })
               );
-              sessionStorage.removeItem("tempUserId")
-              fetchData()
+              sessionStorage.removeItem("tempUserId");
+              fetchData();
             } else {
               localStorage.setItem(
                 "userData",
@@ -72,16 +75,19 @@ function Login() {
                   firstName: result.data.userData.firstName,
                   lastName: result.data.userData.lastName,
                   password: null,
-                  role: result.data.userData.role,  
+                  role: result.data.userData.role,
                   _v: result.data.userData._v,
                   // cartProductsInTempId:tempId
-                  cartProductsInTempId:result.data.userData.cartProductsInTempId == null ? tempId : null  
+                  cartProductsInTempId:
+                    result.data.userData.cartProductsInTempId == null
+                      ? tempId
+                      : null,
                 })
               );
-              fetchData()
+              fetchData();
             }
             const userData = JSON.parse(localStorage.getItem("userData"));
-            fetchData()
+            fetchData();
             try {
               const response = await axios.get(
                 `${API_BASE_URL}cart/handleBuyNow/${userData._id}/${userData.cartProductsInTempId}`,
@@ -115,7 +121,7 @@ function Login() {
                     exisitingUserData.exisitingUserData.cartProductsInTempId,
                 })
               );
-              fetchData()
+              fetchData();
             }
             console.log("data storing in db");
             try {
@@ -150,10 +156,13 @@ function Login() {
                 password: null,
                 role: result.data.userData.role,
                 _v: result.data.userData._v,
-                cartProductsInTempId: result.data.userData.cartProductsInTempId == null ? null : result.data.userData.cartProductsInTempId 
+                cartProductsInTempId:
+                  result.data.userData.cartProductsInTempId == null
+                    ? null
+                    : result.data.userData.cartProductsInTempId,
               })
             );
-            fetchData()
+            fetchData();
           }
 
           const path = localStorage.getItem("path");
@@ -170,11 +179,11 @@ function Login() {
           setMsg(error.response.data.message);
         }
       });
-      fetchData()
+    fetchData();
   }
   return (
     <div className="main-container d-flex">
-      <div className="flex-1 d-flex">
+      <div className="sign-up-container__left-img flex-1 d-flex">
         <ImgTag
           className="w-100"
           imgUrl="/assets/images/bac_removed_3.png"
