@@ -117,9 +117,7 @@ function CashOnDelivery({ cartData, totalAmount, deliveryCharge }) {
 
       navigate(
         `/order-placed?userId=${
-          userData.cartProductsInTempId == null
-            ? userData._id
-            : userData.cartProductsInTempId
+          userData._id
         }`
       );
     } else {
