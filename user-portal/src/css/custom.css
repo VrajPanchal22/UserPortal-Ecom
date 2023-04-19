@@ -11,10 +11,7 @@
     width: 25px !important;
     height: 25px;
 }
-.main-container {
-    min-height: 100vh;
-    /* background: radial-gradient(rgb(177, 176, 176), var(--nav-color)); */
-}
+
 
 .user-form {
     flex-direction: column;
@@ -96,7 +93,34 @@
 .Msg{
     z-index: 13;
 }
+/* signup */
+.main-container {
+    min-height: 100vh;
+    background: radial-gradient(rgb(177, 176, 176), var(--nav-color));
+}
+/* signup media  */
+@media only screen and (max-width: 660px) {
+    .sign-up-container__left-img{
+        display: none !important;
+    }
 
+    .user-form{
+        height: 100% !important;
+        width: 100% !important;
+    }
+
+    .form-width {
+        width:77%;
+} 
+}
+@media only screen and (max-width: 980px) {
+    .form-width {
+        width:67%;
+}
+.user-form {
+    width: 97%;
+}
+}
 /* product details page */
 .sidebar {
     background-color: white;
