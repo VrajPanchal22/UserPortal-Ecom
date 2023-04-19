@@ -10,8 +10,10 @@ function ProductList(props) {
   const { name } = useParams()
   // console.log("productlistparams:::",name)
   const { query } = props;
+
   console.log(query, `product/${query ? "?" + query : ""}`);
-  const { productList, setProductList } = useContext(productGallaryContext);
+  const { productList, setProductList, setProductBrands, setProductColors, setProductSizes, productbrands } = useContext(productGallaryContext);
+  let staticProductList = [...productList]
   const navigate = useNavigate();
   const searchArr = []
   let path = `product/?${query}`;
@@ -20,8 +22,8 @@ function ProductList(props) {
   }
 
   useEffect(() => {
+    console.log("q = ", query)
     getData(`product/?${query ? query : ""}`).then((res) => {
-      // console.log(res.products);
       setProductList(res.products);
     });
   }, [query]);
@@ -29,17 +31,58 @@ function ProductList(props) {
 
   useEffect(() => {
     console.log("productList changed to:", productList);
-    // ...map function here
   }, [productList]);
+
+  //   useEffect(()=>{
+  //     let nameBrand =[]
+  //     if(name){
+  //       productList?.map((product)=>{
+  //         if (product?.name?.toLowerCase() === name) {
+  //           nameBrand.push(product?.brand)
+  //         }
+  //         setBrands([...nameBrand])
+  //       }) 
+  //     }
+  //     else{
+  // productList?.map((product)=>{
+  //   nameBrand.push(product?.brand)
+  // })
+  // setBrands([...nameBrand])
+  //     }
+  //   },[name,setBrands])
+
+  useEffect(() => {
+    let setb = new Set()
+    let setc = new Set()
+    let sets = new Set()
+    getData("product").then((res) => {
+      console.log("edewdgedge3gddew", res?.products)
+      res?.products?.forEach((product) => {
+        console.log(product?.brand)
+        setb.add(product?.brand.toLowerCase())
+        setProductBrands([...setb])
+
+        product?.variants?.forEach((variant) => {
+          // console.log(variant,"cdfwfdygewdewytfdytew")
+          setc.add(variant?.color?.toLowerCase())
+          sets.add(variant?.size?.toLowerCase())
+          setProductColors([...setc])
+    setProductSizes([...sets])
+        })
+      })
+    });
+    console.log("setb::::::::::::::::::::::::::::::::::::::::::::", setb, setc, sets)
+  }, [])
 
   return (
     <div className="row product-section">
       {
         name
           ? productList?.map((product) => {
-            console.log("searcharr:::",searchArr.length)
+            console.log("searcharr:::", searchArr.length)
             if (product?.name?.toLowerCase() === name || product?.brand?.toLowerCase() === name) {
               searchArr.push(product)
+              // setBrands((prevItems) => [...prevItems,product?.brand])
               return (
                 <ProductCard
                   product={product}
@@ -52,6 +95,7 @@ function ProductList(props) {
           )
           : productList?.map((product) => {
             // console.log(product);
+            // setBrands((prevItems) => [...prevItems,product?.brand])
             return (
               <ProductCard
                 product={product}
@@ -63,8 +107,8 @@ function ProductList(props) {
       }
       {
         name && searchArr.length === 0
-        ? <NoProduct/>
-        :""
+          ? <NoProduct />
+          : ""
       }
     </div>
   );

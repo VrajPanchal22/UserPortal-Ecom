@@ -3,8 +3,8 @@ import productGallaryContext from '../../contexts/productGallary'
 import InputTag from '../atoms/InputTag'
 
 function ColorFilter() {
-    const {filterQuery,setFilterQuery}= useContext(productGallaryContext)
-    const colors = ['black', 'pink', 'red', 'white', 'grey', 'blue', 'violet', 'row']
+    const {filterQuery,setFilterQuery,productColors}= useContext(productGallaryContext)
+    const colors = [...productColors]
     return (
         <div className="filter-option">
             <span className="filter-name m-2"><b>COLOR</b></span>

@@ -9,6 +9,9 @@ import { useLocation } from "react-router-dom";
 
 function ProductGallary() {
   const [productList, setProductList] = useState([]);
+  const [productbrands,setProductBrands] = useState([])
+  const [productColors,setProductColors] = useState([])
+  const [productSizes,setProductSizes] = useState([])
   const [viewOption, setViewOption] = useState("grid");
   const [filterQuery, setFilterQuery] = useState({
     Brand: [],
@@ -25,6 +28,9 @@ function ProductGallary() {
     setFilterQuery,
     productList,
     setProductList,
+    productbrands,setProductBrands,
+    productColors,setProductColors,
+    productSizes,setProductSizes
   };
 
   console.log("filtered", productList);

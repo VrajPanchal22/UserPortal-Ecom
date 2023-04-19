@@ -2,8 +2,8 @@ import React, { useContext } from 'react'
 import productGallaryContext from '../../contexts/productGallary';
 
 function SizeFilter() {
-    const {filterQuery,setFilterQuery}= useContext(productGallaryContext)
-    const sizes = ['2xl', '2xs', '3xl', '3xs', '4xl', 'free size', 'l', 'm', 's', 'xl', 'xs'];
+    const {filterQuery,setFilterQuery,productSizes}= useContext(productGallaryContext)
+    const sizes = [...productSizes];
     return (
         <div className=" filter-option">
             <span className="filter-name m-2"><b>SIZE</b></span><br />

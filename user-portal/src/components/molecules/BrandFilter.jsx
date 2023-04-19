@@ -8,11 +8,9 @@ import InputTag from '../atoms/InputTag'
 
 function BrandFilter() {
 
-    const { filterQuery, setFilterQuery } = useContext(productGallaryContext)
-    // const [clearAll,setClearAll] = useState(false)
-    // const [checked,setChecked] = useState(false)
-
-    const brands = ['biba', 'libas', 'levis', 'w', 'hrx', 'adidas', 'puma'];
+    const { filterQuery, setFilterQuery,productbrands} = useContext(productGallaryContext)
+    console.log("brnadfilter:",productbrands)
+    const brands = [...productbrands];
     return (
         <div className='filter-option'>
             <div className="d-flex justify-content-between">
