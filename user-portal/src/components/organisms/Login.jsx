@@ -11,17 +11,14 @@ import * as yup from "yup";
 import { API_BASE_URL } from "../../config";
 import { useContext } from "react";
 import cartContext from "../../contexts/cartContext";
-
 const initialValues = {
   emailId: "",
   password: "",
 };
-
 const validationSchema = yup.object({
   emailId: yup.string().email("enter valid email").required("required !"),
   password: yup.string().required("required !"),
 });
-
 function Login() {
   const { cartData, fetchData, productsInCart } = useContext(cartContext);
   const [msg, setMsg] = useState("");
@@ -37,14 +34,13 @@ function Login() {
           // console.log("Token", result.data.token);
           const tempId = sessionStorage.getItem("tempUserId");
           console.log("userData.cartProductsInTempId:", result.data.userData.cartProductsInTempId);
-
             if (
               result.data.status === true &&
               result.data.userData.cartProductsInTempId != null
             ) {
               sessionStorage.removeItem("tempUserId");
             }
-          console.log("temp: ", tempId);  
+          console.log("temp: ", tempId);
           if (tempId) {
             console.log("inside if tempId");
             localStorage.setItem("token", result.data.token);
@@ -63,8 +59,8 @@ function Login() {
                   cartProductsInTempId:result.data.userData.cartProductsInTempId == null && tempId ? null : tempId
                 })
               );
-              sessionStorage.removeItem("tempUserId");
-              fetchData();
+              sessionStorage.removeItem("tempUserId")
+              fetchData()
             } else {
               console.log("inside result.data.userData.cartProductsInTempId != null")
               localStorage.setItem(
@@ -80,10 +76,10 @@ function Login() {
                   cartProductsInTempId: result.data.userData.cartProductsInTempId != null && tempId ?  result.data.userData.cartProductsInTempId  : null
                 })
               );
-              fetchData();
+              fetchData()
             }
             const userData = JSON.parse(localStorage.getItem("userData"));
-            fetchData();
+            fetchData()
             try {
               const response = await axios.get(
                 `${API_BASE_URL}cart/handleBuyNow/${userData._id}/${userData.cartProductsInTempId}`,
@@ -117,7 +113,7 @@ function Login() {
                     exisitingUserData.exisitingUserData.cartProductsInTempId,
                 })
               );
-              fetchData();
+              fetchData()
             }
             console.log("data storing in db");
             try {
@@ -142,7 +138,6 @@ function Login() {
             console.log("inside else !tempId");
             console.log("RESULT: ", result);
             localStorage.setItem("token", result.data.token);
-
             localStorage.setItem(
               "userData",
               JSON.stringify({
@@ -152,15 +147,11 @@ function Login() {
                 password: null,
                 role: result.data.userData.role,
                 _v: result.data.userData._v,
-                cartProductsInTempId:
-                  result.data.userData.cartProductsInTempId == null
-                    ? null
-                    : result.data.userData.cartProductsInTempId,
+                cartProductsInTempId: result.data.userData.cartProductsInTempId == null ? null : result.data.userData.cartProductsInTempId
               })
             );
-            fetchData();
+            fetchData()
           }
-
           const path = localStorage.getItem("path");
           if (path) {
             navigate(path);
@@ -175,10 +166,10 @@ function Login() {
           setMsg(error.response.data.message);
         }
       });
-    fetchData();
+      fetchData()
   }
   return (
-    <div className="main-container d-flex">
+    <div className="signup-main-container d-flex">
       <div className="sign-up-container__left-img flex-1 d-flex">
         <ImgTag
           className="w-100"
@@ -239,7 +230,6 @@ function Login() {
                 className="btn w-100 signup-btn"
                 buttonText="Login"
               />
-
               <small
                 id="emailHelp"
                 className="form-text text-muted text-center my-2"
@@ -254,5 +244,4 @@ function Login() {
     </div>
   );
 }
-
 export default Login;
