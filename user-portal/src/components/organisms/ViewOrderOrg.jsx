@@ -1,11 +1,15 @@
 import moment from "moment";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Button, Badge } from "reactstrap";
+
 function ViewOrderOrg({obj}) {
+    console.log(obj)
     let {_Id,orderDate,deliveryDate,status,totalAmount,shippingCharge}= obj;
-    let {products:[{name,category,image}]}= obj
+    let {products:[{name,_id,category,image}]}= obj
+    console.log(name,_id,category,image);
     let {variant:[{price}]}=obj;
     let {shippingAddress:{residenceNo,residenceName,area,city,pincode,state,street,country}}=obj;
+    let navigate = useNavigate();
 
 
 
@@ -32,7 +36,7 @@ function ViewOrderOrg({obj}) {
                     </div>
                 </div>
                 <div>
-                    <Button className="m-1">Buy It Again</Button>
+                    <Button className="m-1" onClick={()=>{navigate(`/productdetails/${_id}`)}}>Buy It Again</Button>
                 </div>
             </div>
             <div className="col-4 pt-4">

@@ -2,7 +2,8 @@ import React from 'react'
 import ReactPaginate from 'react-paginate'
 import { LIMIT, PAGES_COUNT } from "../../constants/constants"
 
-function Pagination({ totalCount, handlePageClick, currentPage }) {
+function Pagination({ totalCount=6, handlePageClick, currentPage }) {
+    console.log(totalCount);
     return (
         <div className="d-flex justify-content-center align-items-center">
             <ReactPaginate
@@ -21,7 +22,7 @@ function Pagination({ totalCount, handlePageClick, currentPage }) {
                 previousLabel="&laquo;"
                 forcePage={currentPage}
                 onPageChange={handlePageClick}
-                pageRangeDisplayed={PAGES_COUNT}
+                pageRangeDisplayed={Math.ceil(totalCount / LIMIT)}
                 pageCount={Math.ceil(totalCount / LIMIT)}
                 renderOnZeroPageCount={null}
             />
