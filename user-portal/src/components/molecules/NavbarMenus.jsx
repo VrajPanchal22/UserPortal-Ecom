@@ -40,18 +40,20 @@ export default function NavbarMenus({ handleClick, name }) {
     fetchData();
   }, [productsInCart]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
+  const [timeoutId, setTimeoutId] = useState(null);
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
     console.log("clicked");
   };
 
   const handleDropdownEnter = () => {
+    clearTimeout(timeoutId);
     setIsDropdownOpen(true);
   };
 
   const handleDropdownLeave = () => {
-    setIsDropdownOpen(false);
+    setTimeoutId(setTimeout(() => setIsDropdownOpen(false), 200));
+    // setIsDropdownOpen(false);
   };
   return (
     <>
