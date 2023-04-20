@@ -34,7 +34,7 @@ function PaymentProc() {
       }`
     ).then((res) => {
       setCartData(res.data.products);
-      console.log(res, "response");
+      console.log(res, "response"); 
     });
   }, []);
 
