@@ -1327,11 +1327,10 @@ body{
     width: 17em;
 }
 
-/* .card-img-top{
+.card-img-top-dod{
     height: 20rem;
     width: 17rem;
-} */
-
+}
 @media screen and (max-width: 600px) {
     .day_deal--card {
         width: 100%;
