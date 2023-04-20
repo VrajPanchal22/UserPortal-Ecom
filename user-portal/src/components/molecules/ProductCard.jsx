@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import productGallaryContext from "../../contexts/productGallary";
 
-function ProductCard({ product,onClick }) {
+function ProductCard({ product, onClick }) {
   const { viewOption } = useContext(productGallaryContext);
   return (
     <div
@@ -19,7 +19,7 @@ function ProductCard({ product,onClick }) {
           viewOption === "list"
             ? "flex-row justify-content-around card--listview"
             : "card--gridview"
-        } card p-2 d-flex align-items-center`}
+        } card card-product p-2 d-flex align-items-center`}
         style={{ cursor: "pointer" }}
       >
         <img
