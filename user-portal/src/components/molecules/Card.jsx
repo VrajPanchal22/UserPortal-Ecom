@@ -1,6 +1,6 @@
 import React from "react";
 import CardBrand from "../atoms/CardBrand";
-import CardCategory from "../atoms/CardCategory";
+// import CardCategory from "../atoms/CardCategory";
 import CardProdPrice from "../atoms/CardProdPrice";
 import CardBtn from "../atoms/CardBtn";
 
@@ -20,7 +20,7 @@ function Card({ product, onDelete, onClick }) {
 
         <div className="wishlist__prod-details ml-1 p-3">
           <CardBrand brand={product.brand} name={product.name} />
-          <CardCategory category={product.category} />
+          {/* <CardCategory category={product.category} /> */}
           <CardProdPrice
             price={product.selectedVarient[0].price}
             size={product.selectedVarient[0].size}

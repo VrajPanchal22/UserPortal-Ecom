@@ -11,10 +11,7 @@
     width: 25px !important;
     height: 25px;
 }
-.main-container {
-    min-height: 100vh;
-    /* background: radial-gradient(rgb(177, 176, 176), var(--nav-color)); */
-}
+
 
 .user-form {
     flex-direction: column;
@@ -96,7 +93,34 @@
 .Msg{
     z-index: 13;
 }
+/* signup */
+.main-container {
+    min-height: 100vh;
+    background: radial-gradient(rgb(177, 176, 176), var(--nav-color));
+}
+/* signup media  */
+@media only screen and (max-width: 660px) {
+    .sign-up-container__left-img{
+        display: none !important;
+    }
 
+    .user-form{
+        height: 100% !important;
+        width: 100% !important;
+    }
+
+    .form-width {
+        width:77%;
+} 
+}
+@media only screen and (max-width: 980px) {
+    .form-width {
+        width:67%;
+}
+.user-form {
+    width: 97%;
+}
+}
 /* product details page */
 .sidebar {
     background-color: white;
@@ -1295,7 +1319,10 @@ body{
     width: 17em;
 }
 
-
+.card-img-top{
+    height: 20rem;
+    width: 17rem;
+}
 
 @media screen and (max-width: 600px) {
     .day_deal--card {
@@ -1933,7 +1960,7 @@ input:focus {
 .wishlist__container-bg {
     background: var(--light);
     overflow: hidden !important;
-    min-height:577px!important
+    min-height:669px
 }
 .wishlist__category{
     height:1.3rem
@@ -2036,9 +2063,9 @@ font-weight: bold;
     .wishlist__card--secondary{
         width:15rem !important ;
     }
-    .wishlist__container-bg{
+    /* .wishlist__container-bg{
         min-height: 468px!important;
-    }
+    } */
 }
 @media only screen and (max-width: 403px) {
     .wishlist__btn-cart-del{
@@ -2073,9 +2100,9 @@ font-weight: bold;
         padding: 0.5rem !important;
     }
     
-    .wishlist__container-bg{
+    /* .wishlist__container-bg{
         min-height: 727px!important;
-    }
+    } */
 }
 @media (max-width:480px) {
     .card__img {
@@ -2089,9 +2116,9 @@ font-weight: bold;
     }
    
 }
-@media (max-width:2343px) {
+@media (max-width:995px) {
     .wishlist__container-bg{
-        min-height:1047px;
+        min-height:689px;
     }
 }
 @media (max-width:879px) {

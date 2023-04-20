@@ -12,16 +12,14 @@ import Footer from "../organisms/Footer";
 function ProductDetails(props) {
   const [data, setData] = useState();
   const [selectedVariant, setSelectedVariant] = useState({});
-  // console.log("defaultvariant",data?.variants?.[0])
+ 
   const { id } = useParams();
-  // console.log("product id::", id);
-  // const [variant,setvariant] = useState()
+  
   useEffect(() => {
     async function func() {
       try {
-        // console.log("product id inside func::", id);
+        
         const d = await getData(`/product/${id}`);
-        // console.log("data",data);
         setData(d?.product);
         setSelectedVariant(d?.product?.variants?.[0]);
       } catch (error) {
@@ -37,7 +35,7 @@ function ProductDetails(props) {
     <div className="row">
       {/* {console.log("selectedvariant:::",selectedVariant)} */}
       <div className="col d-flex flex-column align-items-center">
-        <ProductImgDiv src={selectedVariant?.images} />
+        <ProductImgDiv variant={selectedVariant} />
       </div>
       <div className="col right-div">
         <RatingDiv
