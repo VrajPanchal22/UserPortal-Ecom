@@ -6,7 +6,7 @@ export default function Footer(props) {
 
   return (
     <footer className={className}>
-      <div className="w-75 my-5 mx-auto justify-content-around footer-container">
+      <div className="w-75  mx-auto justify-content-around footer-container">
         <FooterItem
           itemName="About"
           content={[

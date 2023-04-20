@@ -2,11 +2,12 @@ import React from "react";
 import Button from "../atoms/Button";
 import ImgTag from "../atoms/ImgTag";
 import { useNavigate } from "react-router-dom";
+import MainNavbar from "../organisms/MainNavbar";
 
 function EmptyWishlist() {
   const navigate = useNavigate();
   const handleContineShopping = () => {
-    navigate("/home");
+    navigate("/");
     console.log("homePage");
   };
   return (

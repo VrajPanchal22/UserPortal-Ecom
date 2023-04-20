@@ -5,34 +5,33 @@ import { useContext } from "react";
 import cartContext from "../../contexts/cartContext";
 // import { useNavigate } from "react-router-dom";
 
-const tempId = localStorage.getItem("tempUserId");
+const tempId = sessionStorage.getItem("tempUserId");
 const userData = JSON.parse(localStorage.getItem("userData"));
 
 export default function CartOrderDetails() {
   const token = localStorage.getItem("token");
 
-  const {cartData, fetchData} = useContext(cartContext);
+  const { cartData, fetchData } = useContext(cartContext);
 
   const navigate = useNavigate();
 
   const handleCheckout = () => {
     if (token) {
-      navigate("/payment");
+      navigate("/address");
     } else {
-      localStorage.setItem("path","/payment")
+      localStorage.setItem("path", "/cart");
       navigate("/login");
     }
   };
 
-  const getCartTotal = (cartData) => 
+  const getCartTotal = (cartData) =>
     cartData.reduce((acc, curr) => {
       const selectedVariants = curr.selectedVariants;
       for (let i = 0; i < selectedVariants.length; i++) {
         const variant = selectedVariants[i];
         acc += variant.price * variant.quantity;
-      } 
+      }
       return acc;
-    
     }, 0);
 
   return (
@@ -74,7 +73,7 @@ export default function CartOrderDetails() {
             className="order-details__shipping-btn btn btn-md font-weight-bold"
             onClick={() => handleCheckout()}
           >
-            PROCEES TO SHPPING
+            PROCESS TO SHPPING
           </button>
         </div>
       </div>

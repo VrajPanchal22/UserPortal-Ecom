@@ -2,16 +2,17 @@ import React, { useContext } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import productGallaryContext from "../../contexts/productGallary";
 
-function ProductCard({ product }) {
+function ProductCard({ product,onClick }) {
   const { viewOption } = useContext(productGallaryContext);
   return (
     <div
       className={`${
         viewOption === "list"
           ? "col-12 m-2"
-          : " col-xl-3 col-lg-4 col-md-6 col-6 d-flex justify-content-center align-items-center"
+          : " col-xl-3 col-lg-4 col-md-6 col-6 d-flex justify-content-center align-items-center mt-2"
       } card-div`}
       id={product._id}
+      onClick={onClick}
     >
       <div
         className={`${
@@ -19,6 +20,7 @@ function ProductCard({ product }) {
             ? "flex-row justify-content-around card--listview"
             : "card--gridview"
         } card p-2 d-flex align-items-center`}
+        style={{ cursor: "pointer" }}
       >
         <img
           className={`${
@@ -46,7 +48,7 @@ function ProductCard({ product }) {
             <div className="product-gender">{product.brand}</div>
           </div>
           <div className="product-price">
-            <b>Rs.{product.variants[0].price}</b>
+            <b>Rs.{product?.variants[0]?.price}</b>
           </div>
           <div className="alertSection"></div>
         </div>

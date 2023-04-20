@@ -10,6 +10,7 @@ import ClearAllFilter from '../molecules/ClearAllFilter'
 import AvailabilityFilter from '../molecules/AvailabilityFilter'
 
 function FilterOptions() {
+
     return (
         <div className="sidebar border rounded">
             <ClearAllFilter />
@@ -17,9 +18,9 @@ function FilterOptions() {
             <BrandFilter />
             <PriceRangeFilter />
             <ColorFilter />
-            <DiscountFilter />
+            {/* <DiscountFilter /> */}
             <SizeFilter />
-            <RatingFilter />
+            {/* <RatingFilter /> */}
             <AvailabilityFilter />
         </div>
     )

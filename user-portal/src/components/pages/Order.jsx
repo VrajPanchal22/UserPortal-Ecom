@@ -9,22 +9,33 @@ import { FetchOrders, SearchOrders } from "../../services/Order";
 import moment from "moment";
 import Pagination from "../molecules/Pagination";
 import { LIMIT, OFFSET, SEARCH_URL } from "../../constants/constants";
+// import '../../css/Order.css'
+import { API_BASE_URL } from "../../config";
 
 function Order() {
+<<<<<<< HEAD
   let userObj = JSON.parse(localStorage.getItem('userData'));
   let userId = userObj._id;
   const ORDER_URL = "http://localhost:4000/api/order";
+=======
+  let userObj = JSON.parse(localStorage.getItem("userData"));
+  let userId = userObj.cartProductsInTempId
+    ? userObj.cartProductsInTempId
+    : userObj._id;
+
+  const ORDER_URL = `${API_BASE_URL}order`;
+  console.log(ORDER_URL);
+>>>>>>> develop
   let [orderList, setOrderList] = useState([]);
   let [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
+  const [count, setCount] = useState(3);
   useEffect(() => {
     if (filter === "Last 30 Days") {
       setFilter("Last30");
-    }
-    else if (filter === "Filter Orders") {
+    } else if (filter === "Filter Orders") {
       setFilter(null);
-    }
-    else{
+    } else {
       fetchdata(ORDER_URL, userId, LIMIT, OFFSET);
     }
   }, [filter]);
@@ -36,18 +47,22 @@ function Order() {
     let response = await FetchOrders(url + `/${userId}`, {
       params: { limit: limit, offset: offset, filter: filter },
     });
+    console.log(response);
     setOrderList(response.data.details);
+    setCount(response.data.totalcount);
+
     return response.data.details;
   };
   async function SearchOrderData(url, userId, limit, offset) {
     let tempresp = await SearchOrders(url, userId, limit, offset, search);
     setOrderList(tempresp.data.details);
+    setCount(tempresp.data.count)
   }
   async function handlePage(event) {
     const newOffSet = event.selected * LIMIT;
-    await fetchdata(ORDER_URL, userId, LIMIT, newOffSet,filter); 
-    localStorage.removeItem('ol');
-    localStorage.setItem('ol',JSON.stringify(orderList));
+    await fetchdata(ORDER_URL, userId, LIMIT, newOffSet, filter);
+    localStorage.removeItem("ol");
+    localStorage.setItem("ol", JSON.stringify(orderList));
   }
 
   return (
@@ -57,7 +72,7 @@ function Order() {
           <div className="row d-flex flex-row justify-content-left align-items-center">
             <div className="col-sm-5 pt-3">
               <div className="order-navbar">
-                <Navbar link1="Home" link2="My Account" link3="My Orders" />
+                <Navbar link1="Home" link2="products" link3="My Orders" />
               </div>
             </div>
             <div className="col-sm-7">
@@ -77,9 +92,7 @@ function Order() {
                   setSearch(value);
                 }}
               />
-               {
-      console.log(filter)
-    }
+              {console.log(filter)}
             </div>
           </div>
           <div className="row">
@@ -110,12 +123,12 @@ function Order() {
               )}
             </div>
           </div>
-          <div className="row">
+          <div className="row pt-2">
             <div className="col-3"></div>
             <div className="col-6">
               {
                 <Pagination
-                  totalCount={30}
+                  totalCount={count}
                   currentPage={0}
                   handlePageClick={(e) => handlePage(e)}
                 />
@@ -126,7 +139,6 @@ function Order() {
         </div>
       </div>
     </main>
-   
   );
 }
 
