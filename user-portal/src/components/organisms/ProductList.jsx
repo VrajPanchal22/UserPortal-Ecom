@@ -1,5 +1,5 @@
 import ProductCard from "../molecules/ProductCard";
-import { Link, useParams } from "react-router-dom";
+import { Link,useHistory, useParams } from "react-router-dom";
 import { getData } from "../../services/api";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useNavigation } from "react-router-dom";
@@ -8,24 +8,29 @@ import NoProduct from "../atoms/no-product";
 
 function ProductList(props) {
   const { name } = useParams()
-  // console.log("productlistparams:::",name)
   const { query } = props;
+const [loader,setLoader] = useState("")
 
   console.log(query, `product/${query ? "?" + query : ""}`);
-  const { productList, setProductList, setProductBrands, setProductColors, setProductSizes, productbrands } = useContext(productGallaryContext);
-  let staticProductList = [...productList]
+  const { productList, setProductList, setProductBrands, setProductColors, setProductSizes } = useContext(productGallaryContext);
   const navigate = useNavigate();
+  // const history = useHistory();
   const searchArr = []
   let path = `product/?${query}`;
   if (query) {
     <Link to={path}></Link>;
   }
 
+console.log("url-of-window",window.location.href)
+
   useEffect(() => {
     console.log("q = ", query)
     getData(`product/?${query ? query : ""}`).then((res) => {
       setProductList(res.products);
     });
+    if(query){
+
+    }
   }, [query]);
   console.log(productList, "productlist");
 
@@ -33,23 +38,6 @@ function ProductList(props) {
     console.log("productList changed to:", productList);
   }, [productList]);
 
-  //   useEffect(()=>{
-  //     let nameBrand =[]
-  //     if(name){
-  //       productList?.map((product)=>{
-  //         if (product?.name?.toLowerCase() === name) {
-  //           nameBrand.push(product?.brand)
-  //         }
-  //         setBrands([...nameBrand])
-  //       }) 
-  //     }
-  //     else{
-  // productList?.map((product)=>{
-  //   nameBrand.push(product?.brand)
-  // })
-  // setBrands([...nameBrand])
-  //     }
-  //   },[name,setBrands])
 
   useEffect(() => {
     let setb = new Set()
@@ -80,9 +68,8 @@ function ProductList(props) {
         name
           ? productList?.map((product) => {
             console.log("searcharr:::", searchArr.length)
-            if (product?.name?.toLowerCase() === name || product?.brand?.toLowerCase() === name) {
+            if (product?.name?.toLowerCase() === name || product?.brand?.toLowerCase() === name || product?.category?.split("/")[1] === name) {
               searchArr.push(product)
-              // setBrands((prevItems) => [...prevItems,product?.brand])
               return (
                 <ProductCard
                   product={product}
