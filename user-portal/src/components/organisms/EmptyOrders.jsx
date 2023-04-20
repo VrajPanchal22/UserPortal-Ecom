@@ -12,7 +12,7 @@ function EmptyOrders(){
       </div>
       <h3>You have no orders</h3>
         <div class="start-shopping-btn-container">
-          <Button className="btn button-start-shopping" onClick={navigate('/productGallary')} >
+          <Button className="btn button-start-shopping" onClick={()=>{navigate('/productGallary')}} >
             Start Shopping
           </Button>
         </div>

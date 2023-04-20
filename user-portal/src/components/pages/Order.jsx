@@ -41,15 +41,16 @@ function Order() {
     let response = await FetchOrders(url + `/${userId}`, {
       params: { limit: limit, offset: offset, filter: filter },
     });
-
+    console.log(response);
     setOrderList(response.data.details);
-    setCount(response.data.count);
+    setCount(response.data.totalcount);
 
     return response.data.details;
   };
   async function SearchOrderData(url, userId, limit, offset) {
     let tempresp = await SearchOrders(url, userId, limit, offset, search);
     setOrderList(tempresp.data.details);
+    setCount(tempresp.data.count)
   }
   async function handlePage(event) {
     const newOffSet = event.selected * LIMIT;
@@ -121,7 +122,7 @@ function Order() {
             <div className="col-6">
               {
                 <Pagination
-                  totalCount={100}
+                  totalCount={count}
                   currentPage={0}
                   handlePageClick={(e) => handlePage(e)}
                 />

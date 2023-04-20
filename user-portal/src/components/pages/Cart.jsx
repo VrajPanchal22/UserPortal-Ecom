@@ -63,7 +63,7 @@ export default function Cart() {
           {cartData.length === 0 ? (
             <CartEmptyContainer />
           ) : (
-            <div className="main-container container-fuild">
+            <div className="main-container container-fuild" style={{minHeight: "100vh"}}>
               <div className="main-container__top-div container col-xl-11 col-lg-12 col-md-12 col-sm-12  d-flex justify-content-center">
                 <div
                   style={{ marginRight: 10, marginTop: 20 }}
