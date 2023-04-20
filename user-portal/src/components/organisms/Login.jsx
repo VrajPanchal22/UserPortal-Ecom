@@ -36,20 +36,21 @@ function Login() {
           setMsg(result.data.message);
           // console.log("Token", result.data.token);
           const tempId = sessionStorage.getItem("tempUserId");
-          console.log("result:", result);
+          console.log("userData.cartProductsInTempId:", result.data.userData.cartProductsInTempId);
 
-          if (
-            result.data.status === true &&
-            result.data.userData.cartProductsInTempId != null
-          ) {
-            sessionStorage.removeItem("tempUserId");
-          }
-          console.log("temp: ", tempId);
+            if (
+              result.data.status === true &&
+              result.data.userData.cartProductsInTempId != null
+            ) {
+              sessionStorage.removeItem("tempUserId");
+            }
+          console.log("temp: ", tempId);  
           if (tempId) {
             console.log("inside if tempId");
             localStorage.setItem("token", result.data.token);
             console.log("RESULT: ", result);
             if (result.data.userData.cartProductsInTempId == null) {
+              console.log("inside result.data.userData.cartProductsInTempId == null")
               localStorage.setItem(
                 "userData",
                 JSON.stringify({
@@ -59,23 +60,24 @@ function Login() {
                   password: null,
                   role: result.data.userData.role,
                   _v: result.data.userData._v,
-                  cartProductsInTempId:result.data.userData.cartProductsInTempId == null ? null  : tempId 
+                  cartProductsInTempId:result.data.userData.cartProductsInTempId == null && tempId ? null : tempId
                 })
               );
               sessionStorage.removeItem("tempUserId")
               fetchData()
             } else {
+              console.log("inside result.data.userData.cartProductsInTempId != null")
               localStorage.setItem(
                 "userData",
                 JSON.stringify({
                   _id: result.data.userData._id,
                   firstName: result.data.userData.firstName,
-                  lastName: result.data.userData.lastName,
+                  lastName: result.data.userData.lastName ,
                   password: null,
                   role: result.data.userData.role,  
                   _v: result.data.userData._v,
                   // cartProductsInTempId:tempId
-                  cartProductsInTempId:result.data.userData.cartProductsInTempId == null ? tempId : null  
+                  cartProductsInTempId: result.data.userData.cartProductsInTempId != null && tempId ?  result.data.userData.cartProductsInTempId  : null
                 })
               );
               fetchData()

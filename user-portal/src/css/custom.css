@@ -827,6 +827,9 @@ body{
     background-color: var(--button-color);
     color: var(--background-color);
 }
+.order-details__shipping-btn:hover{
+    color: var(--background-color);
+}
     
 .order-details__shipping-btn:focus{
     box-shadow: 0 0 0 0;

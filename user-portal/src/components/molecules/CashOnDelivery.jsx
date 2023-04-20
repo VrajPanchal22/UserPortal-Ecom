@@ -1,8 +1,10 @@
+import axios from "axios";
 import React from "react";
-
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../../config";
 import { postData } from "../../services/api";
 import ImgTag from "../atoms/ImgTag";
+
 function CashOnDelivery({ cartData, totalAmount, deliveryCharge }) {
   const navigate = useNavigate();
   async function handlePlaceOrder() {
@@ -111,18 +113,34 @@ function CashOnDelivery({ cartData, totalAmount, deliveryCharge }) {
             },
           ],
         });
+
+        if ((res.msg = "order added successfully")) {
+          console.log("inside API")
+          const clearCartRes = await axios.delete(
+            `${API_BASE_URL}cart/clearCart/${
+              userData.cartProductsInTempId == null
+                ? userData._id
+                : userData.cartProductsInTempId
+            }`,
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
+          console.log(clearCartRes)
+        } 
+
+       
       } catch (error) {
         console.log("error from post order", error.msg);
       }
 
-      navigate(
-        `/order-placed?userId=${
-          userData._id
-        }`
-      );
+      navigate(`/order-placed?userId=${userData._id}`);
     } else {
       alert("no address added");
     }
+
   }
 
   return (
