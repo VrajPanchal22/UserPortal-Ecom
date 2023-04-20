@@ -7,6 +7,10 @@
     --light: #f8f9fa;
     --font-family-menu: Arial, sans-serif;
 }
+.product-dropdown{
+    position: absolute;
+    top:0rem
+}
 .social-icons > img{
     width: 25px !important;
     height: 25px;

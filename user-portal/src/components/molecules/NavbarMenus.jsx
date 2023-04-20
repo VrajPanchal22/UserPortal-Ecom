@@ -67,11 +67,13 @@ export default function NavbarMenus({ handleClick, name }) {
             <FaUser />
             <strong>
               {" "}
-              {name} <i className="fa fa-caret-down"></i>
+              {name} {userData && <i className="fa fa-caret-down"></i>}
             </strong>
           </a>
 
-          <Dropdown isOpen={isDropdownOpen} set={setIsDropdownOpen} />
+          {userData && (
+            <Dropdown isOpen={isDropdownOpen} set={setIsDropdownOpen} />
+          )}
         </li>
 
         <List
