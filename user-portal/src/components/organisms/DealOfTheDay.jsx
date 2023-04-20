@@ -14,7 +14,7 @@ export default function DealOfTheDay() {
             </div>
             <div className="row p-4">
                 <CustomCard imgUrl="/assets/images/dod-shoes.jpg"
-                    className="card-img-top"
+                    className="card-img-top-dod"
                     alt="Card image"
                     width="100%"
                     productName="Shoes"
@@ -23,7 +23,7 @@ export default function DealOfTheDay() {
                     onClick={()=>navigate("/productGallary/shoes")}
                 />
                 <CustomCard imgUrl="assets/images/dod-tshirt.jpg"
-                    className="card-img-top"
+                    className="card-img-top-dod"
                     alt="Card image"
                     width="100%"
                     productName="Tshirt"
@@ -32,7 +32,7 @@ export default function DealOfTheDay() {
                     onClick={()=>navigate("/productGallary/tshirt")}
                 />
                 <CustomCard imgUrl="assets/images/dod-shirt.jpg"
-                    className="card-img-top"
+                    className="card-img-top-dod"
                     alt="Card image"
                     width="100%"
                     productName="Shirt"
@@ -42,7 +42,7 @@ export default function DealOfTheDay() {
                 />
 
                 <CustomCard imgUrl="assets/images/dod-jeans.jpg"
-                    className="card-img-top"
+                    className="card-img-top-dod"
                     alt="Card image"
                     width="100%"
                     productName="jeans"
@@ -52,7 +52,7 @@ export default function DealOfTheDay() {
                 />
 
                 <CustomCard imgUrl="assets/images/dod-kurta.jpeg"
-                    className="card-img-top"
+                    className="card-img-top-dod"
                     alt="Card image"
                     width="100%"
                     productName="Kurta"
@@ -62,7 +62,7 @@ export default function DealOfTheDay() {
                 />
 
                 <CustomCard imgUrl="assets/images/dod-saree.jpg"
-                    className="card-img-top"
+                    className="card-img-top-dod"
                     alt="Card image"
                     width="100%"
                     productName="Saree"
