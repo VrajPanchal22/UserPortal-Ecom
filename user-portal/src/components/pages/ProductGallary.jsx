@@ -21,6 +21,7 @@ function ProductGallary() {
     Available: [],
   });
 
+
   const contextValue = {
     viewOption,
     setViewOption,
@@ -30,13 +31,16 @@ function ProductGallary() {
     setProductList,
     productbrands,setProductBrands,
     productColors,setProductColors,
-    productSizes,setProductSizes
+    productSizes,setProductSizes,
   };
 
   console.log("filtered", productList);
 
   const queryString = qs.stringify(filterQuery, { arrayFormat: "comma" });
+  console.log("querystring::::",queryString)
   //=> 'foo=unicorn&ilike=pizza'
+  let qw = queryString
+  console.log("qwqwqwqwqwqw",qw)
 
   console.log(filterQuery, "query");
 

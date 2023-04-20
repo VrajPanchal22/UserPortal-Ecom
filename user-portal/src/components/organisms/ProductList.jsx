@@ -8,6 +8,8 @@ import NoProduct from "../atoms/no-product";
 
 function ProductList(props) {
   const { name } = useParams()
+  let { filter } = useParams()
+  console.log("filteparams:::",filter)
   const { query } = props;
 const [loader,setLoader] = useState("")
 
@@ -17,21 +19,26 @@ const [loader,setLoader] = useState("")
   // const history = useHistory();
   const searchArr = []
   let path = `product/?${query}`;
-  if (query) {
-    <Link to={path}></Link>;
-  }
+  // if (query) {
+  //  
+  // }
 
 console.log("url-of-window",window.location.href)
 
   useEffect(() => {
-    console.log("q = ", query)
+    filter=query
+    console.log("q = ", query,filter)
     getData(`product/?${query ? query : ""}`).then((res) => {
       setProductList(res.products);
     });
-    if(query){
-
+    if(filter){
+      navigate(`/productGallary/${name}/${filter}`)
+      console.log("qq = ", query,filter)
+    }else{
+      navigate(`/productGallary/${name}`)
     }
-  }, [query]);
+  }, [query,filter]);
+  console.log("queryinproductlist",query,filter);
   console.log(productList, "productlist");
 
   useEffect(() => {
@@ -68,7 +75,7 @@ console.log("url-of-window",window.location.href)
         name
           ? productList?.map((product) => {
             console.log("searcharr:::", searchArr.length)
-            if (product?.name?.toLowerCase() === name || product?.brand?.toLowerCase() === name || product?.category?.split("/")[1] === name) {
+            if (product?.name?.toLowerCase() === name.toLocaleLowerCase() || product?.brand?.toLowerCase() === name.toLocaleLowerCase() || product?.category?.split("/")[1] === name.toLocaleLowerCase()) {
               searchArr.push(product)
               return (
                 <ProductCard
