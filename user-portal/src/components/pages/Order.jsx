@@ -13,11 +13,6 @@ import { LIMIT, OFFSET, SEARCH_URL } from "../../constants/constants";
 import { API_BASE_URL } from "../../config";
 
 function Order() {
-<<<<<<< HEAD
-  let userObj = JSON.parse(localStorage.getItem('userData'));
-  let userId = userObj._id;
-  const ORDER_URL = "http://localhost:4000/api/order";
-=======
   let userObj = JSON.parse(localStorage.getItem("userData"));
   let userId = userObj.cartProductsInTempId
     ? userObj.cartProductsInTempId
@@ -25,7 +20,6 @@ function Order() {
 
   const ORDER_URL = `${API_BASE_URL}order`;
   console.log(ORDER_URL);
->>>>>>> develop
   let [orderList, setOrderList] = useState([]);
   let [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
