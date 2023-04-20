@@ -4,7 +4,7 @@ import productGallaryContext from '../../contexts/productGallary';
 import InputTag from '../atoms/InputTag';
 
 function GenderFilter() {
-    const { filterQuery, setFilterQuery } = useContext(productGallaryContext)
+    const { filterQuery, setFilterQuery}= useContext(productGallaryContext)
     const options = ['men', 'women', 'kid'];
     return (
         <div className='filter-option'>
