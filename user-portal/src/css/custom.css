@@ -7,11 +7,18 @@
     --light: #f8f9fa;
     --font-family-menu: Arial, sans-serif;
 }
+.product-dropdown{
+    position: absolute;
+    top:0rem
+}
 .social-icons > img{
     width: 25px !important;
     height: 25px;
 }
-
+.signup-main-container {
+    min-height: 100vh;
+    background: radial-gradient(rgb(177, 176, 176), var(--nav-color));
+}
 
 .user-form {
     flex-direction: column;
@@ -94,7 +101,7 @@
     z-index: 13;
 }
 /* signup */
-.main-container {
+.signup-main-container {
     min-height: 100vh;
     background: radial-gradient(rgb(177, 176, 176), var(--nav-color));
 }
@@ -121,6 +128,7 @@
     width: 97%;
 }
 }
+
 /* product details page */
 .sidebar {
     background-color: white;
@@ -851,6 +859,9 @@ body{
     background-color: var(--button-color);
     color: var(--background-color);
 }
+.order-details__shipping-btn:hover{
+    color: var(--background-color);
+}
     
 .order-details__shipping-btn:focus{
     box-shadow: 0 0 0 0;
@@ -1316,11 +1327,10 @@ body{
     width: 17em;
 }
 
-.card-img-top{
+.card-img-top-dod{
     height: 20rem;
     width: 17rem;
 }
-
 @media screen and (max-width: 600px) {
     .day_deal--card {
         width: 100%;
@@ -1957,7 +1967,7 @@ input:focus {
 .wishlist__container-bg {
     background: var(--light);
     overflow: hidden !important;
-    min-height:669px
+    min-height:577px!important
 }
 .wishlist__category{
     height:1.3rem
@@ -2060,9 +2070,9 @@ font-weight: bold;
     .wishlist__card--secondary{
         width:15rem !important ;
     }
-    /* .wishlist__container-bg{
+    .wishlist__container-bg{
         min-height: 468px!important;
-    } */
+    }
 }
 @media only screen and (max-width: 403px) {
     .wishlist__btn-cart-del{
@@ -2097,9 +2107,9 @@ font-weight: bold;
         padding: 0.5rem !important;
     }
     
-    /* .wishlist__container-bg{
+    .wishlist__container-bg{
         min-height: 727px!important;
-    } */
+    }
 }
 @media (max-width:480px) {
     .card__img {
@@ -2113,9 +2123,9 @@ font-weight: bold;
     }
    
 }
-@media (max-width:995px) {
+@media (max-width:2343px) {
     .wishlist__container-bg{
-        min-height:689px;
+        min-height:1047px;
     }
 }
 @media (max-width:879px) {
@@ -2137,3 +2147,4 @@ font-weight: bold;
 #active-link:hover{
         color:#C00156
 }
+

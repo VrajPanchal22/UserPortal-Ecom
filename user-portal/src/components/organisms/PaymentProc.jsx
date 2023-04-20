@@ -34,7 +34,7 @@ function PaymentProc() {
       }`
     ).then((res) => {
       setCartData(res.data.products);
-      console.log(res, "response");
+      console.log(res, "response"); 
     });
   }, []);
 
@@ -42,8 +42,8 @@ function PaymentProc() {
 
   console.log(cartData, "from ==");
 
-  const discountPrice = 2999;
-  const deliveryCharge = 200;
+  const discountPrice = 100;
+  const deliveryCharge = 50;
   const getCartTotal = (cartData) =>
     cartData.reduce((acc, curr) => {
       const selectedVariants = curr.selectedVariants;

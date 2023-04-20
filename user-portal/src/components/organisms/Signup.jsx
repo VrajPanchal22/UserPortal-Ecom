@@ -55,7 +55,7 @@ function Signup() {
       });
   }
   return (
-    <div className="main-container d-flex">
+    <div className="signup-main-container d-flex">
       <div className="sign-up-container__left-img flex-1 d-flex">
         <ImgTag
           className="w-100"
