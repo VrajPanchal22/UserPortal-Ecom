@@ -33,6 +33,7 @@ function ProductShopBtn(props) {
 
 
   const handleAddToCart = async () => {
+    if(isSelected){
     const userData = JSON.parse(localStorage.getItem("userData"));
     const token = localStorage.getItem("token");
     const tempId = sessionStorage.getItem("tempUserId");
@@ -161,6 +162,7 @@ function ProductShopBtn(props) {
       }
     }
     fetchData()
+  }
   };
   // }, []);
   async function handleWishlist() {
