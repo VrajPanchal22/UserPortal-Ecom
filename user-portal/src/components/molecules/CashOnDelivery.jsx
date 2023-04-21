@@ -10,14 +10,22 @@ function CashOnDelivery({ cartData, totalAmount, deliveryCharge }) {
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [randomNumber, setRandomNumber] = useState(generateRandomNumber());
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
     setErrorMsg("");
   };
-
+  function generateRandomNumber() {
+    return Math.floor(Math.random() * (99999 - 10000 + 1) + 10000);
+  }
+  function handleRefreshCaptcha() {
+    setRandomNumber(generateRandomNumber());
+    setInputValue("");
+    setErrorMsg("");
+  }
   async function handlePlaceOrder() {
-    if (inputValue === "51418") {
+    if (inputValue === randomNumber.toString()) {
       console.log("total amount", totalAmount);
       const userData = JSON.parse(localStorage.getItem("userData"));
       console.log("userdata from CashOn del", userData);
@@ -155,13 +163,8 @@ function CashOnDelivery({ cartData, totalAmount, deliveryCharge }) {
       }
     } else {
       // Display an error message
-      setErrorMsg("Enter valid CAPTCHA");
-      // const errorMsg = "Please enter a valid capcha";
-      // const errorEl = document.createElement("div");
-      // errorEl.classList.add("text-danger", "fs-8");
-      // errorEl.textContent = errorMsg;
-      // const inputEl = document.getElementById("randCode");
-      // inputEl.parentNode.insertBefore(errorEl, inputEl.nextSibling);
+      setErrorMsg("Please Enter Valid CODE");
+      setInputValue("");
     }
   }
   return (
@@ -170,12 +173,15 @@ function CashOnDelivery({ cartData, totalAmount, deliveryCharge }) {
         Pay on delivery(Cash/UPI)
       </div>
 
-      <div className="captcha-image d-flex flex-row align-items-center my-4">
-        <div className="border border-secondary rounded">
-          <ImgTag imgUrl="assets/images/randNo.png" altText="random Number" />
+      <div className="captcha-image d-flex flex-row align-items-center justify-content-between my-4">
+        <div className="border border-secondary rounded random-box">
+          <div className="fs-8 font-weight-bold p-2">{randomNumber}</div>
         </div>
-        <div className="fs-8 font-weight-bold ml-4">
-          <span>change Image</span>
+        <div
+          className="fs-8 font-weight-bold ml-4 change-code-cursor-pointer"
+          onClick={handleRefreshCaptcha}
+        >
+          <span>CHANGE CODE</span>
         </div>
       </div>
 
@@ -185,12 +191,13 @@ function CashOnDelivery({ cartData, totalAmount, deliveryCharge }) {
           type="text"
           name="randCode"
           id="randCode"
-          placeholder="Enter code shown in above image*"
+          placeholder="Enter code shown above*"
           value={inputValue}
           onChange={handleInputChange}
         />
       </div>
       {errorMsg && <div className="text-danger fs-8">{errorMsg}</div>}
+      {/* {errorMsg && <div className="text-danger fs-8">{errorMsg}</div>} */}
       <div className="fs-10 my-2">
         You can pay via Cash or UPI enabled app at the time of delivery. Ask
         your delivery executive for these options.
