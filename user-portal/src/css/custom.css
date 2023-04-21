@@ -1544,7 +1544,12 @@ body{
 }
 
 /* --------------------------payment main container --------------------- */
-
+.random-box{
+    width:10rem;
+}
+.change-code-cursor-pointer{
+    cursor: pointer;
+}
 .payment-methods {
     background-color: var(--background-color);
 }
